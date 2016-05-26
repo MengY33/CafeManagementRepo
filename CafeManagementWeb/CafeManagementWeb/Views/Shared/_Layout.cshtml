@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">    <!--lang="en" is used to specifies a language code-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">   <!--to tells Internet Explorer to display a webpage in edge mode, if possible-->
+    <meta name="viewport" content="width=device-width", initial-scale="1" />    <!--this viewport element gives the browser instructions on how to control the page's dimensions and scaling, second part is to sets the width of the page to follow the screen-width of the device, the third part is to sets the initial zoom level when the page is first loaded by the browser-->
+   
+    <link rel="shortcut icon" href="@Url.Content("~/Favicons/favicon 64x64.ico")" />    <!--create the favicon-->
+    
+     <title>@ViewBag.Title - The Coffee Bean</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("createacc_link", required: false)   <!--Render the Registration page-->
+
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script src="~/scripts/jquery-1.9.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" /> 
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>  <!--When the site is opened on a device with a smaller screen size, it will display a button with three bars, and when you click on it, it will show the menu vertically-->
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">  <!--link to the Index.cshtml, Index is the action name and Home is the controller name-->
+                    <img alt="CafeBrandLogo" src="~/Images/coffee-bean-logo-14percentage.jpg" />    <!--the cafe logo-->
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Drinks", "Menu")">Drinks</a></li>
+                            <li><a href="@Url.Action("Food", "Menu")">Food</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="@Url.Action("Promotions", "Promotions")">Promotions</a></li>
+                    <li><a href="@Url.Action("Reservation", "Reservation")">Reservation</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About Us <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("VisionMission", "AboutUs")">Vision and Mission</a></li>
+                            <li><a href="@Url.Action("OurCompany", "AboutUs")">Our Company</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="@Url.Action("ContactUs", "ContactUs")">Contact Us</a></li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <div class="pagefooter">
+        
+        <div class="footer-content">
+            <br/>
+            <span style="font-weight: bold; font-size: 18px;" class="aboutus_class">ABOUT US</span><br/><br/>
+            <span style="font-size: 14px;" class="vm_class" id="vm_id">Vision and Mission</span><br/><br/>
+            <span style="font-size: 14px;" class="oc_class" id="oc_id">Our Company</span>
+
+            <span style="font-weight: bold; font-size: 18px;" class="custservice_class">CUSTOMER SERVICE</span><br/><br/>
+            <span style="font-size: 14px;" class="faq_position faq_class" id="faq_id">Frequently Asked Questions</span><br/><br/><br/><br/>
+
+            <span>&copy; 2016 The Coffee Bean Corporation. All rights reserved.</span>
+        </div>
+    </div>
+
+
+    <!--JavaScript-->
+    <script>
+        $(document).ready(function () {
+            $("#vm_id").click(function(event) {
+                var url = '@Url.Action("VisionMission", "AboutUs")';
+                window.location.href = url;
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#oc_id").click(function (event) {
+                var url = '@Url.Action("OurCompany", "AboutUs")';
+                window.location.href = url;
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#faq_id").click(function (event) {
+                var url = '@Url.Action("FAQ", "FAQ")';
+                window.location.href = url;
+            });
+        });
+    </script>
+
+</body>
+</html>

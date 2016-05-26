@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="index_pic1">
+    <img src="~/Images/home_page_pic1.jpg" alt="SignatureDrink" />
+
+    <div class="index_pic1_desc">
+        <label class="index_pic1_namelbl">Double C Frappuccino</label><br/>
+        <p class="desc" align="justify">This is our signature drink. It was mixed up with the unique coffee and the chocolate. The distinct taste of the unique coffee with chocolate is the inspiration for the Double C Frappuccino.</p>
+    </div>
+ </div>
+
+<br/><br/><br/>
+
+<div class="index_membercard_pic1">
+    <img src="~/Images/member_card_pic1.jpg" alt="MemberCard" />
+
+    <div class="index_membercard_desc">
+        <label class="index_membercard_namelbl">The Coffee Bean Card</label><br/>
+        <p class="desc2" align="justify">Every member can enjoys 5% discount to the payment and gain points for exchange any beverages. What are you waiting for?</p><br/>
+        @Html.ActionLink("Join Now", "Registration", "Member", null, new {@class="joinnowlink"}) to apply your own The Coffee Bean Card
+    </div>
+</div>

@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Contact Us";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<span style="font-size: 30px;">Contact Us</span><br/><br/>
+
+<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>     <!--To load the Google Maps JavaScript API. The URL is the location of a JavaScript file that loads all of the symbols and definitions you need for using the Maps JavaScript API.-->
+
+<div style='overflow:hidden;height:440px;width:700px;'>     <!--The overflow is clipped, and the rest of the content will be invisible.-->
+    <div id='gmap_canvas' style='height:440px;width:700px;'></div>      <!--gmap_canvas is the map to display on a web page. Set the map height and width.-->
+    
+    <div>
+        <small>
+            <a href="http://embedgooglemaps.com">       <!--It is overflow stuff so it would hidden since the overflow is set to hidden.-->
+                embed google maps
+            </a>
+        </small>
+    </div>
+
+    <div>
+        <small>
+            <a href="http://www.autohuren.world/locaties/amsterdam/">       <!--It is overflow stuff so it would hidden since the overflow is set to hidden.-->
+                auto huren amsterdam
+            </a>
+        </small>
+    </div>
+</div>
+
+<script type='text/javascript'>
+    function init_map() {
+        var myOptions = { zoom: 13, center: new google.maps.LatLng(3.2169253, 101.6300837), mapTypeId: google.maps.MapTypeId.ROADMAP };
+
+        // Zoom property specifies the zoom level for the map. At low zoom levels, a small set of map tiles covers a wide area. At higher zoom levels, the tiles are of higher resolution and cover a smaller area.
+
+        // The center property specifies where to center the map. Create a LatLng object to center the map on a specific point. Pass the coordinates in the order: latitude, longitude.
+
+        //The mapTypeId property specifies the map type to display. The map types included ROADMAP (normal, default 2D map), SATELLITE (photographic map), HYBRID (photographic map + roads and city names), TERRAIN (map with mountains, rivers, etc.).
+
+        map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+
+        // Creates a new map inside the <div> element with id="gmap_canvas", using the parameters that are passed (myOptions).
+
+        marker = new google.maps.Marker({ map: map, position: new google.maps.LatLng(3.2169253, 101.6300837) });
+
+        // Create a marker that used to identifies a location on a map.
+
+        infowindow = new google.maps.InfoWindow({ content: '<strong>The Coffee Bean</strong><br>No.1, Jalan 11, Taman Desa Jaya, Kepong, 52100 Selangor.<br>' });
+
+        // Create an infowindow to shows some related info.
+
+        google.maps.event.addListener(marker, 'click', function () { infowindow.open(map, marker); }); infowindow.open(map, marker);
+
+        // You can click on the marker to show an infowindow.
+    }
+    google.maps.event.addDomListener(window, 'load', init_map);
+
+    // Add a DOM listener that will execute the init_map() function on window  load (when the page is loaded).
+</script>
+
+<div class="contact_us">
+    <strong style="font-size: 20px;">The Coffee Bean</strong><br/>
+    <span  style="font-size: 18px;">No.1, Jalan 11</span><br/>
+    <span  style="font-size: 18px;">Taman Desa Jaya</span><br/>
+    <span  style="font-size: 18px;">Kepong</span><br/>
+    <span  style="font-size: 18px;">52100, Selangor.</span><br/><br/>
+    <strong style="font-size: 18px;">Phone No. :</strong><span style="font-size: 18px;"> 03-12345678</span><br/><br/>
+    <strong style="font-size: 18px;">Email :</strong><span style="font-size: 18px;"> abbytan192@live.com.my</span>
+</div>
