@@ -34,7 +34,6 @@ namespace OfflineCafe
 
             EmployeeDataFill();
             EmpDtGrdVw.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            //EmployeePositionFill();
         }
 
         //Form minimize
@@ -1442,34 +1441,5 @@ namespace OfflineCafe
                 MessageBox.Show("Employee's data grid view cannot read the database!");
             }
         } 
-
-     /**   private void EmployeePositionFill()
-        {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
-
-            string sql = "SELECT Position FROM Employee";
-
-            SqlCommand cmd = new SqlCommand(sql, con);
-            con.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-
-            try
-            {
-                while(dr.Read())
-                {
-                    EmpPostCbBx.Items.Add(dr.GetString(0));
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                dr.Close();
-            }
-            con.Close();
-        }  **/
     }
     }
