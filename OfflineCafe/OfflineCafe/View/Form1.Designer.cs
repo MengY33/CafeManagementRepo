@@ -125,6 +125,9 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuTableAdapter = new OfflineCafe.CafeManagementDataSet2TableAdapters.MenuTableAdapter();
             this.pnlEmp = new System.Windows.Forms.Panel();
+            this.EmpResetBtn = new System.Windows.Forms.Button();
+            this.EmpUpdateBtn = new System.Windows.Forms.Button();
+            this.EmpRefreshBtn = new System.Windows.Forms.Button();
             this.ErrLbl = new System.Windows.Forms.Label();
             this.EmpInsertBtn = new System.Windows.Forms.Button();
             this.EmpPositionCbBx = new System.Windows.Forms.ComboBox();
@@ -150,7 +153,7 @@
             this.EmpInsrtUpdtLbl = new System.Windows.Forms.Label();
             this.EmpVwUpdtLbl = new System.Windows.Forms.Label();
             this.EmpDtGrdVw = new System.Windows.Forms.DataGridView();
-            this.EmpIdCbBx = new System.Windows.Forms.ComboBox();
+            this.EmpPostCbBx = new System.Windows.Forms.ComboBox();
             this.EmpIdLbl = new System.Windows.Forms.Label();
             this.EmpNmTxtBx = new System.Windows.Forms.TextBox();
             this.EmpNmLbl = new System.Windows.Forms.Label();
@@ -158,6 +161,8 @@
             this.EmpMaintenanceLbl = new System.Windows.Forms.Label();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.textBox5 = new System.Windows.Forms.TextBox();
+            this.EmpStatusCbBx = new System.Windows.Forms.ComboBox();
+            this.EmpStatusLbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.PnlButton.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -1322,6 +1327,11 @@
             // pnlEmp
             // 
             this.pnlEmp.AutoScroll = true;
+            this.pnlEmp.Controls.Add(this.EmpStatusLbl);
+            this.pnlEmp.Controls.Add(this.EmpStatusCbBx);
+            this.pnlEmp.Controls.Add(this.EmpResetBtn);
+            this.pnlEmp.Controls.Add(this.EmpUpdateBtn);
+            this.pnlEmp.Controls.Add(this.EmpRefreshBtn);
             this.pnlEmp.Controls.Add(this.ErrLbl);
             this.pnlEmp.Controls.Add(this.EmpInsertBtn);
             this.pnlEmp.Controls.Add(this.EmpPositionCbBx);
@@ -1347,7 +1357,7 @@
             this.pnlEmp.Controls.Add(this.EmpInsrtUpdtLbl);
             this.pnlEmp.Controls.Add(this.EmpVwUpdtLbl);
             this.pnlEmp.Controls.Add(this.EmpDtGrdVw);
-            this.pnlEmp.Controls.Add(this.EmpIdCbBx);
+            this.pnlEmp.Controls.Add(this.EmpPostCbBx);
             this.pnlEmp.Controls.Add(this.EmpIdLbl);
             this.pnlEmp.Controls.Add(this.EmpNmTxtBx);
             this.pnlEmp.Controls.Add(this.EmpNmLbl);
@@ -1359,6 +1369,36 @@
             this.pnlEmp.Name = "pnlEmp";
             this.pnlEmp.Size = new System.Drawing.Size(1091, 766);
             this.pnlEmp.TabIndex = 71;
+            // 
+            // EmpResetBtn
+            // 
+            this.EmpResetBtn.Location = new System.Drawing.Point(892, 450);
+            this.EmpResetBtn.Name = "EmpResetBtn";
+            this.EmpResetBtn.Size = new System.Drawing.Size(75, 30);
+            this.EmpResetBtn.TabIndex = 34;
+            this.EmpResetBtn.Text = "RESET";
+            this.EmpResetBtn.UseVisualStyleBackColor = true;
+            this.EmpResetBtn.Click += new System.EventHandler(this.EmpResetBtn_Click);
+            // 
+            // EmpUpdateBtn
+            // 
+            this.EmpUpdateBtn.Location = new System.Drawing.Point(770, 450);
+            this.EmpUpdateBtn.Name = "EmpUpdateBtn";
+            this.EmpUpdateBtn.Size = new System.Drawing.Size(75, 30);
+            this.EmpUpdateBtn.TabIndex = 33;
+            this.EmpUpdateBtn.Text = "UPDATE";
+            this.EmpUpdateBtn.UseVisualStyleBackColor = true;
+            this.EmpUpdateBtn.Click += new System.EventHandler(this.EmpUpdateBtn_Click);
+            // 
+            // EmpRefreshBtn
+            // 
+            this.EmpRefreshBtn.Location = new System.Drawing.Point(466, 324);
+            this.EmpRefreshBtn.Name = "EmpRefreshBtn";
+            this.EmpRefreshBtn.Size = new System.Drawing.Size(95, 30);
+            this.EmpRefreshBtn.TabIndex = 32;
+            this.EmpRefreshBtn.Text = "REFRESH";
+            this.EmpRefreshBtn.UseVisualStyleBackColor = true;
+            this.EmpRefreshBtn.Click += new System.EventHandler(this.EmpRefreshBtn_Click);
             // 
             // ErrLbl
             // 
@@ -1373,7 +1413,7 @@
             // 
             // EmpInsertBtn
             // 
-            this.EmpInsertBtn.Location = new System.Drawing.Point(648, 420);
+            this.EmpInsertBtn.Location = new System.Drawing.Point(648, 450);
             this.EmpInsertBtn.Name = "EmpInsertBtn";
             this.EmpInsertBtn.Size = new System.Drawing.Size(75, 30);
             this.EmpInsertBtn.TabIndex = 29;
@@ -1385,7 +1425,7 @@
             // 
             this.EmpPositionCbBx.FormattingEnabled = true;
             this.EmpPositionCbBx.Items.AddRange(new object[] {
-            "-Select Position -",
+            "- Select Position -",
             "Admin",
             "Cashier",
             "Chef",
@@ -1581,28 +1621,39 @@
             this.EmpVwUpdtLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmpVwUpdtLbl.Location = new System.Drawing.Point(16, 278);
             this.EmpVwUpdtLbl.Name = "EmpVwUpdtLbl";
-            this.EmpVwUpdtLbl.Size = new System.Drawing.Size(391, 19);
+            this.EmpVwUpdtLbl.Size = new System.Drawing.Size(362, 19);
             this.EmpVwUpdtLbl.TabIndex = 7;
-            this.EmpVwUpdtLbl.Text = "**Double Click the row of Employee data to View and Update";
+            this.EmpVwUpdtLbl.Text = "**Click on the row of Employee data to View and Update";
             // 
             // EmpDtGrdVw
             // 
+            this.EmpDtGrdVw.AllowUserToAddRows = false;
+            this.EmpDtGrdVw.AllowUserToDeleteRows = false;
+            this.EmpDtGrdVw.AllowUserToOrderColumns = true;
             this.EmpDtGrdVw.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.EmpDtGrdVw.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.EmpDtGrdVw.Location = new System.Drawing.Point(20, 95);
             this.EmpDtGrdVw.Name = "EmpDtGrdVw";
+            this.EmpDtGrdVw.ReadOnly = true;
             this.EmpDtGrdVw.Size = new System.Drawing.Size(541, 180);
             this.EmpDtGrdVw.TabIndex = 6;
+            this.EmpDtGrdVw.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.EmpDtGrdVw_CellContentClick);
             // 
-            // EmpIdCbBx
+            // EmpPostCbBx
             // 
-            this.EmpIdCbBx.DropDownWidth = 118;
-            this.EmpIdCbBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpIdCbBx.FormattingEnabled = true;
-            this.EmpIdCbBx.Location = new System.Drawing.Point(440, 60);
-            this.EmpIdCbBx.Name = "EmpIdCbBx";
-            this.EmpIdCbBx.Size = new System.Drawing.Size(121, 27);
-            this.EmpIdCbBx.TabIndex = 5;
+            this.EmpPostCbBx.DropDownWidth = 118;
+            this.EmpPostCbBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmpPostCbBx.FormattingEnabled = true;
+            this.EmpPostCbBx.Items.AddRange(new object[] {
+            "Admin",
+            "Cashier",
+            "Chef",
+            "Manager"});
+            this.EmpPostCbBx.Location = new System.Drawing.Point(440, 60);
+            this.EmpPostCbBx.Name = "EmpPostCbBx";
+            this.EmpPostCbBx.Size = new System.Drawing.Size(121, 27);
+            this.EmpPostCbBx.TabIndex = 5;
+            this.EmpPostCbBx.SelectedIndexChanged += new System.EventHandler(this.EmpIdCbBx_SelectedIndexChanged);
             // 
             // EmpIdLbl
             // 
@@ -1611,9 +1662,9 @@
             this.EmpIdLbl.Location = new System.Drawing.Point(332, 65);
             this.EmpIdLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.EmpIdLbl.Name = "EmpIdLbl";
-            this.EmpIdLbl.Size = new System.Drawing.Size(89, 19);
+            this.EmpIdLbl.Size = new System.Drawing.Size(100, 19);
             this.EmpIdLbl.TabIndex = 4;
-            this.EmpIdLbl.Text = "Employee ID";
+            this.EmpIdLbl.Text = "Employee Post";
             // 
             // EmpNmTxtBx
             // 
@@ -1623,6 +1674,7 @@
             this.EmpNmTxtBx.Name = "EmpNmTxtBx";
             this.EmpNmTxtBx.Size = new System.Drawing.Size(118, 26);
             this.EmpNmTxtBx.TabIndex = 3;
+            this.EmpNmTxtBx.TextChanged += new System.EventHandler(this.EmpNmTxtBx_TextChanged);
             // 
             // EmpNmLbl
             // 
@@ -1675,6 +1727,27 @@
             this.textBox5.Size = new System.Drawing.Size(76, 20);
             this.textBox5.TabIndex = 1;
             this.textBox5.Text = "main";
+            // 
+            // EmpStatusCbBx
+            // 
+            this.EmpStatusCbBx.FormattingEnabled = true;
+            this.EmpStatusCbBx.Items.AddRange(new object[] {
+            "- Select Status -",
+            "Hired",
+            "Resigned"});
+            this.EmpStatusCbBx.Location = new System.Drawing.Point(760, 386);
+            this.EmpStatusCbBx.Name = "EmpStatusCbBx";
+            this.EmpStatusCbBx.Size = new System.Drawing.Size(134, 27);
+            this.EmpStatusCbBx.TabIndex = 35;
+            // 
+            // EmpStatusLbl
+            // 
+            this.EmpStatusLbl.AutoSize = true;
+            this.EmpStatusLbl.Location = new System.Drawing.Point(644, 390);
+            this.EmpStatusLbl.Name = "EmpStatusLbl";
+            this.EmpStatusLbl.Size = new System.Drawing.Size(46, 19);
+            this.EmpStatusLbl.TabIndex = 36;
+            this.EmpStatusLbl.Text = "Status";
             // 
             // Form1
             // 
@@ -1820,7 +1893,7 @@
         private System.Windows.Forms.Label EmpNmLbl;
         private System.Windows.Forms.Label EmpSearchLbl;
         private System.Windows.Forms.TextBox EmpNmTxtBx;
-        private System.Windows.Forms.ComboBox EmpIdCbBx;
+        private System.Windows.Forms.ComboBox EmpPostCbBx;
         private System.Windows.Forms.Label EmpIdLbl;
         private System.Windows.Forms.DataGridView EmpDtGrdVw;
         private System.Windows.Forms.Label EmpVwUpdtLbl;
@@ -1847,6 +1920,11 @@
         private System.Windows.Forms.ComboBox EmpPositionCbBx;
         private System.Windows.Forms.Button EmpInsertBtn;
         private System.Windows.Forms.Label ErrLbl;
+        private System.Windows.Forms.Button EmpRefreshBtn;
+        private System.Windows.Forms.Button EmpUpdateBtn;
+        private System.Windows.Forms.Button EmpResetBtn;
+        private System.Windows.Forms.Label EmpStatusLbl;
+        private System.Windows.Forms.ComboBox EmpStatusCbBx;
     }
 }
 
