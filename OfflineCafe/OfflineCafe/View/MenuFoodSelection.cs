@@ -44,9 +44,6 @@ namespace OfflineCafe.View
                 double totalP = quantity * price2;
                 dataGridView3.Rows[i].Cells[5].Value = String.Format("{0:0.00}", totalP.ToString("0.00"));
             }
-            
-
-
         }
 
         private void MenuFoodSelection_Load(object sender, EventArgs e)
@@ -58,105 +55,117 @@ namespace OfflineCafe.View
         //DISPAY menu data which status is available and type
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox3.SelectedIndex == 0)
-            {
-                FoodDA fDA = new FoodDA();
-                var adapter = fDA.SearchAvailable();
+            try {
+                if (comboBox3.SelectedIndex == 0)
+                {
+                    FoodDA fDA = new FoodDA();
+                    var adapter = fDA.SearchAvailable();
 
-                var ds = this.cafeManagementDataSet.Food;
-                ds.Clear();
-                adapter.Fill(ds);
+                    var ds = this.cafeManagementDataSet.Food;
+                    ds.Clear();
+                    adapter.Fill(ds);
+                }
+                else
+                {
+                    Food f = new Food();
+                    FoodDA fDA = new FoodDA();
+                    f.foodType = comboBox3.SelectedItem.ToString();
+                    var adapter = fDA.SearchAvailableType(f);
+
+
+                    var ds = this.cafeManagementDataSet.Food;
+                    ds.Clear();
+                    adapter.Fill(ds);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Food f = new Food();
-                FoodDA fDA = new FoodDA();
-                f.foodType = comboBox3.SelectedItem.ToString();
-                var adapter = fDA.SearchAvailableType(f);
-
-
-                var ds = this.cafeManagementDataSet.Food;
-                ds.Clear();
-                adapter.Fill(ds);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
        //To add the menu food to dgv3 from dgv2
         private void dataGridView2_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            Boolean flag = true;
-            string index = dataGridView2.CurrentRow.Index.ToString();
-            String id;
-            String name;
-            String type;
-            double price;
+            try {
+                Boolean flag = true;
+                string index = dataGridView2.CurrentRow.Index.ToString();
+                String id;
+                String name;
+                String type;
+                double price;
 
-            id = dataGridView2.Rows[Convert.ToInt32(index)].Cells[0].Value.ToString();
-            name = dataGridView2.Rows[Convert.ToInt32(index)].Cells[1].Value.ToString();
-            type = dataGridView2.Rows[Convert.ToInt32(index)].Cells[2].Value.ToString();
-            price = Convert.ToDouble(dataGridView2.Rows[Convert.ToInt32(index)].Cells[3].Value.ToString());
-            Food f = new Food();
+                id = dataGridView2.Rows[Convert.ToInt32(index)].Cells[0].Value.ToString();
+                name = dataGridView2.Rows[Convert.ToInt32(index)].Cells[1].Value.ToString();
+                type = dataGridView2.Rows[Convert.ToInt32(index)].Cells[2].Value.ToString();
+                price = Convert.ToDouble(dataGridView2.Rows[Convert.ToInt32(index)].Cells[3].Value.ToString());
+                Food f = new Food();
 
-            f.foodID = id;
-            f.foodName = name;
-            f.foodType = type;
-            f.foodPrice = price;
-            f.qty = 1;
-            int qty = 0;
-            for (int i = 0; i < fList.Count; i++)
-            {
-                if (fList.ElementAt(i).foodID == id)
+                f.foodID = id;
+                f.foodName = name;
+                f.foodType = type;
+                f.foodPrice = price;
+                f.qty = 1;
+                int qty = 0;
+                for (int i = 0; i < fList.Count; i++)
                 {
-
-                    qty = i;
-                    flag = false;
-                }
-            }
-            if (flag == true)
-            {
-                if (dataGridView3.RowCount <= 4)
-                {
-                    fList.Add(f);
-                    dataGridView3.Refresh();
-                    dataGridView3.Rows.Add();
-                    for (int i = 0; i < fList.Count; i++)
+                    if (fList.ElementAt(i).foodID == id)
                     {
-                        dataGridView3.Rows[i].Cells["fID"].Value = fList.ElementAt(i).foodID;
-                        dataGridView3.Rows[i].Cells["fName"].Value = fList.ElementAt(i).foodName;
-                        dataGridView3.Rows[i].Cells["fType"].Value = fList.ElementAt(i).foodType;
-                        dataGridView3.Rows[i].Cells["fPrice"].Value = String.Format("{0:0.00}", (fList.ElementAt(i).foodPrice).ToString("0.00"));
-                        dataGridView3.Rows[i].Cells["qty"].Value = fList.ElementAt(i).qty;
-                        double quantity = Convert.ToDouble(dataGridView3.Rows[i].Cells["qty"].Value);
-                        double price2 = Convert.ToDouble(dataGridView3.Rows[i].Cells["fPrice"].Value);
-                        //textBox1.Text = String.Format("{0:0.00}", price2.ToString("0.00"));
-                        double totalP = quantity * price2;
-                        dataGridView3.Rows[i].Cells["totalPrice"].Value = String.Format("{0:0.00}", totalP.ToString("0.00"));
+
+                        qty = i;
+                        flag = false;
+                    }
+                }
+                if (flag == true)
+                {
+                    if (dataGridView3.RowCount <= 4)
+                    {
+                        fList.Add(f);
+                        dataGridView3.Refresh();
+                        dataGridView3.Rows.Add();
+                        for (int i = 0; i < fList.Count; i++)
+                        {
+                            dataGridView3.Rows[i].Cells["fID"].Value = fList.ElementAt(i).foodID;
+                            dataGridView3.Rows[i].Cells["fName"].Value = fList.ElementAt(i).foodName;
+                            dataGridView3.Rows[i].Cells["fType"].Value = fList.ElementAt(i).foodType;
+                            dataGridView3.Rows[i].Cells["fPrice"].Value = String.Format("{0:0.00}", (fList.ElementAt(i).foodPrice).ToString("0.00"));
+                            dataGridView3.Rows[i].Cells["qty"].Value = fList.ElementAt(i).qty;
+                            double quantity = Convert.ToDouble(dataGridView3.Rows[i].Cells["qty"].Value);
+                            double price2 = Convert.ToDouble(dataGridView3.Rows[i].Cells["fPrice"].Value);
+                            //textBox1.Text = String.Format("{0:0.00}", price2.ToString("0.00"));
+                            double totalP = quantity * price2;
+                            dataGridView3.Rows[i].Cells["totalPrice"].Value = String.Format("{0:0.00}", totalP.ToString("0.00"));
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("It is over maximum Ala Carte Food to Menu Sets", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("It is over maximum Ala Carte Food to Menu Sets", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    if (fList.ElementAt(qty).qty > 5)
+                    {
+                        MessageBox.Show("It is over quantity of Ala Carte Food to Menu Sets", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        int qty2 = Convert.ToInt32(dataGridView3.Rows[qty].Cells["qty"].Value);
+                        //int qty3 = 1;
+                        //int qty4 = qty3+qty2;
+                        qty2 += 1;
+                        //MessageBox.Show("This Food ID = " + id + " is already Selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        fList.ElementAt(qty).qty = qty2;
+                        dataGridView3.Rows[qty].Cells["qty"].Value = qty2;
+                    }
+                    double quantity2 = Convert.ToDouble(dataGridView3.Rows[qty].Cells["qty"].Value);
+                    double price3 = Convert.ToDouble(dataGridView3.Rows[qty].Cells["fPrice"].Value);
+                    double totalP2 = quantity2 * price3;
+                    dataGridView3.Rows[qty].Cells["totalPrice"].Value = String.Format("{0:0.00}", totalP2.ToString("0.00"));
                 }
             }
-            else
+            catch (Exception ex)
             {
-                if (fList.ElementAt(qty).qty > 5)
-                {
-                    MessageBox.Show("It is over quantity of Ala Carte Food to Menu Sets", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-                else
-                {
-                    int qty2 = Convert.ToInt32(dataGridView3.Rows[qty].Cells["qty"].Value);
-                    //int qty3 = 1;
-                    //int qty4 = qty3+qty2;
-                    qty2 += 1;
-                    //MessageBox.Show("This Food ID = " + id + " is already Selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    fList.ElementAt(qty).qty = qty2;
-                    dataGridView3.Rows[qty].Cells["qty"].Value = qty2;
-                }
-                double quantity2 = Convert.ToDouble(dataGridView3.Rows[qty].Cells["qty"].Value);
-                double price3 = Convert.ToDouble(dataGridView3.Rows[qty].Cells["fPrice"].Value);
-                double totalP2 = quantity2 * price3;
-                dataGridView3.Rows[qty].Cells["totalPrice"].Value = String.Format("{0:0.00}", totalP2.ToString("0.00"));
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

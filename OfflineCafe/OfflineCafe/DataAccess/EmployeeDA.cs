@@ -16,8 +16,9 @@ namespace OfflineCafe.DataAccess
             SqlConnection con = new SqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
 
-            try {
-                string sql = "INSERT INTO Employee VALUES ('"+emp.EmployeeName+"', '"+emp.ICNumber+"', '"+emp.Gender+"', '"+emp.HomeAddress+"', '"+emp.HomeNumber+"', '"+emp.HandphoneNumber+"', '"+emp.Email+"', '"+emp.Position+"', '"+emp.CurrentStatus+"')";
+            try
+            {
+                string sql = "INSERT INTO Employee VALUES ('" + emp.EmployeeName + "', '" + emp.ICNumber + "', '" + emp.Gender + "', '" + emp.HomeAddress + "', '" + emp.HomeNumber + "', '" + emp.HandphoneNumber + "', '" + emp.Email + "', '" + emp.Position + "', '" + emp.CurrentStatus + "')";
 
                 SqlCommand cmd = new SqlCommand(sql, con);
 
@@ -27,10 +28,10 @@ namespace OfflineCafe.DataAccess
 
                 emp.InsertStatus = "Success";
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 emp.InsertStatus = "Failed";
-                throw ex;      
+                throw ex;
             }
         }
 
@@ -41,7 +42,7 @@ namespace OfflineCafe.DataAccess
 
             try
             {
-                string sql = "UPDATE Employee SET EmployeeName = '"+em.EmployeeName+"', ICNumber = '"+em.ICNumber+"', Gender = '"+em.Gender+"', HomeAddress = '"+em.HomeAddress+"', HomeNumber = '"+em.HomeNumber+"', HandphoneNumber = '"+em.HandphoneNumber+"', Email = '"+em.Email+"', Position = '"+em.Position+"', EmpStatus = '"+em.CurrentStatus+"' WHERE EmployeeID = '"+em.EmployeeID+"'";
+                string sql = "UPDATE Employee SET EmployeeName = '" + em.EmployeeName + "', ICNumber = '" + em.ICNumber + "', Gender = '" + em.Gender + "', HomeAddress = '" + em.HomeAddress + "', HomeNumber = '" + em.HomeNumber + "', HandphoneNumber = '" + em.HandphoneNumber + "', Email = '" + em.Email + "', Position = '" + em.Position + "', EmpStatus = '" + em.CurrentStatus + "' WHERE EmployeeID = '" + em.EmployeeID + "'";
 
                 SqlCommand cmd = new SqlCommand(sql, con);
 

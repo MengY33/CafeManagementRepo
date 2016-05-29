@@ -16,6 +16,7 @@ namespace OfflineCafe
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+           //Application.Run(new OfflineCafe.View.Login());
             Application.Run(new Form1());
         }
     }
