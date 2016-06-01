@@ -34,8 +34,17 @@ namespace OfflineCafe
             pnlEmp.Visible = false;
             pnlPwChg.Visible = false;
             pnlMain.Visible = true;
+
             EmployeeDataFill();
             EmpDtGrdVw.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            SupplierDataFill();
+            SuppDtGdVw.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            EmpPositionCbBx.SelectedIndex = 0;
+            EmpStatusCbBx.SelectedIndex = 0;
+            SuppStatusCbBx.SelectedIndex = 0;
+            ItmStatusCbBx.SelectedIndex = 0;
             //for (int i = 0; i < staticeList.Count; i++)
             //{
             //    label34.Text = staticeList.ElementAt(i).foodName;             
@@ -55,13 +64,16 @@ namespace OfflineCafe
             else { }
         }
         private void Form1_Load(object sender, EventArgs e)
-        {    
+        {
             // TODO: This line of code loads data into the 'cafeManagementDataSet2.Menu' table. You can move, or remove it, as needed.
             //  this.menuTableAdapter.Fill(this.cafeManagementDataSet2.Menu);
             // TODO: This line of code loads data into the 'cafeManagementDataSet.Food' table. You can move, or remove it, as needed.
             //   this.foodTableAdapter1.Fill(this.cafeManagementDataSet.Food);
             //display data grid view
             //  this.foodTableAdapter.Fill(this.cafeManagementDataSet1.Food);
+
+            EmpDtGrdVw.AutoGenerateColumns = false;
+            SuppDtGdVw.AutoGenerateColumns = false;
         }
         //insert menu data
         private void btnInsertMenu_Click(object sender, EventArgs e)
@@ -537,6 +549,7 @@ namespace OfflineCafe
             pnlMain.Visible = false;
             pnlPwChg.Visible = false;
             pnlSupplier.Visible = false;
+            pnlItem.Visible = false;
         }
         //employee btn
         private void button1_Click(object sender, EventArgs e)
@@ -546,10 +559,8 @@ namespace OfflineCafe
             //    if (staticeList.ElementAt(i).foodType == "Noodle")
             //    {
             pnlEmp.Visible =true;
-            EmpPositionCbBx.SelectedIndex = 0;
-            EmpStatusCbBx.SelectedIndex = 0;
-
             pnlSupplier.Visible = false;
+            pnlItem.Visible = false;
                 //}
                 //else
                 //{
@@ -563,6 +574,7 @@ namespace OfflineCafe
             pnlMenu.Visible = false;
             pnlEmp.Visible = false;
             pnlMain.Visible = false;
+            pnlItem.Visible = false;
             pnlSupplier.Visible = true;
         }
 
@@ -571,6 +583,7 @@ namespace OfflineCafe
             pnlMenu.Visible = false;
             pnlEmp.Visible = false;
             pnlSupplier.Visible = false;
+            pnlItem.Visible = true;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -711,7 +724,6 @@ namespace OfflineCafe
             String p8 = @"\d{6}-[1]{1}[789]{1}-\d{4}";                  //check the birthplace code from the IC Number, it does not contains 17,18,19
             String p9 = @"\d{6}-[2]{1}[0]{1}-\d{4}";                    //check the birthplace code from the IC Number, it does not contains 20
             String p10 = @"\d{6}-[6789]{1}[0123456789]{1}-\d{4}";       //check the birthplace code from the IC Number, it does not contains 60-69, 70-79, 80-89, 90-99
-            //String p11 = @"[0]{1}[0-9]{5}-[0-9]{2}-[0-9]{4}";           //check the year from the IC Number, make sure the first digit is not starts from 0
             String p12 = @"[0-9]{2}[0]{4}-[0-9]{2}-[0-9]{4}";           //check the IC Number, it can't be like 920000-12-1234
             String p13 = @"[0-9]{3}[0]{3}-[0-9]{2}-[0-9]{4}";           //check the IC Number, it can't be like 921000-12-1234
             String p14 = @"[0-9]{4}[0]{2}-[0-9]{2}-[0-9]{4}";           //check the IC Number, it can't be like 920400-12-1234
@@ -742,7 +754,6 @@ namespace OfflineCafe
             Regex rgx8 = new Regex(p8);
             Regex rgx9 = new Regex(p9);
             Regex rgx10 = new Regex(p10);
-            //Regex rgx11 = new Regex(p11);
             Regex rgx12 = new Regex(p12);
             Regex rgx13 = new Regex(p13);
             Regex rgx14 = new Regex(p14);
@@ -762,7 +773,6 @@ namespace OfflineCafe
             Regex rgx28 = new Regex(p28);
             Regex rgx29 = new Regex(p29);
             Regex rgx30 = new Regex(p30);
-
 
             if (EmpNameTxtBx.Text == String.Empty || EmpICTxtBx.Text == String.Empty || EmpMaleRdBtn.Checked == false && EmpFemaleRdBtn.Checked == false || EmpAddress1TxtBx.Text == String.Empty && EmpAddress2TxtBx.Text == String.Empty || EmpHomeNoTxtBx.Text == String.Empty || EmpHandphoneNoTxtBx.Text == String.Empty || EmpEmailTxtBx.Text == String.Empty || EmpPositionCbBx.SelectedIndex == 0 || EmpStatusCbBx.SelectedIndex == 0)
             {
@@ -839,7 +849,7 @@ namespace OfflineCafe
                             if (!rgx19.Match(EmpAddress1TxtBx.Text).Success)
                             {
                                 ErrLbl.Visible = true;
-                                ErrLbl.Text = "*Please make sure Address does not contains any special symbols, except ','  '.'  '/'  '-'.";
+                                ErrLbl.Text = "*Please make sure first Address textfield does not contains any special symbols, except ','  '.'  '/'  '-'.";
                                 EmpAddress1TxtBx.Focus();
                             }
                             else if (rgx20.Match(EmpAddress1TxtBx.Text).Success)
@@ -848,10 +858,10 @@ namespace OfflineCafe
                                 ErrLbl.Text = "*Invalid Address!";
                                 EmpAddress1TxtBx.Focus();
                             }
-                            else if (EmpAddress1TxtBx.TextLength > 150 || EmpAddress1TxtBx.TextLength < 20)
+                            else if (EmpAddress1TxtBx.TextLength > 170 || EmpAddress1TxtBx.TextLength < 20)
                             {
                                 ErrLbl.Visible = true;
-                                ErrLbl.Text = "*Please make sure Address does not exceeds more than 150 characters. \r\n\r\n*Please make sure Address has minimum 20 characters.";
+                                ErrLbl.Text = "*Please make sure first Address textfield does not exceeds more than 170 characters. \r\n\r\n*Please make sure first Address textfield has minimum 20 characters.";
                                 EmpAddress1TxtBx.Focus();
                             }
                             else
@@ -859,7 +869,7 @@ namespace OfflineCafe
                                 if (!(EmpAddress2TxtBx.Text == String.Empty) && !rgx19.Match(EmpAddress2TxtBx.Text).Success)
                                 {
                                     ErrLbl.Visible = true;
-                                    ErrLbl.Text = "*Please make sure Address does not contains any special symbols, except ','  '.'  '/'  '-'.";
+                                    ErrLbl.Text = "*Please make sure second Address textfield does not contains any special symbols, except ','  '.'  '/'  '-'.";
                                     EmpAddress2TxtBx.Focus();
                                 }
                                 else if (!(EmpAddress2TxtBx.Text == String.Empty) && rgx20.Match(EmpAddress2TxtBx.Text).Success)
@@ -868,10 +878,10 @@ namespace OfflineCafe
                                     ErrLbl.Text = "*Invalid Address!";
                                     EmpAddress2TxtBx.Focus();
                                 }
-                                else if (!(EmpAddress2TxtBx.Text == String.Empty) && EmpAddress2TxtBx.TextLength > 50)
+                                else if (!(EmpAddress2TxtBx.Text == String.Empty) && EmpAddress2TxtBx.TextLength > 30)
                                 {
                                     ErrLbl.Visible = true;
-                                    ErrLbl.Text = "*Please make sure Address does not exceeds more than 50 characters.";
+                                    ErrLbl.Text = "*Please make sure second Address textfield does not exceeds more than 30 characters.";
                                     EmpAddress2TxtBx.Focus();
                                 }
                                 else
@@ -963,6 +973,7 @@ namespace OfflineCafe
                                                 Employee emp = new Employee();
                                                 EmployeeDA empDA = new EmployeeDA();
 
+                                                emp.EmployeeID = EmpIDDTxtBx.Text;
                                                 emp.EmployeeName = EmpNameTxtBx.Text;
                                                 emp.ICNumber = EmpICTxtBx.Text;
 
@@ -993,8 +1004,9 @@ namespace OfflineCafe
 
                                                 if (emp.InsertStatus == "Success")
                                                 {
-                                                    MessageBox.Show("New employee record has inserted successfully!");
+                                                    MessageBox.Show("Employee record has inserted successfully!");
 
+                                                    EmpIDDTxtBx.Text = "Auto-Generated";
                                                     EmpNameTxtBx.Clear();
                                                     EmpICTxtBx.Clear();
                                                     EmpMaleRdBtn.Checked = false;
@@ -1007,6 +1019,7 @@ namespace OfflineCafe
                                                     EmpPositionCbBx.SelectedIndex = 0;
                                                     EmpStatusCbBx.SelectedIndex = 0;
 
+                                                    EmpInsertBtn.Enabled = true;
                                                     ErrLbl.Visible = false;
                                                 }
                                                 else if (emp.InsertStatus == "Failed")
@@ -1023,6 +1036,7 @@ namespace OfflineCafe
                 }
             }
         }
+
         private void EmployeeDataFill()
         {
             SqlConnection con = new SqlConnection();
@@ -1048,6 +1062,7 @@ namespace OfflineCafe
             catch (Exception ex)
             {
                 MessageBox.Show("Employee's data grid view cannot read the database!");
+                throw ex;
             }
         }
         private void EmpUpdateBtn_Click(object sender, EventArgs e)
@@ -1381,30 +1396,7 @@ namespace OfflineCafe
 
         private void EmpRefreshBtn_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
-
-            try
-            {
-                string sql = "SELECT EmployeeID, EmployeeName, ICNumber, Gender, HomeAddress, HomeNumber, HandphoneNumber, Email, Position, EmpStatus FROM Employee";
-
-                SqlDataAdapter da = new SqlDataAdapter(sql, con);
-
-                DataSet ds = new DataSet();
-
-                con.Open();
-
-                da.Fill(ds, "Employee");
-
-                con.Close();
-
-                EmpDtGrdVw.DataSource = ds;
-                EmpDtGrdVw.DataMember = "Employee";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Employee's data grid view cannot read the database!");
-            }
+            EmployeeDataFill();
         }
 
         private void EmpDtGrdVw_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -1462,6 +1454,10 @@ namespace OfflineCafe
             {
                 EmpStatusCbBx.SelectedIndex = 2;
             }
+            else if(cs.Equals("Fired"))
+            {
+                EmpStatusCbBx.SelectedIndex = 3;
+            }
         }
 
         private void EmpResetBtn_Click(object sender, EventArgs e)
@@ -1507,7 +1503,8 @@ namespace OfflineCafe
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Employee's data grid view cannot read the database!");
+                MessageBox.Show("Can't find the Employee Name!");
+                throw ex;
             }
         }
 
@@ -1537,7 +1534,8 @@ namespace OfflineCafe
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Employee's data grid view cannot read the database!");
+                MessageBox.Show("Can't find the Employee Post!");
+                throw ex;
             }
         }
 
@@ -1573,7 +1571,7 @@ namespace OfflineCafe
             Regex rgx13 = new Regex(p13);
             Regex rgx14 = new Regex(p14);
 
-            if(SuppNameTxtBx.Text == String.Empty || SuppMaleRdBtn.Checked == false && SuppFemaleRdBtn.Checked == false || SuppHandphoneTxtBx.Text == String.Empty || SuppEmailTxtBx.Text == String.Empty || CmpyNameTxtBx.Text == String.Empty || CmpyAddress1TxtBx.Text == String.Empty && CmpyAddress2TxtBx.Text == String.Empty || CmpyNumberTxtBx.Text == String.Empty || CmpyFaxNumberTxtBx.Text == String.Empty)
+            if(SuppNameTxtBx.Text == String.Empty || SuppMaleRdBtn.Checked == false && SuppFemaleRdBtn.Checked == false || SuppHandphoneTxtBx.Text == String.Empty || SuppEmailTxtBx.Text == String.Empty || CmpyNameTxtBx.Text == String.Empty || CmpyAddress1TxtBx.Text == String.Empty && CmpyAddress2TxtBx.Text == String.Empty || CmpyNumberTxtBx.Text == String.Empty || CmpyFaxNumberTxtBx.Text == String.Empty || SuppStatusCbBx.SelectedIndex == 0)
             {
                 SuppErrLbl.Visible = true;
                 SuppErrLbl.Text = "*Please make sure all the fields are completed.";
@@ -1785,14 +1783,474 @@ namespace OfflineCafe
 
                                             supp.CompanyNum = CmpyNumberTxtBx.Text;
                                             supp.CompanyFaxNum = CmpyFaxNumberTxtBx.Text;
+                                            supp.SuppStatus = SuppStatusCbBx.SelectedItem.ToString();
 
                                             suppDA.SupplierInsertRecord(supp);
+
+                                            if(supp.InsertStatus == "Success")
+                                            {
+                                                MessageBox.Show("New supplier record has inserted successfully!");
+
+                                                SuppNameTxtBx.Clear();
+                                                SuppMaleRdBtn.Checked = false;
+                                                SuppFemaleRdBtn.Checked = false;
+                                                SuppHandphoneTxtBx.Clear();
+                                                SuppEmailTxtBx.Clear();
+                                                CmpyNameTxtBx.Clear();
+                                                CmpyAddress1TxtBx.Clear();
+                                                CmpyAddress2TxtBx.Clear();
+                                                CmpyNumberTxtBx.Clear();
+                                                CmpyFaxNumberTxtBx.Clear();
+                                                SuppStatusCbBx.SelectedIndex = 0;
+
+                                                SuppErrLbl.Visible = false;
+                                            }
+                                            else if(supp.InsertStatus == "Failed")
+                                            {
+                                                MessageBox.Show("Failed to insert supplier record!");
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
                     }
+                }
+            }
+        }
+
+        private void SupplierDataFill()
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
+
+            try
+            {
+                string sql = "SELECT SupplierID, SupplierName, Gender, HandphoneNumber, Email, CompanyName, CompanyAddress, CompanyNumber, CompanyFaxNumber, SuppStatus FROM Supplier";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, con);
+
+                DataSet ds = new DataSet();
+
+                con.Open();
+
+                da.Fill(ds, "Supplier");
+
+                con.Close();
+
+                SuppDtGdVw.DataSource = ds;
+                SuppDtGdVw.DataMember = "Supplier";
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Supplier's data grid view cannot read the database!");
+                throw ex;
+            }
+        }
+
+        private void SuppRefreshBtn_Click(object sender, EventArgs e)
+        {
+            SupplierDataFill();
+        }
+
+        private void SuppDtGdVw_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SuppInsertBtn.Enabled = false;
+
+            int i;
+            i = SuppDtGdVw.SelectedCells[0].RowIndex;
+
+            SuppIDTxtBx.Text = SuppDtGdVw.Rows[i].Cells[0].Value.ToString();
+            SuppNameTxtBx.Text = SuppDtGdVw.Rows[i].Cells[1].Value.ToString();
+
+            string g = SuppDtGdVw.Rows[i].Cells[2].Value.ToString();
+
+            if(g.Equals("Male"))
+            {
+                SuppMaleRdBtn.Checked = true;
+            }
+            else
+            {
+                SuppFemaleRdBtn.Checked = true;
+            }
+
+            SuppHandphoneTxtBx.Text = SuppDtGdVw.Rows[i].Cells[3].Value.ToString();
+            SuppEmailTxtBx.Text = SuppDtGdVw.Rows[i].Cells[4].Value.ToString();
+            CmpyNameTxtBx.Text = SuppDtGdVw.Rows[i].Cells[5].Value.ToString();
+            CmpyAddress1TxtBx.Text = SuppDtGdVw.Rows[i].Cells[6].Value.ToString();
+            CmpyNumberTxtBx.Text = SuppDtGdVw.Rows[i].Cells[7].Value.ToString();
+            CmpyFaxNumberTxtBx.Text = SuppDtGdVw.Rows[i].Cells[8].Value.ToString();
+
+            string s = SuppDtGdVw.Rows[i].Cells[9].Value.ToString();
+
+            if (s.Equals("Supply"))
+            {
+                SuppStatusCbBx.SelectedIndex = 1;
+            }
+            else if(s.Equals("No Supply"))
+            {
+                SuppStatusCbBx.SelectedIndex = 2;
+            }
+        }
+
+        private void SuppUpdateBtn_Click(object sender, EventArgs e)
+        {
+            String p1 = @"^[a-z\s/]*$";
+            String p2 = @"^\d*$";
+            String p3 = @"[1-9]{1}[0-9]{2}-[0-9]{7}";
+            String p4 = @"[0]{3}-[0-9]{7}";
+            String p5 = @"[0-9]{3}-[0]{7}";
+            String p6 = @"^\d{3}-\d{7}$";
+            String p7 = @"^[a-z0-9_.\-]+\@[a-z]+\.(?:[a-z]{3}|com|org|net|edu|gov)|\.(?:[a-z]{2}|my)$";
+            String p8 = @"^[a-z0-9\s.,/-]*$";
+            String p9 = @"^[0-9\s.,/-]*$";
+            String p10 = @"[1-9]{1}[0-9]{1}-[0-9]{8}";
+            String p11 = @"[0]{1}[0]{1}-[0-9]{8}";
+            String p12 = @"[0]{1}[125]{1}";
+            String p13 = @"[0-9]{2}-[0]{8}";
+            String p14 = @"^\d{2}-\d{8}$";
+
+            Regex rgx1 = new Regex(p1, RegexOptions.IgnoreCase);
+            Regex rgx2 = new Regex(p2);
+            Regex rgx3 = new Regex(p3);
+            Regex rgx4 = new Regex(p4);
+            Regex rgx5 = new Regex(p5);
+            Regex rgx6 = new Regex(p6);
+            Regex rgx7 = new Regex(p7);
+            Regex rgx8 = new Regex(p8);
+            Regex rgx9 = new Regex(p9);
+            Regex rgx10 = new Regex(p10);
+            Regex rgx11 = new Regex(p11);
+            Regex rgx12 = new Regex(p12);
+            Regex rgx13 = new Regex(p13);
+            Regex rgx14 = new Regex(p14);
+
+            if (SuppNameTxtBx.Text == String.Empty || SuppMaleRdBtn.Checked == false && SuppFemaleRdBtn.Checked == false || SuppHandphoneTxtBx.Text == String.Empty || SuppEmailTxtBx.Text == String.Empty || CmpyNameTxtBx.Text == String.Empty || CmpyAddress1TxtBx.Text == String.Empty && CmpyAddress2TxtBx.Text == String.Empty || CmpyNumberTxtBx.Text == String.Empty || CmpyFaxNumberTxtBx.Text == String.Empty || SuppStatusCbBx.SelectedIndex == 0)
+            {
+                SuppErrLbl.Visible = true;
+                SuppErrLbl.Text = "*Please make sure all the fields are completed.";
+            }
+            else
+            {
+                if (!rgx1.Match(SuppNameTxtBx.Text).Success)
+                {
+                    SuppErrLbl.Visible = true;
+                    SuppErrLbl.Text = "*Please make sure Supplier Name does not contains any numeric data. \r\n\r\n*Please make sure Supplier Name does not contains any special symbol, except '/'.";
+                    SuppNameTxtBx.Focus();
+                }
+                else if (SuppNameTxtBx.TextLength > 200 || SuppNameTxtBx.TextLength < 10)
+                {
+                    SuppErrLbl.Visible = true;
+                    SuppErrLbl.Text = "*Please make sure Supplier Name does not exceeds more than 200 characters. \r\n\r\n*Please make sure Supplier Name has minimum 10 characters.";
+                    SuppNameTxtBx.Focus();
+                }
+                else
+                {
+                    if (rgx2.Match(SuppHandphoneTxtBx.Text).Success)
+                    {
+                        SuppErrLbl.Visible = true;
+                        SuppErrLbl.Text = "*Handphone Number is missing dashes '-'. \r\n\r\n*Please make sure Handphone Number is in such format 'xxx-xxxxxxx'.";
+                        SuppHandphoneTxtBx.Focus();
+                    }
+                    else if (rgx3.Match(SuppHandphoneTxtBx.Text).Success)
+                    {
+                        SuppErrLbl.Visible = true;
+                        SuppErrLbl.Text = "*Invalid Handphone Number!  Please make sure the first digit is zero.";
+                        SuppHandphoneTxtBx.Focus();
+                    }
+                    else if (rgx4.Match(SuppHandphoneTxtBx.Text).Success)
+                    {
+                        SuppErrLbl.Visible = true;
+                        SuppErrLbl.Text = "*Invalid Handphone Number!";
+                        SuppHandphoneTxtBx.Focus();
+                    }
+                    else if (rgx5.Match(SuppHandphoneTxtBx.Text).Success)
+                    {
+                        SuppErrLbl.Visible = true;
+                        SuppErrLbl.Text = "*Invalid Handphone Number!";
+                        SuppHandphoneTxtBx.Focus();
+                    }
+                    else if (!rgx6.Match(SuppHandphoneTxtBx.Text).Success)
+                    {
+                        SuppErrLbl.Visible = true;
+                        SuppErrLbl.Text = "*Please make sure Handphone Number does not contains any alphabetics and any special symbols, except '-'. \r\n\r\n*Please make sure Handphone Number has exactly 11 characters. \r\n\r\n*Please make sure Handphone Number is in such format 'xxx-xxxxxxx'.";
+                        SuppHandphoneTxtBx.Focus();
+                    }
+                    else
+                    {
+                        if (!rgx7.Match(SuppEmailTxtBx.Text).Success)
+                        {
+                            SuppErrLbl.Visible = true;
+                            SuppErrLbl.Text = "*Invalid Email Address!";
+                            SuppEmailTxtBx.Focus();
+                        }
+                        else if (SuppEmailTxtBx.TextLength > 200 || SuppEmailTxtBx.TextLength < 10)
+                        {
+                            SuppErrLbl.Visible = true;
+                            SuppErrLbl.Text = "*Please make sure Email address does not exceeds more than 200 characters. \r\n\r\n*Please make sure Email address has minimum 10 characters.";
+                            SuppEmailTxtBx.Focus();
+                        }
+                        else
+                        {
+                            if (!rgx8.Match(CmpyAddress1TxtBx.Text).Success)
+                            {
+                                SuppErrLbl.Visible = true;
+                                SuppErrLbl.Text = "*Please make sure first Address textfield does not contains any special symbols, except ','  '.'  '/'  '-'.";
+                                CmpyAddress1TxtBx.Focus();
+                            }
+                            else if (rgx9.Match(CmpyAddress1TxtBx.Text).Success)
+                            {
+                                SuppErrLbl.Visible = true;
+                                SuppErrLbl.Text = "*Invalid Address!";
+                                CmpyAddress1TxtBx.Focus();
+                            }
+                            else if (CmpyAddress1TxtBx.TextLength > 170 || CmpyAddress1TxtBx.TextLength < 20)
+                            {
+                                SuppErrLbl.Visible = true;
+                                SuppErrLbl.Text = "*Please make sure first Address textfield does not exceeds more than 170 characters. \r\n\r\n*Please make sure first Address textfield has minimum 20 characters.";
+                                CmpyAddress1TxtBx.Focus();
+                            }
+                            else
+                            {
+                                if (!(CmpyAddress2TxtBx.Text == String.Empty) && !rgx8.Match(CmpyAddress2TxtBx.Text).Success)
+                                {
+                                    SuppErrLbl.Visible = true;
+                                    SuppErrLbl.Text = "*Please make sure second Address textfield does not contains any special symbols, except ','  '.'  '/'  '-'.";
+                                    CmpyAddress2TxtBx.Focus();
+                                }
+                                else if (!(CmpyAddress2TxtBx.Text == String.Empty) && rgx9.Match(CmpyAddress2TxtBx.Text).Success)
+                                {
+                                    SuppErrLbl.Visible = true;
+                                    SuppErrLbl.Text = "*Invalid Address!";
+                                    CmpyAddress2TxtBx.Focus();
+                                }
+                                else if (!(CmpyAddress2TxtBx.Text == String.Empty) && CmpyAddress2TxtBx.TextLength > 30)
+                                {
+                                    SuppErrLbl.Visible = true;
+                                    SuppErrLbl.Text = "*Please make sure second Address textfield does not exceeds more than 30 characters.";
+                                    CmpyAddress2TxtBx.Focus();
+                                }
+                                else
+                                {
+                                    if (rgx2.Match(CmpyNumberTxtBx.Text).Success)
+                                    {
+                                        SuppErrLbl.Visible = true;
+                                        SuppErrLbl.Text = "*Home Number is missing dashes '-'. \r\n\r\n*Please make sure Home Number is in such format 'xx-xxxxxxxx'.";
+                                        CmpyNumberTxtBx.Focus();
+                                    }
+                                    else if (rgx10.Match(CmpyNumberTxtBx.Text).Success)
+                                    {
+                                        SuppErrLbl.Visible = true;
+                                        SuppErrLbl.Text = "*Invalid Home Number!  Please make sure the first digit is zero.";
+                                        CmpyNumberTxtBx.Focus();
+                                    }
+                                    else if (rgx11.Match(CmpyNumberTxtBx.Text).Success)
+                                    {
+                                        SuppErrLbl.Visible = true;
+                                        SuppErrLbl.Text = "*Invalid Home Number!  Please make sure the second digit is not zero.";
+                                        CmpyNumberTxtBx.Focus();
+                                    }
+                                    else if (rgx12.Match(CmpyNumberTxtBx.Text).Success)
+                                    {
+                                        SuppErrLbl.Visible = true;
+                                        SuppErrLbl.Text = "*Invalid Home Number!  Malaysia city codes only contain 03, 04, 06, 07, 08, 09.";
+                                        CmpyNumberTxtBx.Focus();
+                                    }
+                                    else if (rgx13.Match(CmpyNumberTxtBx.Text).Success)
+                                    {
+                                        SuppErrLbl.Visible = true;
+                                        SuppErrLbl.Text = "*Invalid Home Number!";
+                                        CmpyNumberTxtBx.Focus();
+                                    }
+                                    else if (!rgx14.Match(CmpyNumberTxtBx.Text).Success)
+                                    {
+                                        SuppErrLbl.Visible = true;
+                                        SuppErrLbl.Text = "*Please make sure Home Number does not contains any alphabetics. \r\n\r\n*Please make sure Home Number does not contains any special symbols, except '-'. \r\n\r\n*Please make sure Home Number has exactly 11 characters.";
+                                        CmpyNumberTxtBx.Focus();
+                                    }
+                                    else
+                                    {
+                                        if (rgx2.Match(CmpyFaxNumberTxtBx.Text).Success)
+                                        {
+                                            SuppErrLbl.Visible = true;
+                                            SuppErrLbl.Text = "*Fax Number is missing dashes '-'. \r\n\r\n*Please make sure Fax Number is in such format 'xx-xxxxxxxx'.";
+                                            CmpyFaxNumberTxtBx.Focus();
+                                        }
+                                        else if (rgx10.Match(CmpyFaxNumberTxtBx.Text).Success)
+                                        {
+                                            SuppErrLbl.Visible = true;
+                                            SuppErrLbl.Text = "*Invalid Fax Number!  Please make sure the first digit is zero.";
+                                            CmpyFaxNumberTxtBx.Focus();
+                                        }
+                                        else if (rgx11.Match(CmpyFaxNumberTxtBx.Text).Success)
+                                        {
+                                            SuppErrLbl.Visible = true;
+                                            SuppErrLbl.Text = "*Invalid Fax Number!  Please make sure the second digit is not zero.";
+                                            CmpyFaxNumberTxtBx.Focus();
+                                        }
+                                        else if (rgx12.Match(CmpyFaxNumberTxtBx.Text).Success)
+                                        {
+                                            SuppErrLbl.Visible = true;
+                                            SuppErrLbl.Text = "*Invalid Fax Number!  Malaysia city codes only contain 03, 04, 06, 07, 08, 09.";
+                                            CmpyFaxNumberTxtBx.Focus();
+                                        }
+                                        else if (rgx13.Match(CmpyFaxNumberTxtBx.Text).Success)
+                                        {
+                                            SuppErrLbl.Visible = true;
+                                            SuppErrLbl.Text = "*Invalid Fax Number!";
+                                            CmpyFaxNumberTxtBx.Focus();
+                                        }
+                                        else if (!rgx14.Match(CmpyFaxNumberTxtBx.Text).Success)
+                                        {
+                                            SuppErrLbl.Visible = true;
+                                            SuppErrLbl.Text = "*Please make sure Fax Number does not contains any alphabetics. \r\n\r\n*Please make sure Fax Number does not contains any special symbols, except '-'. \r\n\r\n*Please make sure Fax Number has exactly 11 characters.";
+                                            CmpyFaxNumberTxtBx.Focus();
+                                        }
+                                        else
+                                        {
+                                            Supplier supp = new Supplier();
+                                            SupplierDA suppDA = new SupplierDA();
+
+                                            supp.SupplierID = SuppIDTxtBx.Text;
+                                            supp.SupplierName = SuppNameTxtBx.Text;
+
+                                            if (SuppMaleRdBtn.Checked == true)
+                                            {
+                                                supp.SupplierGender = SuppMaleRdBtn.Text;
+                                            }
+                                            else
+                                            {
+                                                supp.SupplierGender = SuppFemaleRdBtn.Text;
+                                            }
+
+                                            supp.SupplierHandphoneNum = SuppHandphoneTxtBx.Text;
+                                            supp.SupplierEmail = SuppEmailTxtBx.Text;
+                                            supp.CompanyName = CmpyNameTxtBx.Text;
+
+                                            if (!(CmpyAddress1TxtBx.Text == String.Empty) && !(CmpyAddress2TxtBx.Text == String.Empty))
+                                            {
+                                                supp.CompanyAddress = CmpyAddress1TxtBx.Text + ", " + CmpyAddress2TxtBx.Text;
+                                            }
+                                            else
+                                            {
+                                                supp.CompanyAddress = CmpyAddress1TxtBx.Text;
+                                            }
+
+                                            supp.CompanyNum = CmpyNumberTxtBx.Text;
+                                            supp.CompanyFaxNum = CmpyFaxNumberTxtBx.Text;
+                                            supp.SuppStatus = SuppStatusCbBx.SelectedItem.ToString();
+
+                                            suppDA.SupplierUpdateRecord(supp);
+
+                                            if (supp.UpdateStatus == "Success")
+                                            {
+                                                MessageBox.Show("New supplier record has updated successfully!");
+
+                                                SuppIDTxtBx.Text = "Auto-Generated";
+                                                SuppNameTxtBx.Clear();
+                                                SuppMaleRdBtn.Checked = false;
+                                                SuppFemaleRdBtn.Checked = false;
+                                                SuppHandphoneTxtBx.Clear();
+                                                SuppEmailTxtBx.Clear();
+                                                CmpyNameTxtBx.Clear();
+                                                CmpyAddress1TxtBx.Clear();
+                                                CmpyAddress2TxtBx.Clear();
+                                                CmpyNumberTxtBx.Clear();
+                                                CmpyFaxNumberTxtBx.Clear();
+                                                SuppStatusCbBx.SelectedIndex = 0;
+
+                                                SuppInsertBtn.Enabled = true;
+                                                SuppErrLbl.Visible = false;
+                                            }
+                                            else if (supp.UpdateStatus == "Failed")
+                                            {
+                                                MessageBox.Show("Failed to update supplier record!");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void SuppResetBtn_Click(object sender, EventArgs e)
+        {
+            SuppIDTxtBx.Text = "Auto-Generated";
+            SuppNameTxtBx.Clear();
+            SuppMaleRdBtn.Checked = false;
+            SuppFemaleRdBtn.Checked = false;
+            SuppHandphoneTxtBx.Clear();
+            SuppEmailTxtBx.Clear();
+            CmpyNameTxtBx.Clear();
+            CmpyAddress1TxtBx.Clear();
+            CmpyAddress2TxtBx.Clear();
+            CmpyNumberTxtBx.Clear();
+            CmpyFaxNumberTxtBx.Clear();
+            SuppStatusCbBx.SelectedIndex = 0;
+
+            SuppInsertBtn.Enabled = true;
+        }
+
+        private void SuppNmTxtBx_TextChanged(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
+
+            try
+            {
+                string sql = "SELECT * FROM Supplier WHERE SupplierName like '" + SuppNmTxtBx.Text + "%'";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, con);
+
+                DataSet ds = new DataSet();
+
+                con.Open();
+
+                da.Fill(ds, "Supplier");        //Supplier is the table name
+
+                con.Close();
+
+                SuppDtGdVw.DataSource = ds;
+                SuppDtGdVw.DataMember = "Supplier";
+            }
+            catch(SqlException ex)
+            {
+                MessageBox.Show("Can't find the Supplier Name!");
+                throw ex;
+            }
+        }
+
+        private void ItmInsertBtn_Click(object sender, EventArgs e)
+        {
+            String p1 = @"^[0]{1}";
+            String p2 = @"^[0-9]{3}[\.][0-9]{2}$";
+            String p3 = @"^[0-9]{2}[\.][0-9]{2}$";
+            String p4 = @"^[0-9]{1}[\.][0-9]{2}$";
+
+            Regex rgx1 = new Regex(p1);
+            Regex rgx2 = new Regex(p2);
+            Regex rgx3 = new Regex(p3);
+            Regex rgx4 = new Regex(p4);
+
+            if(ItmNameTxtBx.Text == String.Empty || ItmDescTxtBx.Text == String.Empty || UnitPriceTxtBx.Text == String.Empty || ItmStatusCbBx.SelectedIndex == 0)
+            {
+                ItmErrLbl.Visible = true;
+                ItmErrLbl.Text = "*Please make sure all the fields are completed.";
+            }
+            else
+            {
+                if(rgx1.Match(UnitPriceTxtBx.Text).Success)
+                {
+                    ItmErrLbl.Visible = true;
+                    ItmErrLbl.Text = "*Invalid price!";
+                }
+                else if(!rgx2.Match(UnitPriceTxtBx.Text).Success && !rgx3.Match(UnitPriceTxtBx.Text).Success && !rgx4.Match(UnitPriceTxtBx.Text).Success)
+                {
+                    ItmErrLbl.Visible = true;
+                    ItmErrLbl.Text = "*Invalid price! \r\n\r\n*Please make sure the unit price not more than 999.99. \r\n\r\n*Please make sure the unit price has 2 decimal places.";
                 }
             }
         }

@@ -17,6 +17,8 @@ namespace OfflineCafe.Entity
         public string CompanyAddress;
         public string CompanyNum;
         public string CompanyFaxNum;
-        public string InsertStatus;
+        public string SuppStatus;
+        public string InsertStatus = "";
+        public string UpdateStatus = "";
     }
 }
