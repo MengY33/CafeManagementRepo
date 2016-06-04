@@ -83,11 +83,13 @@
     </Compile>
     <Compile Include="DataAccess\EmployeeDA.cs" />
     <Compile Include="DataAccess\FoodDA.cs" />
+    <Compile Include="DataAccess\IngredientDA.cs" />
     <Compile Include="DataAccess\LoginDA.cs" />
     <Compile Include="DataAccess\MenuDA.cs" />
     <Compile Include="DataAccess\SupplierDA.cs" />
     <Compile Include="Entity\Employee.cs" />
     <Compile Include="Entity\Food.cs" />
+    <Compile Include="Entity\Ingredient.cs" />
     <Compile Include="Entity\Login.cs" />
     <Compile Include="Entity\Menu.cs" />
     <Compile Include="Entity\MenuFood.cs" />

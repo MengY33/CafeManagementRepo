@@ -24,7 +24,6 @@ namespace OfflineCafe.DataAccess
 
                 con.Open();
                 cmd.ExecuteNonQuery();
-                con.Close();
 
                 supp.InsertStatus = "Success";
             }
@@ -33,6 +32,7 @@ namespace OfflineCafe.DataAccess
                 supp.InsertStatus = "Failed";
                 throw ex;
             }
+            con.Close();
         }
 
         public void SupplierUpdateRecord(Supplier sup)

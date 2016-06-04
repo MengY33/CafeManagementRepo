@@ -41,10 +41,17 @@ namespace OfflineCafe
             SupplierDataFill();
             SuppDtGdVw.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
+            IngredientDataFill();
+            IngDtGdVw.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
             EmpPositionCbBx.SelectedIndex = 0;
             EmpStatusCbBx.SelectedIndex = 0;
             SuppStatusCbBx.SelectedIndex = 0;
-            ItmStatusCbBx.SelectedIndex = 0;
+            StorageAreaCbBx.SelectedIndex = 0;
+            ExpiryDatePicker.Value = DateTime.Now;
+            ReOrderLevelCbBx.SelectedIndex = 0;
+            ReOrderQtyCbBx.SelectedIndex = 0;
+            IngStatusCbBx.SelectedIndex = 1;
             //for (int i = 0; i < staticeList.Count; i++)
             //{
             //    label34.Text = staticeList.ElementAt(i).foodName;             
@@ -74,6 +81,7 @@ namespace OfflineCafe
 
             EmpDtGrdVw.AutoGenerateColumns = false;
             SuppDtGdVw.AutoGenerateColumns = false;
+            IngDtGdVw.AutoGenerateColumns = false;
         }
         //insert menu data
         private void btnInsertMenu_Click(object sender, EventArgs e)
@@ -2225,32 +2233,262 @@ namespace OfflineCafe
 
         private void ItmInsertBtn_Click(object sender, EventArgs e)
         {
-            String p1 = @"^[0]{1}";
-            String p2 = @"^[0-9]{3}[\.][0-9]{2}$";
-            String p3 = @"^[0-9]{2}[\.][0-9]{2}$";
-            String p4 = @"^[0-9]{1}[\.][0-9]{2}$";
-
-            Regex rgx1 = new Regex(p1);
-            Regex rgx2 = new Regex(p2);
-            Regex rgx3 = new Regex(p3);
-            Regex rgx4 = new Regex(p4);
-
-            if(ItmNameTxtBx.Text == String.Empty || ItmDescTxtBx.Text == String.Empty || UnitPriceTxtBx.Text == String.Empty || ItmStatusCbBx.SelectedIndex == 0)
+            if(IngNameTxtBx.Text == String.Empty || IngDescTxtBx.Text == String.Empty || StorageAreaCbBx.SelectedIndex == 0 || ReOrderLevelCbBx.SelectedIndex == 0 || ReOrderQtyCbBx.SelectedIndex == 0)
             {
-                ItmErrLbl.Visible = true;
-                ItmErrLbl.Text = "*Please make sure all the fields are completed.";
+                IngErrLbl.Visible = true;
+                IngErrLbl.Text = "*Please make sure all the fields are completed.";
             }
             else
             {
-                if(rgx1.Match(UnitPriceTxtBx.Text).Success)
+                if(IngNameTxtBx.TextLength > 200)
                 {
-                    ItmErrLbl.Visible = true;
-                    ItmErrLbl.Text = "*Invalid price!";
+                    IngErrLbl.Visible = true;
+                    IngErrLbl.Text = "*Please make sure Ingredient Name does not more than 200 characters.";
                 }
-                else if(!rgx2.Match(UnitPriceTxtBx.Text).Success && !rgx3.Match(UnitPriceTxtBx.Text).Success && !rgx4.Match(UnitPriceTxtBx.Text).Success)
+                else
                 {
-                    ItmErrLbl.Visible = true;
-                    ItmErrLbl.Text = "*Invalid price! \r\n\r\n*Please make sure the unit price not more than 999.99. \r\n\r\n*Please make sure the unit price has 2 decimal places.";
+                    if(IngDescTxtBx.TextLength > 200)
+                    {
+                        IngErrLbl.Visible = true;
+                        IngErrLbl.Text = "*Please make sure Ingredient Desc does not more than 200 characters.";
+                    }
+                    else
+                    {
+                        if (!(ExpiryDatePicker.Value >= System.DateTime.Today))
+                        {
+                            IngErrLbl.Visible = true;
+                            IngErrLbl.Text = "*Invalid date! \r\n\r\n*Please make sure the Expiry Date is greater than or equals to today date.";
+                        }
+                        else
+                        {
+                            Ingredient ing = new Ingredient();
+                            IngredientDA ingDA = new IngredientDA();
+
+                            ing.IngredientName = IngNameTxtBx.Text;
+                            ing.IngredientDesc = IngDescTxtBx.Text;
+                            ing.IngredientQty = int.Parse(IngQuantityTxtBx.Text);
+                            ing.StorageArea = StorageAreaCbBx.SelectedItem.ToString();
+                            ing.ExpiryDate = ExpiryDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture);
+                            ing.ReOrderLevel = int.Parse(ReOrderLevelCbBx.SelectedItem.ToString());
+                            ing.ReOrderQty = int.Parse(ReOrderQtyCbBx.SelectedItem.ToString());
+                            ing.IngredientStatus = IngStatusCbBx.SelectedItem.ToString();
+
+                            ingDA.InsertIngredientRecord(ing);
+
+                            if (ing.InsertStatus == "Success")
+                            {
+                                MessageBox.Show("New ingredient record has inserted successfully!");
+
+                                IngNameTxtBx.Clear();
+                                IngDescTxtBx.Clear();
+                                StorageAreaCbBx.SelectedIndex = 0;
+                                ExpiryDatePicker.Value = DateTime.Now;
+                                ReOrderLevelCbBx.SelectedIndex = 0;
+                                ReOrderQtyCbBx.SelectedIndex = 0;
+
+                                IngErrLbl.Visible = false;
+                            }
+                            else if (ing.InsertStatus == "Failed")
+                            {
+                                MessageBox.Show("Failed to insert ingredient record!");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void IngredientDataFill()
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
+
+            try
+            {
+                string sql = "SELECT IngredientID, IngredientName, IngredientDesc, Quantity, StorageArea, ExpiryDate, ReOrderLevel, ReOrderQuantity, IngredientStatus FROM Ingredient";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, con);
+
+                DataSet ds = new DataSet();
+
+                con.Open();
+
+                da.Fill(ds, "Ingredient");
+
+                IngDtGdVw.DataSource = ds;
+                IngDtGdVw.DataMember = "Ingredient";
+            }
+            catch(SqlException ex)
+            {
+                MessageBox.Show("Ingredient's data grid view cannot read the database!");
+                throw ex;
+            }
+            con.Close();
+        }
+
+        private void ItmResetBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void IngDtGdVw_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            IngInsertBtn.Enabled = false;
+            IngQuantityTxtBx.Enabled = true;
+            IngStatusCbBx.Enabled = true;
+
+            int i;
+            i = IngDtGdVw.SelectedCells[0].RowIndex;
+
+            IngIDTxtBx.Text = IngDtGdVw.Rows[i].Cells[0].Value.ToString();
+            IngNameTxtBx.Text = IngDtGdVw.Rows[i].Cells[1].Value.ToString();
+            IngDescTxtBx.Text = IngDtGdVw.Rows[i].Cells[2].Value.ToString();
+            IngQuantityTxtBx.Text = IngDtGdVw.Rows[i].Cells[3].Value.ToString();
+
+            string sa = IngDtGdVw.Rows[i].Cells[4].Value.ToString();
+
+            if (sa.Equals("Dry Place"))
+            {
+                StorageAreaCbBx.SelectedIndex = 1;
+            }
+            else if (sa.Equals("Refrigeration"))
+            {
+                StorageAreaCbBx.SelectedIndex = 2;
+            }
+            else if (sa.Equals("Freeze"))
+            {
+                StorageAreaCbBx.SelectedIndex = 3;
+            }
+
+            string ed = IngDtGdVw.Rows[i].Cells[5].Value.ToString();
+            ExpiryDatePicker.Value = DateTime.Parse(ed);
+
+            string rol = IngDtGdVw.Rows[i].Cells[6].Value.ToString();
+
+            if (rol.Equals("5"))
+            {
+                ReOrderLevelCbBx.SelectedIndex = 1;
+            }
+            else if (rol.Equals("10"))
+            {
+                ReOrderLevelCbBx.SelectedIndex = 2;
+            }
+            else if (rol.Equals("15"))
+            {
+                ReOrderLevelCbBx.SelectedIndex = 3;
+            }
+            else if (rol.Equals("20"))
+            {
+                ReOrderLevelCbBx.SelectedIndex = 4;
+            }
+            else if(rol.Equals("25"))
+            {
+                ReOrderLevelCbBx.SelectedIndex = 5;
+            }
+
+            string roq = IngDtGdVw.Rows[i].Cells[7].Value.ToString();
+
+            if (roq.Equals("10"))
+            {
+                ReOrderQtyCbBx.SelectedIndex = 1;
+            }
+            else if (roq.Equals("20"))
+            {
+                ReOrderQtyCbBx.SelectedIndex = 2;
+            }
+            else if (roq.Equals("30"))
+            {
+                ReOrderQtyCbBx.SelectedIndex = 3;
+            }
+            else if (roq.Equals("40"))
+            {
+                ReOrderQtyCbBx.SelectedIndex = 4;
+            }
+            else if (roq.Equals("50"))
+            {
+                ReOrderQtyCbBx.SelectedIndex = 5;
+            }
+
+            string s = IngDtGdVw.Rows[i].Cells[8].Value.ToString();
+
+            if (s.Equals("In Stock"))
+            {
+                IngStatusCbBx.SelectedIndex = 0;
+            }
+            else if (s.Equals("Out of Stock"))
+            {
+                IngStatusCbBx.SelectedIndex = 1;
+            }
+        }
+
+        private void IngRefreshBtn_Click(object sender, EventArgs e)
+        {
+            IngredientDataFill();
+        }
+
+        private void IngUpdateBtn_Click(object sender, EventArgs e)
+        {
+            if (IngNameTxtBx.Text == String.Empty || IngDescTxtBx.Text == String.Empty || IngQuantityTxtBx.Text == String.Empty ||StorageAreaCbBx.SelectedIndex == 0 || ReOrderLevelCbBx.SelectedIndex == 0 || ReOrderQtyCbBx.SelectedIndex == 0)
+            {
+                IngErrLbl.Visible = true;
+                IngErrLbl.Text = "*Please make sure all the fields are completed.";
+            }
+            else
+            {
+                if (IngNameTxtBx.TextLength > 200)
+                {
+                    IngErrLbl.Visible = true;
+                    IngErrLbl.Text = "*Please make sure Ingredient Name does not more than 200 characters.";
+                }
+                else
+                {
+                    if (IngDescTxtBx.TextLength > 200)
+                    {
+                        IngErrLbl.Visible = true;
+                        IngErrLbl.Text = "*Please make sure Ingredient Desc does not more than 200 characters.";
+                    }
+                    else
+                    {
+                        if (!(ExpiryDatePicker.Value >= System.DateTime.Today))
+                        {
+                            IngErrLbl.Visible = true;
+                            IngErrLbl.Text = "*Invalid date! \r\n\r\n*Please make sure the Expiry Date is greater than or equals to today date.";
+                        }
+                        else
+                        {
+                            Ingredient ing = new Ingredient();
+                            IngredientDA ingDA = new IngredientDA();
+
+                            ing.IngredientName = IngNameTxtBx.Text;
+                            ing.IngredientDesc = IngDescTxtBx.Text;
+                            ing.IngredientQty = int.Parse(IngQuantityTxtBx.Text);
+                            ing.StorageArea = StorageAreaCbBx.SelectedItem.ToString();
+                            ing.ExpiryDate = ExpiryDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture);
+                            ing.ReOrderLevel = int.Parse(ReOrderLevelCbBx.SelectedItem.ToString());
+                            ing.ReOrderQty = int.Parse(ReOrderQtyCbBx.SelectedItem.ToString());
+                            ing.IngredientStatus = IngStatusCbBx.SelectedItem.ToString();
+
+                            //ingDA.InsertIngredientRecord(ing);
+
+                            if (ing.InsertStatus == "Success")
+                            {
+                                MessageBox.Show("New ingredient record has inserted successfully!");
+
+                                IngNameTxtBx.Clear();
+                                IngDescTxtBx.Clear();
+                                StorageAreaCbBx.SelectedIndex = 0;
+                                ExpiryDatePicker.Value = DateTime.Now;
+                                ReOrderLevelCbBx.SelectedIndex = 0;
+                                ReOrderQtyCbBx.SelectedIndex = 0;
+
+                                IngErrLbl.Visible = false;
+                            }
+                            else if (ing.InsertStatus == "Failed")
+                            {
+                                MessageBox.Show("Failed to insert ingredient record!");
+                            }
+                        }
+                    }
                 }
             }
         }
