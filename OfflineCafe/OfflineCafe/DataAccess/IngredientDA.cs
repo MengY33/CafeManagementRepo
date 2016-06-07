@@ -34,5 +34,29 @@ namespace OfflineCafe.DataAccess
             }
             con.Close();
         }
+
+        public void UpdateIngredientRecord(Ingredient ing)
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
+
+            try
+            {
+                string sql = "UPDATE Ingredient SET IngredientName = '"+ing.IngredientName+"', IngredientDesc = '"+ing.IngredientDesc+"', StorageArea = '"+ing.StorageArea+"', ExpiryDate = '"+ing.ExpiryDate+"', ReOrderLevel = '"+ing.ReOrderLevel+"', ReOrderQuantity = '"+ing.ReOrderQty+"', IngredientStatus = '"+ing.IngredientStatus+"' WHERE IngredientID = '"+ing.IngredientID+"'";
+
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+
+                ing.UpdateStatus = "Success";
+            }
+            catch(SqlException ex)
+            {
+                ing.UpdateStatus = "Failed";
+                throw ex;
+            }
+            con.Close();
+        }
     }
 }

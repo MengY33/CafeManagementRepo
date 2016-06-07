@@ -48,7 +48,7 @@ namespace OfflineCafe
             EmpStatusCbBx.SelectedIndex = 0;
             SuppStatusCbBx.SelectedIndex = 0;
             StorageAreaCbBx.SelectedIndex = 0;
-            ExpiryDatePicker.Value = DateTime.Now;
+            ExpiryDatePicker.Value = System.DateTime.Now;
             ReOrderLevelCbBx.SelectedIndex = 0;
             ReOrderQtyCbBx.SelectedIndex = 0;
             IngStatusCbBx.SelectedIndex = 1;
@@ -2200,6 +2200,7 @@ namespace OfflineCafe
             SuppStatusCbBx.SelectedIndex = 0;
 
             SuppInsertBtn.Enabled = true;
+            SuppErrLbl.Visible = false;
         }
 
         private void SuppNmTxtBx_TextChanged(object sender, EventArgs e)
@@ -2328,13 +2329,24 @@ namespace OfflineCafe
 
         private void ItmResetBtn_Click(object sender, EventArgs e)
         {
+            IngIDTxtBx.Text = "Auto-Generated";
+            IngNameTxtBx.Clear();
+            IngDescTxtBx.Clear();
+            IngQuantityTxtBx.Text = "0";
+            StorageAreaCbBx.SelectedIndex = 0;
+            ExpiryDatePicker.Value = System.DateTime.Now;
+            ReOrderLevelCbBx.SelectedIndex = 0;
+            ReOrderQtyCbBx.SelectedIndex = 0;
+            IngStatusCbBx.SelectedIndex = 1;
+            IngStatusCbBx.Enabled = false;
 
+            IngInsertBtn.Enabled = true;
+            IngErrLbl.Visible = false;
         }
 
         private void IngDtGdVw_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
             IngInsertBtn.Enabled = false;
-            IngQuantityTxtBx.Enabled = true;
             IngStatusCbBx.Enabled = true;
 
             int i;
@@ -2449,49 +2461,52 @@ namespace OfflineCafe
                     }
                     else
                     {
-                        if (!(ExpiryDatePicker.Value >= System.DateTime.Today))
+                        if(IngQuantityTxtBx.Text.Equals("0") && IngStatusCbBx.SelectedIndex == 0)
                         {
                             IngErrLbl.Visible = true;
-                            IngErrLbl.Text = "*Invalid date! \r\n\r\n*Please make sure the Expiry Date is greater than or equals to today date.";
+                            IngErrLbl.Text = "*Invalid Status! There is no quantity of this ingredient.";
                         }
                         else
                         {
                             Ingredient ing = new Ingredient();
                             IngredientDA ingDA = new IngredientDA();
 
+                            ing.IngredientID = IngIDTxtBx.Text;
                             ing.IngredientName = IngNameTxtBx.Text;
                             ing.IngredientDesc = IngDescTxtBx.Text;
-                            ing.IngredientQty = int.Parse(IngQuantityTxtBx.Text);
                             ing.StorageArea = StorageAreaCbBx.SelectedItem.ToString();
                             ing.ExpiryDate = ExpiryDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture);
                             ing.ReOrderLevel = int.Parse(ReOrderLevelCbBx.SelectedItem.ToString());
                             ing.ReOrderQty = int.Parse(ReOrderQtyCbBx.SelectedItem.ToString());
                             ing.IngredientStatus = IngStatusCbBx.SelectedItem.ToString();
 
-                            //ingDA.InsertIngredientRecord(ing);
+                            ingDA.UpdateIngredientRecord(ing);
 
-                            if (ing.InsertStatus == "Success")
-                            {
-                                MessageBox.Show("New ingredient record has inserted successfully!");
+                            if (ing.UpdateStatus == "Success")
+                             {
+                                MessageBox.Show("Ingredient record has updated successfully!");
 
+                                IngIDTxtBx.Text = "Auto-Generated";
                                 IngNameTxtBx.Clear();
                                 IngDescTxtBx.Clear();
                                 StorageAreaCbBx.SelectedIndex = 0;
-                                ExpiryDatePicker.Value = DateTime.Now;
+                                ExpiryDatePicker.Value = System.DateTime.Now;
                                 ReOrderLevelCbBx.SelectedIndex = 0;
                                 ReOrderQtyCbBx.SelectedIndex = 0;
+                                IngStatusCbBx.SelectedIndex = 1;
+                                IngStatusCbBx.Enabled = false;
 
                                 IngErrLbl.Visible = false;
-                            }
-                            else if (ing.InsertStatus == "Failed")
-                            {
-                                MessageBox.Show("Failed to insert ingredient record!");
+                                IngInsertBtn.Enabled = true;
+                             }
+                             else if (ing.UpdateStatus == "Failed")
+                             {
+                                MessageBox.Show("Failed to update ingredient record!");
+                             }
                             }
                         }
                     }
                 }
             }
-        }
-    }
-    
+        }    
 }

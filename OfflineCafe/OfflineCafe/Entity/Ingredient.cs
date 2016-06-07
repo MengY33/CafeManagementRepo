@@ -8,6 +8,7 @@ namespace OfflineCafe.Entity
 {
     class Ingredient
     {
+        public string IngredientID;
         public string IngredientName;
         public string IngredientDesc;
         public int IngredientQty;
@@ -17,5 +18,6 @@ namespace OfflineCafe.Entity
         public int ReOrderQty;
         public string IngredientStatus;
         public string InsertStatus;
+        public string UpdateStatus;
     }
 }
