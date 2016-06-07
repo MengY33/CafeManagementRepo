@@ -2508,5 +2508,64 @@ namespace OfflineCafe
                     }
                 }
             }
-        }    
+
+        private void IngredientNameTxtBx_TextChanged(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
+
+            try
+            {
+                string sql = "SELECT * FROM Ingredient WHERE IngredientName like '"+IngredientNameTxtBx.Text+"%'";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, con);
+
+                DataSet ds = new DataSet();
+
+                con.Open();
+
+                da.Fill(ds, "Ingredient");
+
+                con.Close();
+
+                IngDtGdVw.DataSource = ds;
+                IngDtGdVw.DataMember = "Ingredient";
+            }
+            catch(SqlException ex)
+            {
+                MessageBox.Show("Can't find the Ingredient Name!");
+                throw ex;
+            }
+        }
+
+        private void IngredientStatusCbBx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
+
+            try
+            {
+                string ingredientStatus = IngredientStatusCbBx.SelectedItem.ToString();
+
+                string sql = "SELECT * FROM Ingredient WHERE IngredientStatus like '"+ingredientStatus+"%'";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, con);
+
+                DataSet ds = new DataSet();
+
+                con.Open();
+
+                da.Fill(ds, "Ingredient");
+
+                con.Close();
+
+                IngDtGdVw.DataSource = ds;
+                IngDtGdVw.DataMember = "Ingredient";
+            }
+            catch(SqlException ex)
+            {
+                throw ex;
+            }
+        }
+    }    
 }

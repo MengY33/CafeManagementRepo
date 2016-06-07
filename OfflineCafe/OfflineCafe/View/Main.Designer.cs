@@ -2549,6 +2549,7 @@
             this.IngredientStatusCbBx.Name = "IngredientStatusCbBx";
             this.IngredientStatusCbBx.Size = new System.Drawing.Size(121, 27);
             this.IngredientStatusCbBx.TabIndex = 31;
+            this.IngredientStatusCbBx.SelectedIndexChanged += new System.EventHandler(this.IngredientStatusCbBx_SelectedIndexChanged);
             // 
             // IngStatusCbBx
             // 
@@ -2747,6 +2748,7 @@
             this.IngredientNameTxtBx.Name = "IngredientNameTxtBx";
             this.IngredientNameTxtBx.Size = new System.Drawing.Size(100, 26);
             this.IngredientNameTxtBx.TabIndex = 3;
+            this.IngredientNameTxtBx.TextChanged += new System.EventHandler(this.IngredientNameTxtBx_TextChanged);
             // 
             // IngredientNameLbl
             // 
