@@ -13,6 +13,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Mail;
 
 namespace OfflineCafe
 {
@@ -30,6 +31,7 @@ namespace OfflineCafe
             //form date
             label7.Text = "Today is " + DateTime.Now.ToShortDateString();
             //pnl close
+
             pnlMenu.Visible = false;
             pnlEmp.Visible = false;
             pnlPwChg.Visible = false;
@@ -44,14 +46,22 @@ namespace OfflineCafe
             IngredientDataFill();
             IngDtGdVw.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
+            IngPODataFill();
+            IngPODtGrdVw.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
             EmpPositionCbBx.SelectedIndex = 0;
             EmpStatusCbBx.SelectedIndex = 0;
+            EmpUpdateBtn.Enabled = false;
             SuppStatusCbBx.SelectedIndex = 0;
+            SuppUpdateBtn.Enabled = false;
+            UnitCbBx.SelectedIndex = 0;
             StorageAreaCbBx.SelectedIndex = 0;
             ExpiryDatePicker.Value = System.DateTime.Now;
             ReOrderLevelCbBx.SelectedIndex = 0;
             ReOrderQtyCbBx.SelectedIndex = 0;
             IngStatusCbBx.SelectedIndex = 1;
+            IngUpdateBtn.Enabled = false;
+
             //for (int i = 0; i < staticeList.Count; i++)
             //{
             //    label34.Text = staticeList.ElementAt(i).foodName;             
@@ -82,6 +92,10 @@ namespace OfflineCafe
             EmpDtGrdVw.AutoGenerateColumns = false;
             SuppDtGdVw.AutoGenerateColumns = false;
             IngDtGdVw.AutoGenerateColumns = false;
+            IngPODtGrdVw.AutoGenerateColumns = false;
+
+            IngredientTimer.Interval = 1000;
+            IngredientTimer.Start();
         }
         //insert menu data
         private void btnInsertMenu_Click(object sender, EventArgs e)
@@ -558,6 +572,7 @@ namespace OfflineCafe
             pnlPwChg.Visible = false;
             pnlSupplier.Visible = false;
             pnlItem.Visible = false;
+            pnlPO.Visible = false;
         }
         //employee btn
         private void button1_Click(object sender, EventArgs e)
@@ -569,6 +584,7 @@ namespace OfflineCafe
             pnlEmp.Visible =true;
             pnlSupplier.Visible = false;
             pnlItem.Visible = false;
+            pnlPO.Visible = false;
                 //}
                 //else
                 //{
@@ -583,6 +599,7 @@ namespace OfflineCafe
             pnlEmp.Visible = false;
             pnlMain.Visible = false;
             pnlItem.Visible = false;
+            pnlPO.Visible = false;
             pnlSupplier.Visible = true;
         }
 
@@ -591,6 +608,7 @@ namespace OfflineCafe
             pnlMenu.Visible = false;
             pnlEmp.Visible = false;
             pnlSupplier.Visible = false;
+            pnlPO.Visible = false;
             pnlItem.Visible = true;
         }
 
@@ -599,6 +617,7 @@ namespace OfflineCafe
             pnlMenu.Visible = false;
             pnlEmp.Visible = false;
             pnlSupplier.Visible = false;
+            pnlPO.Visible = false;
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -751,6 +770,7 @@ namespace OfflineCafe
             String p28 = @"[0-9]{3}-[0]{7}";                            //Handphone No. Validation, it can't be like 012-0000000
             String p29 = @"^\d{3}-\d{7}$";                                //Handphone No. Validation, it can't contains any alphabetics and any special symbols and also has exactly 11 characters
             String p30 = @"^[a-z0-9_.\-]+\@[a-z]+\.(?:[a-z]{3}|com|org|net|edu|gov)|\.(?:[a-z]{2}|my)$";    //Email Validation
+            String p31 = @"^\d-*$";
 
             Regex rgx1 = new Regex(p1, RegexOptions.IgnoreCase);
             Regex rgx2 = new Regex(p2);
@@ -781,6 +801,7 @@ namespace OfflineCafe
             Regex rgx28 = new Regex(p28);
             Regex rgx29 = new Regex(p29);
             Regex rgx30 = new Regex(p30);
+            Regex rgx31 = new Regex(p31);
 
             if (EmpNameTxtBx.Text == String.Empty || EmpICTxtBx.Text == String.Empty || EmpMaleRdBtn.Checked == false && EmpFemaleRdBtn.Checked == false || EmpAddress1TxtBx.Text == String.Empty && EmpAddress2TxtBx.Text == String.Empty || EmpHomeNoTxtBx.Text == String.Empty || EmpHandphoneNoTxtBx.Text == String.Empty || EmpEmailTxtBx.Text == String.Empty || EmpPositionCbBx.SelectedIndex == 0 || EmpStatusCbBx.SelectedIndex == 0)
             {
@@ -803,16 +824,10 @@ namespace OfflineCafe
                 }
                 else
                 {
-                    if (rgx2.Match(EmpICTxtBx.Text).Success)
+                    if(!rgx16.Match(EmpICTxtBx.Text).Success)
                     {
                         ErrLbl.Visible = true;
-                        ErrLbl.Text = "*IC Number is missing dashes '-'. \r\n\r\nPlease make sure IC Number is in such format 'xxxxxx-xx-xxxx'.";
-                        EmpICTxtBx.Focus();
-                    }
-                    else if (EmpICTxtBx.TextLength > 14 || EmpICTxtBx.TextLength < 14)
-                    {
-                        ErrLbl.Visible = true;
-                        ErrLbl.Text = "*Please make sure IC Number has exactly 14 characters.";
+                        ErrLbl.Text = "*Please make sure IC Number does not contains any alphabetics. \r\n\r\n*Please make sure IC Number does not contains any special symbols, except '-'. \r\n\r\n*Please make sure IC Number has exactly 14 characters. \r\n\r\n*Please make sure IC Number is in such format '123456-12-1234'.";
                         EmpICTxtBx.Focus();
                     }
                     else if (EmpICTxtBx.Text.Equals("000000-00-0000") || rgx12.Match(EmpICTxtBx.Text).Success || rgx13.Match(EmpICTxtBx.Text).Success || rgx14.Match(EmpICTxtBx.Text).Success || rgx15.Match(EmpICTxtBx.Text).Success)
@@ -837,12 +852,6 @@ namespace OfflineCafe
                     {
                         ErrLbl.Visible = true;
                         ErrLbl.Text = "*Invalid IC Number!  Please make sure the birthplace code is entered correctly.";
-                        EmpICTxtBx.Focus();
-                    }
-                    else if (!rgx16.Match(EmpICTxtBx.Text).Success)
-                    {
-                        ErrLbl.Visible = true;
-                        ErrLbl.Text = "*Please make sure the IC Number does not contains any alphabetics.\r\n\r\n*Please make sure the IC Number does not contains any special symbols, except '-'.";
                         EmpICTxtBx.Focus();
                     }
                     else
@@ -894,10 +903,10 @@ namespace OfflineCafe
                                 }
                                 else
                                 {
-                                    if (rgx2.Match(EmpHomeNoTxtBx.Text).Success)
+                                    if (!rgx25.Match(EmpHomeNoTxtBx.Text).Success)
                                     {
                                         ErrLbl.Visible = true;
-                                        ErrLbl.Text = "*Home Number is missing dashes '-'. \r\n\r\n*Please make sure Home Number is in such format 'xx-xxxxxxxx'.";
+                                        ErrLbl.Text = "*Please make sure Home Number does not contains any alphabetics. \r\n\r\n*Please make sure Home Number does not contains any special symbols, except '-'. \r\n\r\n*Please make sure Home Number has exactly 11 characters. \r\n\r\n*Please make sure Home Number is in such format '03-12345678'.";
                                         EmpHomeNoTxtBx.Focus();
                                     }
                                     else if (rgx21.Match(EmpHomeNoTxtBx.Text).Success)
@@ -924,18 +933,12 @@ namespace OfflineCafe
                                         ErrLbl.Text = "*Invalid Home Number!";
                                         EmpHomeNoTxtBx.Focus();
                                     }
-                                    else if (!rgx25.Match(EmpHomeNoTxtBx.Text).Success)
-                                    {
-                                        ErrLbl.Visible = true;
-                                        ErrLbl.Text = "*Please make sure Home Number does not contains any alphabetics. \r\n\r\n*Please make sure Home Number does not contains any special symbols, except '-'. \r\n\r\n*Please make sure Home Number has exactly 11 characters.";
-                                        EmpHomeNoTxtBx.Focus();
-                                    }
                                     else
                                     {
-                                        if (rgx2.Match(EmpHandphoneNoTxtBx.Text).Success)
+                                        if (!rgx29.Match(EmpHandphoneNoTxtBx.Text).Success)
                                         {
                                             ErrLbl.Visible = true;
-                                            ErrLbl.Text = "*Handphone Number is missing dashes '-'. \r\n\r\n*Please make sure Handphone Number is in such format 'xxx-xxxxxxx'.";
+                                            ErrLbl.Text = "*Please make sure Handphone Number does not contains any alphabetics. \r\n\r\n*Please make sure Handphone Number does not contains any special symbols, except '-'. \r\n\r\n*Please make sure Handphone Number has exactly 11 characters. \r\n\r\n*Please make sure Handphone Number is in such format '012-1234567'.";
                                             EmpHandphoneNoTxtBx.Focus();
                                         }
                                         else if (rgx26.Match(EmpHandphoneNoTxtBx.Text).Success)
@@ -954,12 +957,6 @@ namespace OfflineCafe
                                         {
                                             ErrLbl.Visible = true;
                                             ErrLbl.Text = "*Invalid Handphone Number!";
-                                            EmpHandphoneNoTxtBx.Focus();
-                                        }
-                                        else if (!rgx29.Match(EmpHandphoneNoTxtBx.Text).Success)
-                                        {
-                                            ErrLbl.Visible = true;
-                                            ErrLbl.Text = "*Please make sure Handphone Number does not contains any alphabetics and any special symbols, except '-'. \r\n\r\n*Please make sure Handphone Number has exactly 11 characters. \r\n\r\n*Please make sure Handphone Number is in such format 'xxx-xxxxxxx'.";
                                             EmpHandphoneNoTxtBx.Focus();
                                         }
                                         else
@@ -1012,8 +1009,6 @@ namespace OfflineCafe
 
                                                 if (emp.InsertStatus == "Success")
                                                 {
-                                                    MessageBox.Show("Employee record has inserted successfully!");
-
                                                     EmpIDDTxtBx.Text = "Auto-Generated";
                                                     EmpNameTxtBx.Clear();
                                                     EmpICTxtBx.Clear();
@@ -1029,6 +1024,34 @@ namespace OfflineCafe
 
                                                     EmpInsertBtn.Enabled = true;
                                                     ErrLbl.Visible = false;
+
+                                                    try
+                                                    {
+                                                        empDA.RetreiveEmployeeID(emp);
+                                                        empDA.RetrieveAdminName(emp);
+
+                                                        //SMTP Authentication
+                                                        MailMessage MailMsg = new MailMessage();
+                                                        SmtpClient client = new SmtpClient();
+                                                        client.Host = "smtp.gmail.com";     //Gmail's SMTP server address
+                                                        client.Port = 587;
+                                                        client.EnableSsl = true;
+                                                        client.DeliveryMethod = SmtpDeliveryMethod.Network;     //Specifies how email message is delivered. Network means the email is sent through the network to an SMTP server.
+                                                        client.Credentials = new System.Net.NetworkCredential("abbytan0415@gmail.com", "7aubenfelD");
+
+                                                        MailMsg.From = new MailAddress("abbytan0415@gmail.com", "The Coffee Bean");
+                                                        MailMsg.To.Add(emp.Email);
+                                                        MailMsg.Subject = "Welcome to The Coffee Bean";
+                                                        MailMsg.Body = "Dear, " + emp.EmployeeName + "\n\nYou have been hired by The Coffee Bean shop. Your Employee ID is " + emp.EmployeeIDRetrieve + "." + "\n\nPlease carefully check of your personal information as below:" + "\n\nName : " + emp.EmployeeName + "\n\nIC No. : " + emp.ICNumber + "\n\nGender : " + emp.Gender + "\n\nHome Address : " + emp.HomeAddress + "\n\nHome No. : " + emp.HomeNumber + "\n\nHandphone No. : " + emp.HandphoneNumber + "\n\nEmail : " + emp.Email + "\n\nIf your personal information has any mistakes, please contact administrator." + "\n\n\nRegards, \n" + emp.AdminNameRetrieve + "\nAdministrator";
+                                                        MailMsg.BodyEncoding = System.Text.Encoding.UTF8;       //Encode body message
+                                                        MailMsg.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;    //Send back notification only in case of failure of delivery email message
+                                                        client.Send(MailMsg);
+                                                        MessageBox.Show("Employee record has inserted successfully and Email sent!");
+                                                    }
+                                                    catch(Exception ex)
+                                                    {
+                                                        MessageBox.Show(ex.ToString());
+                                                    }
                                                 }
                                                 else if (emp.InsertStatus == "Failed")
                                                 {
@@ -1159,16 +1182,10 @@ namespace OfflineCafe
                 }
                 else
                 {
-                    if (rgx2.Match(EmpICTxtBx.Text).Success)
+                    if (!rgx16.Match(EmpICTxtBx.Text).Success)
                     {
                         ErrLbl.Visible = true;
-                        ErrLbl.Text = "*IC Number is missing dashes '-'. \r\n\r\nPlease make sure IC Number is in such format 'xxxxxx-xx-xxxx'.";
-                        EmpICTxtBx.Focus();
-                    }
-                    else if (EmpICTxtBx.TextLength > 14 || EmpICTxtBx.TextLength < 14)
-                    {
-                        ErrLbl.Visible = true;
-                        ErrLbl.Text = "*Please make sure IC Number has exactly 14 characters.";
+                        ErrLbl.Text = "*Please make sure IC Number does not contains any alphabetics. \r\n\r\n*Please make sure IC Number does not contains any special symbols, except '-'. \r\n\r\n*Please make sure IC Number has exactly 14 characters. \r\n\r\n*Please make sure IC Number is in such format '123456-12-1234'.";
                         EmpICTxtBx.Focus();
                     }
                     else if (EmpICTxtBx.Text.Equals("000000-00-0000") || rgx12.Match(EmpICTxtBx.Text).Success || rgx13.Match(EmpICTxtBx.Text).Success || rgx14.Match(EmpICTxtBx.Text).Success || rgx15.Match(EmpICTxtBx.Text).Success)
@@ -1193,12 +1210,6 @@ namespace OfflineCafe
                     {
                         ErrLbl.Visible = true;
                         ErrLbl.Text = "*Invalid IC Number!  Please make sure the birthplace code is entered correctly.";
-                        EmpICTxtBx.Focus();
-                    }
-                    else if (!rgx16.Match(EmpICTxtBx.Text).Success)
-                    {
-                        ErrLbl.Visible = true;
-                        ErrLbl.Text = "*Please make sure the IC Number does not contains any alphabetics.\r\n\r\n*Please make sure the IC Number does not contains any special symbols, except '-'.";
                         EmpICTxtBx.Focus();
                     }
                     else
@@ -1250,10 +1261,10 @@ namespace OfflineCafe
                                 }
                                 else
                                 {
-                                    if (rgx2.Match(EmpHomeNoTxtBx.Text).Success)
+                                    if (!rgx25.Match(EmpHomeNoTxtBx.Text).Success)
                                     {
                                         ErrLbl.Visible = true;
-                                        ErrLbl.Text = "*Home Number is missing dashes '-'. \r\n\r\n*Please make sure Home Number is in such format 'xx-xxxxxxxx'.";
+                                        ErrLbl.Text = "*Please make sure Home Number does not contains any alphabetics. \r\n\r\n*Please make sure Home Number does not contains any special symbols, except '-'. \r\n\r\n*Please make sure Home Number has exactly 11 characters. \r\n\r\n*Please make sure Home Number is in such format '03-12345678'.";
                                         EmpHomeNoTxtBx.Focus();
                                     }
                                     else if (rgx21.Match(EmpHomeNoTxtBx.Text).Success)
@@ -1280,18 +1291,12 @@ namespace OfflineCafe
                                         ErrLbl.Text = "*Invalid Home Number!";
                                         EmpHomeNoTxtBx.Focus();
                                     }
-                                    else if (!rgx25.Match(EmpHomeNoTxtBx.Text).Success)
-                                    {
-                                        ErrLbl.Visible = true;
-                                        ErrLbl.Text = "*Please make sure Home Number does not contains any alphabetics. \r\n\r\n*Please make sure Home Number does not contains any special symbols, except '-'. \r\n\r\n*Please make sure Home Number has exactly 11 characters.";
-                                        EmpHomeNoTxtBx.Focus();
-                                    }
                                     else
                                     {
-                                        if (rgx2.Match(EmpHandphoneNoTxtBx.Text).Success)
+                                        if (!rgx29.Match(EmpHandphoneNoTxtBx.Text).Success)
                                         {
                                             ErrLbl.Visible = true;
-                                            ErrLbl.Text = "*Handphone Number is missing dashes '-'. \r\n\r\n*Please make sure Handphone Number is in such format 'xxx-xxxxxxx'.";
+                                            ErrLbl.Text = "*Please make sure Handphone Number does not contains any alphabetics. \r\n\r\n*Please make sure Handphone Number does not contains any special symbols, except '-'. \r\n\r\n*Please make sure Handphone Number has exactly 11 characters. \r\n\r\n*Please make sure Handphone Number is in such format '012-1234567'.";
                                             EmpHandphoneNoTxtBx.Focus();
                                         }
                                         else if (rgx26.Match(EmpHandphoneNoTxtBx.Text).Success)
@@ -1310,12 +1315,6 @@ namespace OfflineCafe
                                         {
                                             ErrLbl.Visible = true;
                                             ErrLbl.Text = "*Invalid Handphone Number!";
-                                            EmpHandphoneNoTxtBx.Focus();
-                                        }
-                                        else if (!rgx29.Match(EmpHandphoneNoTxtBx.Text).Success)
-                                        {
-                                            ErrLbl.Visible = true;
-                                            ErrLbl.Text = "*Please make sure Handphone Number does not contains any alphabetics and any special symbols, except '-'. \r\n\r\n*Please make sure Handphone Number has exactly 11 characters. \r\n\r\n*Please make sure Handphone Number is in such format 'xxx-xxxxxxx'.";
                                             EmpHandphoneNoTxtBx.Focus();
                                         }
                                         else
@@ -1410,6 +1409,7 @@ namespace OfflineCafe
         private void EmpDtGrdVw_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             EmpInsertBtn.Enabled = false;
+            EmpUpdateBtn.Enabled = true;
 
             int i;
             i = EmpDtGrdVw.SelectedCells[0].RowIndex;
@@ -1484,6 +1484,7 @@ namespace OfflineCafe
             EmpStatusCbBx.SelectedIndex = 0;
 
             EmpInsertBtn.Enabled = true;
+            EmpUpdateBtn.Enabled = false;
             ErrLbl.Visible = false;
         }
 
@@ -1864,6 +1865,7 @@ namespace OfflineCafe
         private void SuppDtGdVw_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             SuppInsertBtn.Enabled = false;
+            SuppUpdateBtn.Enabled = true;
 
             int i;
             i = SuppDtGdVw.SelectedCells[0].RowIndex;
@@ -2200,6 +2202,7 @@ namespace OfflineCafe
             SuppStatusCbBx.SelectedIndex = 0;
 
             SuppInsertBtn.Enabled = true;
+            SuppUpdateBtn.Enabled = false;
             SuppErrLbl.Visible = false;
         }
 
@@ -2268,8 +2271,10 @@ namespace OfflineCafe
                             ing.IngredientName = IngNameTxtBx.Text;
                             ing.IngredientDesc = IngDescTxtBx.Text;
                             ing.IngredientQty = int.Parse(IngQuantityTxtBx.Text);
+                            ing.Unit = UnitCbBx.SelectedItem.ToString();
                             ing.StorageArea = StorageAreaCbBx.SelectedItem.ToString();
-                            ing.ExpiryDate = ExpiryDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture);
+                            //ing.ExpiryDate = ExpiryDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture);
+                            ing.ExpiryDate = ExpiryDatePicker.Value.ToShortDateString();
                             ing.ReOrderLevel = int.Parse(ReOrderLevelCbBx.SelectedItem.ToString());
                             ing.ReOrderQty = int.Parse(ReOrderQtyCbBx.SelectedItem.ToString());
                             ing.IngredientStatus = IngStatusCbBx.SelectedItem.ToString();
@@ -2306,7 +2311,7 @@ namespace OfflineCafe
 
             try
             {
-                string sql = "SELECT IngredientID, IngredientName, IngredientDesc, Quantity, StorageArea, ExpiryDate, ReOrderLevel, ReOrderQuantity, IngredientStatus FROM Ingredient";
+                string sql = "SELECT IngredientID, IngredientName, IngredientDesc, Quantity, Unit, StorageArea, ExpiryDate, ReOrderLevel, ReOrderQuantity, IngredientStatus FROM Ingredient";
 
                 SqlDataAdapter da = new SqlDataAdapter(sql, con);
 
@@ -2333,6 +2338,7 @@ namespace OfflineCafe
             IngNameTxtBx.Clear();
             IngDescTxtBx.Clear();
             IngQuantityTxtBx.Text = "0";
+            UnitCbBx.SelectedIndex = 0;
             StorageAreaCbBx.SelectedIndex = 0;
             ExpiryDatePicker.Value = System.DateTime.Now;
             ReOrderLevelCbBx.SelectedIndex = 0;
@@ -2341,13 +2347,14 @@ namespace OfflineCafe
             IngStatusCbBx.Enabled = false;
 
             IngInsertBtn.Enabled = true;
+            IngUpdateBtn.Enabled = false;
             IngErrLbl.Visible = false;
         }
 
         private void IngDtGdVw_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
             IngInsertBtn.Enabled = false;
-            IngStatusCbBx.Enabled = true;
+            IngUpdateBtn.Enabled = true;
 
             int i;
             i = IngDtGdVw.SelectedCells[0].RowIndex;
@@ -2357,7 +2364,26 @@ namespace OfflineCafe
             IngDescTxtBx.Text = IngDtGdVw.Rows[i].Cells[2].Value.ToString();
             IngQuantityTxtBx.Text = IngDtGdVw.Rows[i].Cells[3].Value.ToString();
 
-            string sa = IngDtGdVw.Rows[i].Cells[4].Value.ToString();
+            string u = IngDtGdVw.Rows[i].Cells[4].Value.ToString();
+
+            if(u.Equals("kg"))
+            {
+                UnitCbBx.SelectedIndex = 1;
+            }
+            else if(u.Equals("litre"))
+            {
+                UnitCbBx.SelectedIndex = 2;
+            }
+            else if(u.Equals("pack"))
+            {
+                UnitCbBx.SelectedIndex = 3;
+            }
+            else if(u.Equals("piece"))
+            {
+                UnitCbBx.SelectedIndex = 4;
+            }
+
+            string sa = IngDtGdVw.Rows[i].Cells[5].Value.ToString();
 
             if (sa.Equals("Dry Place"))
             {
@@ -2372,10 +2398,10 @@ namespace OfflineCafe
                 StorageAreaCbBx.SelectedIndex = 3;
             }
 
-            string ed = IngDtGdVw.Rows[i].Cells[5].Value.ToString();
+            string ed = IngDtGdVw.Rows[i].Cells[6].Value.ToString();
             ExpiryDatePicker.Value = DateTime.Parse(ed);
 
-            string rol = IngDtGdVw.Rows[i].Cells[6].Value.ToString();
+            string rol = IngDtGdVw.Rows[i].Cells[7].Value.ToString();
 
             if (rol.Equals("5"))
             {
@@ -2398,7 +2424,7 @@ namespace OfflineCafe
                 ReOrderLevelCbBx.SelectedIndex = 5;
             }
 
-            string roq = IngDtGdVw.Rows[i].Cells[7].Value.ToString();
+            string roq = IngDtGdVw.Rows[i].Cells[8].Value.ToString();
 
             if (roq.Equals("10"))
             {
@@ -2421,13 +2447,13 @@ namespace OfflineCafe
                 ReOrderQtyCbBx.SelectedIndex = 5;
             }
 
-            string s = IngDtGdVw.Rows[i].Cells[8].Value.ToString();
+            string s = IngDtGdVw.Rows[i].Cells[9].Value.ToString();
 
-            if (s.Equals("In Stock"))
+            if (s.Equals("Available"))
             {
                 IngStatusCbBx.SelectedIndex = 0;
             }
-            else if (s.Equals("Out of Stock"))
+            else if (s.Equals("Not Available"))
             {
                 IngStatusCbBx.SelectedIndex = 1;
             }
@@ -2440,7 +2466,7 @@ namespace OfflineCafe
 
         private void IngUpdateBtn_Click(object sender, EventArgs e)
         {
-            if (IngNameTxtBx.Text == String.Empty || IngDescTxtBx.Text == String.Empty || IngQuantityTxtBx.Text == String.Empty ||StorageAreaCbBx.SelectedIndex == 0 || ReOrderLevelCbBx.SelectedIndex == 0 || ReOrderQtyCbBx.SelectedIndex == 0)
+            if (IngNameTxtBx.Text == String.Empty || IngDescTxtBx.Text == String.Empty ||StorageAreaCbBx.SelectedIndex == 0 || ReOrderLevelCbBx.SelectedIndex == 0 || ReOrderQtyCbBx.SelectedIndex == 0)
             {
                 IngErrLbl.Visible = true;
                 IngErrLbl.Text = "*Please make sure all the fields are completed.";
@@ -2461,13 +2487,6 @@ namespace OfflineCafe
                     }
                     else
                     {
-                        if(IngQuantityTxtBx.Text.Equals("0") && IngStatusCbBx.SelectedIndex == 0)
-                        {
-                            IngErrLbl.Visible = true;
-                            IngErrLbl.Text = "*Invalid Status! There is no quantity of this ingredient.";
-                        }
-                        else
-                        {
                             Ingredient ing = new Ingredient();
                             IngredientDA ingDA = new IngredientDA();
 
@@ -2475,7 +2494,8 @@ namespace OfflineCafe
                             ing.IngredientName = IngNameTxtBx.Text;
                             ing.IngredientDesc = IngDescTxtBx.Text;
                             ing.StorageArea = StorageAreaCbBx.SelectedItem.ToString();
-                            ing.ExpiryDate = ExpiryDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture);
+                            //ing.ExpiryDate = ExpiryDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture);
+                            ing.ExpiryDate = ExpiryDatePicker.Value.ToShortDateString();
                             ing.ReOrderLevel = int.Parse(ReOrderLevelCbBx.SelectedItem.ToString());
                             ing.ReOrderQty = int.Parse(ReOrderQtyCbBx.SelectedItem.ToString());
                             ing.IngredientStatus = IngStatusCbBx.SelectedItem.ToString();
@@ -2489,12 +2509,13 @@ namespace OfflineCafe
                                 IngIDTxtBx.Text = "Auto-Generated";
                                 IngNameTxtBx.Clear();
                                 IngDescTxtBx.Clear();
+                                IngQuantityTxtBx.Text = "0";
+                                UnitCbBx.SelectedIndex = 0;
                                 StorageAreaCbBx.SelectedIndex = 0;
                                 ExpiryDatePicker.Value = System.DateTime.Now;
                                 ReOrderLevelCbBx.SelectedIndex = 0;
                                 ReOrderQtyCbBx.SelectedIndex = 0;
                                 IngStatusCbBx.SelectedIndex = 1;
-                                IngStatusCbBx.Enabled = false;
 
                                 IngErrLbl.Visible = false;
                                 IngInsertBtn.Enabled = true;
@@ -2503,7 +2524,6 @@ namespace OfflineCafe
                              {
                                 MessageBox.Show("Failed to update ingredient record!");
                              }
-                            }
                         }
                     }
                 }
@@ -2566,6 +2586,77 @@ namespace OfflineCafe
             {
                 throw ex;
             }
+        }
+
+        private void IngredientTimer_Tick(object sender, EventArgs e)
+        {
+            IngredientDA ingDA = new IngredientDA();
+            //MessageBox.Show(ingDA.IngredientQtyCheck().ToString());
+
+            if(ingDA.IngredientQtyCheck() == true)
+            {
+                IngredientNotifyIcn.Visible = true;
+                IngredientNotifyIcn.BalloonTipTitle = "Not Enough Ingredient!";
+                IngredientNotifyIcn.BalloonTipText = "Please click below The Coffee Bean icon to get more details.";
+                IngredientNotifyIcn.ShowBalloonTip(100);
+                IngredientTimer.Interval = 70000;
+                //IngredientTimer.Stop();
+            }
+        }
+
+        private void IngredientNotifyIcn_Click(object sender, EventArgs e)
+        {
+            pnlItem.Visible = false;
+            pnlMain.Visible = false;
+            pnlMenu.Visible = false;
+            pnlPwChg.Visible = false;
+            pnlSupplier.Visible = false;
+            pnlEmp.Visible = false;
+            pnlPO.Visible = true;
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            pnlEmp.Visible = false;
+            pnlItem.Visible = false;
+            pnlMain.Visible = false;
+            pnlMenu.Visible = false;
+            pnlPwChg.Visible = false;
+            pnlSupplier.Visible = false;
+            pnlPO.Visible = true;
+        }
+
+        private void IngPODataFill()
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
+
+            try
+            {
+                string sql = "SELECT IngredientID, IngredientName, Quantity, ReOrderLevel, ReOrderQuantity FROM Ingredient WHERE Quantity <= ReOrderLevel AND IngredientStatus = 'Available';";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, con);
+
+                DataSet ds = new DataSet();
+
+                con.Open();
+
+                da.Fill(ds, "Ingredient");
+                con.Close();
+
+                IngPODtGrdVw.DataSource = ds;
+                IngPODtGrdVw.DataMember = "Ingredient";
+            }
+            catch(SqlException ex)
+            {
+                MessageBox.Show("Ingredient Purchase Order's data grid view cannot read the database!");
+                throw ex;
+            }
+        }
+
+        private void IngPORefreshBtn_Click(object sender, EventArgs e)
+        {
+            IngPODataFill();
         }
     }    
 }

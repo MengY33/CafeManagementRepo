@@ -176,7 +176,6 @@
             this.ppw3 = new System.Windows.Forms.Label();
             this.pwchg = new System.Windows.Forms.Label();
             this.pnlSupplier = new System.Windows.Forms.Panel();
-            this.POInsertUpdateLbl = new System.Windows.Forms.Label();
             this.SuppStatusLbl = new System.Windows.Forms.Label();
             this.SuppStatusCbBx = new System.Windows.Forms.ComboBox();
             this.SuppResetBtn = new System.Windows.Forms.Button();
@@ -244,6 +243,21 @@
             this.IngredientNameLbl = new System.Windows.Forms.Label();
             this.IngSearchLbl = new System.Windows.Forms.Label();
             this.IngMaintenanceLbl = new System.Windows.Forms.Label();
+            this.IngredientTimer = new System.Windows.Forms.Timer(this.components);
+            this.IngredientNotifyIcn = new System.Windows.Forms.NotifyIcon(this.components);
+            this.UnitLbl = new System.Windows.Forms.Label();
+            this.UnitCbBx = new System.Windows.Forms.ComboBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.button14 = new System.Windows.Forms.Button();
+            this.pnlPO = new System.Windows.Forms.Panel();
+            this.label39 = new System.Windows.Forms.Label();
+            this.IngPODtGrdVw = new System.Windows.Forms.DataGridView();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.IngPONameSearchTxtBx = new System.Windows.Forms.TextBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.IngPORefreshBtn = new System.Windows.Forms.Button();
+            this.IngPOErrLbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.PnlButton.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -261,6 +275,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.SuppDtGdVw)).BeginInit();
             this.pnlItem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IngDtGdVw)).BeginInit();
+            this.pnlPO.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IngPODtGrdVw)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -326,6 +342,8 @@
             // PnlButton
             // 
             this.PnlButton.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.PnlButton.Controls.Add(this.button14);
+            this.PnlButton.Controls.Add(this.label38);
             this.PnlButton.Controls.Add(this.button13);
             this.PnlButton.Controls.Add(this.button10);
             this.PnlButton.Controls.Add(this.label5);
@@ -344,7 +362,7 @@
             this.PnlButton.Location = new System.Drawing.Point(1096, 60);
             this.PnlButton.Margin = new System.Windows.Forms.Padding(2);
             this.PnlButton.Name = "PnlButton";
-            this.PnlButton.Size = new System.Drawing.Size(241, 663);
+            this.PnlButton.Size = new System.Drawing.Size(241, 766);
             this.PnlButton.TabIndex = 5;
             // 
             // button13
@@ -354,7 +372,7 @@
             this.button13.Font = new System.Drawing.Font("Algerian", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button13.Image = ((System.Drawing.Image)(resources.GetObject("button13.Image")));
             this.button13.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button13.Location = new System.Drawing.Point(85, 590);
+            this.button13.Location = new System.Drawing.Point(85, 660);
             this.button13.Margin = new System.Windows.Forms.Padding(2);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(72, 73);
@@ -370,7 +388,7 @@
             this.button10.Font = new System.Drawing.Font("Algerian", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button10.Image = ((System.Drawing.Image)(resources.GetObject("button10.Image")));
             this.button10.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.button10.Location = new System.Drawing.Point(2, 525);
+            this.button10.Location = new System.Drawing.Point(2, 596);
             this.button10.Margin = new System.Windows.Forms.Padding(2);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(238, 50);
@@ -385,7 +403,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Algerian", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label5.Location = new System.Drawing.Point(2, 508);
+            this.label5.Location = new System.Drawing.Point(2, 580);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(80, 18);
@@ -1471,7 +1489,7 @@
             // 
             this.EmpStatusLbl.AutoSize = true;
             this.EmpStatusLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpStatusLbl.Location = new System.Drawing.Point(644, 392);
+            this.EmpStatusLbl.Location = new System.Drawing.Point(644, 471);
             this.EmpStatusLbl.Name = "EmpStatusLbl";
             this.EmpStatusLbl.Size = new System.Drawing.Size(46, 19);
             this.EmpStatusLbl.TabIndex = 72;
@@ -1479,6 +1497,7 @@
             // 
             // EmpStatusCbBx
             // 
+            this.EmpStatusCbBx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.EmpStatusCbBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmpStatusCbBx.FormattingEnabled = true;
             this.EmpStatusCbBx.Items.AddRange(new object[] {
@@ -1486,7 +1505,7 @@
             "Hired",
             "Resigned",
             "Fired"});
-            this.EmpStatusCbBx.Location = new System.Drawing.Point(760, 388);
+            this.EmpStatusCbBx.Location = new System.Drawing.Point(760, 466);
             this.EmpStatusCbBx.Name = "EmpStatusCbBx";
             this.EmpStatusCbBx.Size = new System.Drawing.Size(134, 27);
             this.EmpStatusCbBx.TabIndex = 11;
@@ -1494,7 +1513,7 @@
             // EmpResetBtn
             // 
             this.EmpResetBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpResetBtn.Location = new System.Drawing.Point(900, 452);
+            this.EmpResetBtn.Location = new System.Drawing.Point(900, 530);
             this.EmpResetBtn.Name = "EmpResetBtn";
             this.EmpResetBtn.Size = new System.Drawing.Size(75, 30);
             this.EmpResetBtn.TabIndex = 14;
@@ -1505,7 +1524,7 @@
             // EmpUpdateBtn
             // 
             this.EmpUpdateBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpUpdateBtn.Location = new System.Drawing.Point(780, 452);
+            this.EmpUpdateBtn.Location = new System.Drawing.Point(780, 530);
             this.EmpUpdateBtn.Name = "EmpUpdateBtn";
             this.EmpUpdateBtn.Size = new System.Drawing.Size(75, 30);
             this.EmpUpdateBtn.TabIndex = 13;
@@ -1529,7 +1548,7 @@
             this.ErrLbl.AutoSize = true;
             this.ErrLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ErrLbl.ForeColor = System.Drawing.Color.Red;
-            this.ErrLbl.Location = new System.Drawing.Point(16, 482);
+            this.ErrLbl.Location = new System.Drawing.Point(16, 330);
             this.ErrLbl.Name = "ErrLbl";
             this.ErrLbl.Size = new System.Drawing.Size(17, 19);
             this.ErrLbl.TabIndex = 67;
@@ -1539,7 +1558,7 @@
             // EmpInsertBtn
             // 
             this.EmpInsertBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpInsertBtn.Location = new System.Drawing.Point(644, 452);
+            this.EmpInsertBtn.Location = new System.Drawing.Point(644, 530);
             this.EmpInsertBtn.Name = "EmpInsertBtn";
             this.EmpInsertBtn.Size = new System.Drawing.Size(75, 30);
             this.EmpInsertBtn.TabIndex = 12;
@@ -1549,6 +1568,7 @@
             // 
             // EmpPositionCbBx
             // 
+            this.EmpPositionCbBx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.EmpPositionCbBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmpPositionCbBx.FormattingEnabled = true;
             this.EmpPositionCbBx.Items.AddRange(new object[] {
@@ -1557,7 +1577,7 @@
             "Cashier",
             "Chef",
             "Manager"});
-            this.EmpPositionCbBx.Location = new System.Drawing.Point(760, 354);
+            this.EmpPositionCbBx.Location = new System.Drawing.Point(760, 433);
             this.EmpPositionCbBx.Name = "EmpPositionCbBx";
             this.EmpPositionCbBx.Size = new System.Drawing.Size(134, 27);
             this.EmpPositionCbBx.TabIndex = 10;
@@ -1565,7 +1585,7 @@
             // EmpEmailTxtBx
             // 
             this.EmpEmailTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpEmailTxtBx.Location = new System.Drawing.Point(760, 322);
+            this.EmpEmailTxtBx.Location = new System.Drawing.Point(760, 400);
             this.EmpEmailTxtBx.Name = "EmpEmailTxtBx";
             this.EmpEmailTxtBx.Size = new System.Drawing.Size(250, 26);
             this.EmpEmailTxtBx.TabIndex = 9;
@@ -1573,7 +1593,7 @@
             // EmpHandphoneNoTxtBx
             // 
             this.EmpHandphoneNoTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpHandphoneNoTxtBx.Location = new System.Drawing.Point(760, 288);
+            this.EmpHandphoneNoTxtBx.Location = new System.Drawing.Point(760, 340);
             this.EmpHandphoneNoTxtBx.Name = "EmpHandphoneNoTxtBx";
             this.EmpHandphoneNoTxtBx.Size = new System.Drawing.Size(200, 26);
             this.EmpHandphoneNoTxtBx.TabIndex = 8;
@@ -1581,7 +1601,7 @@
             // EmpHomeNoTxtBx
             // 
             this.EmpHomeNoTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpHomeNoTxtBx.Location = new System.Drawing.Point(760, 256);
+            this.EmpHomeNoTxtBx.Location = new System.Drawing.Point(760, 279);
             this.EmpHomeNoTxtBx.Name = "EmpHomeNoTxtBx";
             this.EmpHomeNoTxtBx.Size = new System.Drawing.Size(200, 26);
             this.EmpHomeNoTxtBx.TabIndex = 7;
@@ -1589,7 +1609,7 @@
             // EmpAddress2TxtBx
             // 
             this.EmpAddress2TxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpAddress2TxtBx.Location = new System.Drawing.Point(760, 223);
+            this.EmpAddress2TxtBx.Location = new System.Drawing.Point(760, 246);
             this.EmpAddress2TxtBx.Name = "EmpAddress2TxtBx";
             this.EmpAddress2TxtBx.Size = new System.Drawing.Size(250, 26);
             this.EmpAddress2TxtBx.TabIndex = 6;
@@ -1597,7 +1617,7 @@
             // EmpAddress1TxtBx
             // 
             this.EmpAddress1TxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpAddress1TxtBx.Location = new System.Drawing.Point(760, 189);
+            this.EmpAddress1TxtBx.Location = new System.Drawing.Point(760, 213);
             this.EmpAddress1TxtBx.Name = "EmpAddress1TxtBx";
             this.EmpAddress1TxtBx.Size = new System.Drawing.Size(250, 26);
             this.EmpAddress1TxtBx.TabIndex = 5;
@@ -1606,7 +1626,7 @@
             // 
             this.EmpFemaleRdBtn.AutoSize = true;
             this.EmpFemaleRdBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpFemaleRdBtn.Location = new System.Drawing.Point(889, 161);
+            this.EmpFemaleRdBtn.Location = new System.Drawing.Point(889, 180);
             this.EmpFemaleRdBtn.Name = "EmpFemaleRdBtn";
             this.EmpFemaleRdBtn.Size = new System.Drawing.Size(71, 23);
             this.EmpFemaleRdBtn.TabIndex = 4;
@@ -1618,7 +1638,7 @@
             // 
             this.EmpMaleRdBtn.AutoSize = true;
             this.EmpMaleRdBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpMaleRdBtn.Location = new System.Drawing.Point(760, 161);
+            this.EmpMaleRdBtn.Location = new System.Drawing.Point(760, 180);
             this.EmpMaleRdBtn.Name = "EmpMaleRdBtn";
             this.EmpMaleRdBtn.Size = new System.Drawing.Size(58, 23);
             this.EmpMaleRdBtn.TabIndex = 3;
@@ -1656,7 +1676,7 @@
             // 
             this.EmpPositionLbl.AutoSize = true;
             this.EmpPositionLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpPositionLbl.Location = new System.Drawing.Point(644, 360);
+            this.EmpPositionLbl.Location = new System.Drawing.Point(644, 439);
             this.EmpPositionLbl.Name = "EmpPositionLbl";
             this.EmpPositionLbl.Size = new System.Drawing.Size(57, 19);
             this.EmpPositionLbl.TabIndex = 54;
@@ -1666,7 +1686,7 @@
             // 
             this.EmpEmailLbl.AutoSize = true;
             this.EmpEmailLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpEmailLbl.Location = new System.Drawing.Point(644, 326);
+            this.EmpEmailLbl.Location = new System.Drawing.Point(644, 404);
             this.EmpEmailLbl.Name = "EmpEmailLbl";
             this.EmpEmailLbl.Size = new System.Drawing.Size(42, 19);
             this.EmpEmailLbl.TabIndex = 53;
@@ -1676,27 +1696,27 @@
             // 
             this.EmpHandphoneNoLbl.AutoSize = true;
             this.EmpHandphoneNoLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpHandphoneNoLbl.Location = new System.Drawing.Point(644, 292);
+            this.EmpHandphoneNoLbl.Location = new System.Drawing.Point(644, 344);
             this.EmpHandphoneNoLbl.Name = "EmpHandphoneNoLbl";
-            this.EmpHandphoneNoLbl.Size = new System.Drawing.Size(107, 19);
+            this.EmpHandphoneNoLbl.Size = new System.Drawing.Size(107, 38);
             this.EmpHandphoneNoLbl.TabIndex = 52;
-            this.EmpHandphoneNoLbl.Text = "Handphone No.";
+            this.EmpHandphoneNoLbl.Text = "Handphone No.\r\n(xxx-xxxxxxx)";
             // 
             // EmpHomeNoLbl
             // 
             this.EmpHomeNoLbl.AutoSize = true;
             this.EmpHomeNoLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpHomeNoLbl.Location = new System.Drawing.Point(644, 261);
+            this.EmpHomeNoLbl.Location = new System.Drawing.Point(644, 284);
             this.EmpHomeNoLbl.Name = "EmpHomeNoLbl";
-            this.EmpHomeNoLbl.Size = new System.Drawing.Size(74, 19);
+            this.EmpHomeNoLbl.Size = new System.Drawing.Size(95, 38);
             this.EmpHomeNoLbl.TabIndex = 51;
-            this.EmpHomeNoLbl.Text = "Home No.";
+            this.EmpHomeNoLbl.Text = "Home No.\r\n(xx-xxxxxxxx)";
             // 
             // EmpAddressLbl
             // 
             this.EmpAddressLbl.AutoSize = true;
             this.EmpAddressLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpAddressLbl.Location = new System.Drawing.Point(644, 193);
+            this.EmpAddressLbl.Location = new System.Drawing.Point(644, 217);
             this.EmpAddressLbl.Name = "EmpAddressLbl";
             this.EmpAddressLbl.Size = new System.Drawing.Size(60, 19);
             this.EmpAddressLbl.TabIndex = 50;
@@ -1706,7 +1726,7 @@
             // 
             this.EmpGenderLbl.AutoSize = true;
             this.EmpGenderLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpGenderLbl.Location = new System.Drawing.Point(644, 162);
+            this.EmpGenderLbl.Location = new System.Drawing.Point(644, 182);
             this.EmpGenderLbl.Name = "EmpGenderLbl";
             this.EmpGenderLbl.Size = new System.Drawing.Size(54, 19);
             this.EmpGenderLbl.TabIndex = 49;
@@ -1718,9 +1738,9 @@
             this.EmpICLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmpICLbl.Location = new System.Drawing.Point(644, 131);
             this.EmpICLbl.Name = "EmpICLbl";
-            this.EmpICLbl.Size = new System.Drawing.Size(53, 19);
+            this.EmpICLbl.Size = new System.Drawing.Size(115, 38);
             this.EmpICLbl.TabIndex = 48;
-            this.EmpICLbl.Text = "IC No.";
+            this.EmpICLbl.Text = "IC No.\r\n(xxxxxx-xx-xxxx)";
             // 
             // EmpNameLbl
             // 
@@ -1778,6 +1798,7 @@
             // 
             // EmpPostCbBx
             // 
+            this.EmpPostCbBx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.EmpPostCbBx.DropDownWidth = 118;
             this.EmpPostCbBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EmpPostCbBx.FormattingEnabled = true;
@@ -1995,7 +2016,6 @@
             // 
             // pnlSupplier
             // 
-            this.pnlSupplier.Controls.Add(this.POInsertUpdateLbl);
             this.pnlSupplier.Controls.Add(this.SuppStatusLbl);
             this.pnlSupplier.Controls.Add(this.SuppStatusCbBx);
             this.pnlSupplier.Controls.Add(this.SuppResetBtn);
@@ -2035,16 +2055,6 @@
             this.pnlSupplier.Size = new System.Drawing.Size(1091, 766);
             this.pnlSupplier.TabIndex = 74;
             // 
-            // POInsertUpdateLbl
-            // 
-            this.POInsertUpdateLbl.AutoSize = true;
-            this.POInsertUpdateLbl.Font = new System.Drawing.Font("AR JULIAN", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.POInsertUpdateLbl.Location = new System.Drawing.Point(644, 520);
-            this.POInsertUpdateLbl.Name = "POInsertUpdateLbl";
-            this.POInsertUpdateLbl.Size = new System.Drawing.Size(256, 19);
-            this.POInsertUpdateLbl.TabIndex = 34;
-            this.POInsertUpdateLbl.Text = "Purchase Order Insert && Update";
-            // 
             // SuppStatusLbl
             // 
             this.SuppStatusLbl.AutoSize = true;
@@ -2057,6 +2067,7 @@
             // 
             // SuppStatusCbBx
             // 
+            this.SuppStatusCbBx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.SuppStatusCbBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SuppStatusCbBx.FormattingEnabled = true;
             this.SuppStatusCbBx.Items.AddRange(new object[] {
@@ -2304,7 +2315,7 @@
             this.SuppErrLbl.AutoSize = true;
             this.SuppErrLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SuppErrLbl.ForeColor = System.Drawing.Color.Red;
-            this.SuppErrLbl.Location = new System.Drawing.Point(16, 370);
+            this.SuppErrLbl.Location = new System.Drawing.Point(16, 330);
             this.SuppErrLbl.Name = "SuppErrLbl";
             this.SuppErrLbl.Size = new System.Drawing.Size(17, 19);
             this.SuppErrLbl.TabIndex = 7;
@@ -2387,6 +2398,8 @@
             // 
             // pnlItem
             // 
+            this.pnlItem.Controls.Add(this.UnitCbBx);
+            this.pnlItem.Controls.Add(this.UnitLbl);
             this.pnlItem.Controls.Add(this.ExpiryDatePicker);
             this.pnlItem.Controls.Add(this.ReOrderQtyLbl);
             this.pnlItem.Controls.Add(this.ReOrderQtyCbBx);
@@ -2435,7 +2448,7 @@
             this.ExpiryDatePicker.Location = new System.Drawing.Point(770, 227);
             this.ExpiryDatePicker.Name = "ExpiryDatePicker";
             this.ExpiryDatePicker.Size = new System.Drawing.Size(170, 26);
-            this.ExpiryDatePicker.TabIndex = 41;
+            this.ExpiryDatePicker.TabIndex = 4;
             this.ExpiryDatePicker.Value = new System.DateTime(2016, 6, 5, 1, 11, 46, 0);
             // 
             // ReOrderQtyLbl
@@ -2455,15 +2468,15 @@
             this.ReOrderQtyCbBx.FormattingEnabled = true;
             this.ReOrderQtyCbBx.Items.AddRange(new object[] {
             "- Select Re-Order Quantity -",
-            "10",
-            "20",
             "30",
-            "40",
-            "50"});
+            "60",
+            "90",
+            "120",
+            "150"});
             this.ReOrderQtyCbBx.Location = new System.Drawing.Point(770, 293);
             this.ReOrderQtyCbBx.Name = "ReOrderQtyCbBx";
             this.ReOrderQtyCbBx.Size = new System.Drawing.Size(200, 27);
-            this.ReOrderQtyCbBx.TabIndex = 39;
+            this.ReOrderQtyCbBx.TabIndex = 6;
             // 
             // ReOrderLevelLbl
             // 
@@ -2482,15 +2495,15 @@
             this.ReOrderLevelCbBx.FormattingEnabled = true;
             this.ReOrderLevelCbBx.Items.AddRange(new object[] {
             "- Select Re-Order Level -",
-            "5",
             "10",
             "15",
             "20",
-            "25"});
+            "25",
+            "30"});
             this.ReOrderLevelCbBx.Location = new System.Drawing.Point(770, 260);
             this.ReOrderLevelCbBx.Name = "ReOrderLevelCbBx";
             this.ReOrderLevelCbBx.Size = new System.Drawing.Size(200, 27);
-            this.ReOrderLevelCbBx.TabIndex = 37;
+            this.ReOrderLevelCbBx.TabIndex = 5;
             // 
             // ExpiryDateLbl
             // 
@@ -2525,7 +2538,7 @@
             this.StorageAreaCbBx.Location = new System.Drawing.Point(770, 194);
             this.StorageAreaCbBx.Name = "StorageAreaCbBx";
             this.StorageAreaCbBx.Size = new System.Drawing.Size(170, 27);
-            this.StorageAreaCbBx.TabIndex = 33;
+            this.StorageAreaCbBx.TabIndex = 3;
             // 
             // IngredientStatusLbl
             // 
@@ -2543,8 +2556,8 @@
             this.IngredientStatusCbBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IngredientStatusCbBx.FormattingEnabled = true;
             this.IngredientStatusCbBx.Items.AddRange(new object[] {
-            "In Stock",
-            "Out of Stock"});
+            "Available",
+            "Not Available"});
             this.IngredientStatusCbBx.Location = new System.Drawing.Point(438, 65);
             this.IngredientStatusCbBx.Name = "IngredientStatusCbBx";
             this.IngredientStatusCbBx.Size = new System.Drawing.Size(121, 27);
@@ -2558,12 +2571,12 @@
             this.IngStatusCbBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IngStatusCbBx.FormattingEnabled = true;
             this.IngStatusCbBx.Items.AddRange(new object[] {
-            "In Stock",
-            "Out of Stock"});
+            "Available",
+            "Not Available"});
             this.IngStatusCbBx.Location = new System.Drawing.Point(770, 326);
             this.IngStatusCbBx.Name = "IngStatusCbBx";
-            this.IngStatusCbBx.Size = new System.Drawing.Size(120, 27);
-            this.IngStatusCbBx.TabIndex = 5;
+            this.IngStatusCbBx.Size = new System.Drawing.Size(170, 27);
+            this.IngStatusCbBx.TabIndex = 55;
             // 
             // IngStatusLbl
             // 
@@ -2582,7 +2595,7 @@
             this.IngQuantityTxtBx.Location = new System.Drawing.Point(770, 161);
             this.IngQuantityTxtBx.Name = "IngQuantityTxtBx";
             this.IngQuantityTxtBx.Size = new System.Drawing.Size(120, 26);
-            this.IngQuantityTxtBx.TabIndex = 4;
+            this.IngQuantityTxtBx.TabIndex = 33;
             this.IngQuantityTxtBx.Text = "0";
             // 
             // IngResetBtn
@@ -2591,7 +2604,7 @@
             this.IngResetBtn.Location = new System.Drawing.Point(900, 400);
             this.IngResetBtn.Name = "IngResetBtn";
             this.IngResetBtn.Size = new System.Drawing.Size(75, 30);
-            this.IngResetBtn.TabIndex = 8;
+            this.IngResetBtn.TabIndex = 9;
             this.IngResetBtn.Text = "RESET";
             this.IngResetBtn.UseVisualStyleBackColor = true;
             this.IngResetBtn.Click += new System.EventHandler(this.ItmResetBtn_Click);
@@ -2602,7 +2615,7 @@
             this.IngUpdateBtn.Location = new System.Drawing.Point(780, 400);
             this.IngUpdateBtn.Name = "IngUpdateBtn";
             this.IngUpdateBtn.Size = new System.Drawing.Size(75, 30);
-            this.IngUpdateBtn.TabIndex = 7;
+            this.IngUpdateBtn.TabIndex = 8;
             this.IngUpdateBtn.Text = "UPDATE";
             this.IngUpdateBtn.UseVisualStyleBackColor = true;
             this.IngUpdateBtn.Click += new System.EventHandler(this.IngUpdateBtn_Click);
@@ -2613,7 +2626,7 @@
             this.IngInsertBtn.Location = new System.Drawing.Point(644, 400);
             this.IngInsertBtn.Name = "IngInsertBtn";
             this.IngInsertBtn.Size = new System.Drawing.Size(75, 30);
-            this.IngInsertBtn.TabIndex = 6;
+            this.IngInsertBtn.TabIndex = 7;
             this.IngInsertBtn.Text = "INSERT";
             this.IngInsertBtn.UseVisualStyleBackColor = true;
             this.IngInsertBtn.Click += new System.EventHandler(this.ItmInsertBtn_Click);
@@ -2699,7 +2712,7 @@
             this.IngErrLbl.AutoSize = true;
             this.IngErrLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IngErrLbl.ForeColor = System.Drawing.Color.Red;
-            this.IngErrLbl.Location = new System.Drawing.Point(16, 320);
+            this.IngErrLbl.Location = new System.Drawing.Point(16, 330);
             this.IngErrLbl.Name = "IngErrLbl";
             this.IngErrLbl.Size = new System.Drawing.Size(17, 19);
             this.IngErrLbl.TabIndex = 9;
@@ -2712,7 +2725,7 @@
             this.IngRefreshBtn.Location = new System.Drawing.Point(466, 280);
             this.IngRefreshBtn.Name = "IngRefreshBtn";
             this.IngRefreshBtn.Size = new System.Drawing.Size(95, 30);
-            this.IngRefreshBtn.TabIndex = 9;
+            this.IngRefreshBtn.TabIndex = 10;
             this.IngRefreshBtn.Text = "REFRESH";
             this.IngRefreshBtn.UseVisualStyleBackColor = true;
             this.IngRefreshBtn.Click += new System.EventHandler(this.IngRefreshBtn_Click);
@@ -2780,6 +2793,170 @@
             this.IngMaintenanceLbl.TabIndex = 0;
             this.IngMaintenanceLbl.Text = "Ingredient Maintenance";
             // 
+            // IngredientTimer
+            // 
+            this.IngredientTimer.Enabled = true;
+            this.IngredientTimer.Tick += new System.EventHandler(this.IngredientTimer_Tick);
+            // 
+            // IngredientNotifyIcn
+            // 
+            this.IngredientNotifyIcn.Icon = ((System.Drawing.Icon)(resources.GetObject("IngredientNotifyIcn.Icon")));
+            this.IngredientNotifyIcn.Text = "The Coffee Bean";
+            this.IngredientNotifyIcn.Visible = true;
+            this.IngredientNotifyIcn.Click += new System.EventHandler(this.IngredientNotifyIcn_Click);
+            // 
+            // UnitLbl
+            // 
+            this.UnitLbl.AutoSize = true;
+            this.UnitLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UnitLbl.Location = new System.Drawing.Point(896, 165);
+            this.UnitLbl.Name = "UnitLbl";
+            this.UnitLbl.Size = new System.Drawing.Size(34, 19);
+            this.UnitLbl.TabIndex = 42;
+            this.UnitLbl.Text = "Unit";
+            // 
+            // UnitCbBx
+            // 
+            this.UnitCbBx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.UnitCbBx.Enabled = false;
+            this.UnitCbBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UnitCbBx.FormattingEnabled = true;
+            this.UnitCbBx.Items.AddRange(new object[] {
+            "-",
+            "kg",
+            "litre",
+            "pack",
+            "piece"});
+            this.UnitCbBx.Location = new System.Drawing.Point(940, 160);
+            this.UnitCbBx.Name = "UnitCbBx";
+            this.UnitCbBx.Size = new System.Drawing.Size(121, 27);
+            this.UnitCbBx.TabIndex = 43;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Algerian", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.label38.Location = new System.Drawing.Point(2, 511);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(141, 18);
+            this.label38.TabIndex = 18;
+            this.label38.Text = "Purchase Order";
+            // 
+            // button14
+            // 
+            this.button14.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button14.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button14.Font = new System.Drawing.Font("Algerian", 16.2F, System.Drawing.FontStyle.Bold);
+            this.button14.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.button14.Location = new System.Drawing.Point(2, 527);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(238, 50);
+            this.button14.TabIndex = 19;
+            this.button14.Text = "Purchase";
+            this.button14.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.button14.UseVisualStyleBackColor = false;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
+            // pnlPO
+            // 
+            this.pnlPO.Controls.Add(this.IngPOErrLbl);
+            this.pnlPO.Controls.Add(this.IngPORefreshBtn);
+            this.pnlPO.Controls.Add(this.label42);
+            this.pnlPO.Controls.Add(this.IngPONameSearchTxtBx);
+            this.pnlPO.Controls.Add(this.label41);
+            this.pnlPO.Controls.Add(this.label40);
+            this.pnlPO.Controls.Add(this.IngPODtGrdVw);
+            this.pnlPO.Controls.Add(this.label39);
+            this.pnlPO.Location = new System.Drawing.Point(2, 61);
+            this.pnlPO.Name = "pnlPO";
+            this.pnlPO.Size = new System.Drawing.Size(1091, 766);
+            this.pnlPO.TabIndex = 76;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("AR JULIAN", 13.8F);
+            this.label39.Location = new System.Drawing.Point(7, 7);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(276, 23);
+            this.label39.TabIndex = 0;
+            this.label39.Text = "Ingredients Require to Order";
+            // 
+            // IngPODtGrdVw
+            // 
+            this.IngPODtGrdVw.AllowUserToAddRows = false;
+            this.IngPODtGrdVw.AllowUserToDeleteRows = false;
+            this.IngPODtGrdVw.AllowUserToOrderColumns = true;
+            this.IngPODtGrdVw.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.IngPODtGrdVw.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.IngPODtGrdVw.Location = new System.Drawing.Point(20, 97);
+            this.IngPODtGrdVw.Name = "IngPODtGrdVw";
+            this.IngPODtGrdVw.ReadOnly = true;
+            this.IngPODtGrdVw.Size = new System.Drawing.Size(541, 180);
+            this.IngPODtGrdVw.TabIndex = 1;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("AR JULIAN", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.Location = new System.Drawing.Point(16, 39);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(137, 19);
+            this.label40.TabIndex = 2;
+            this.label40.Text = "Ingredient Search";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.Location = new System.Drawing.Point(16, 68);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(110, 19);
+            this.label41.TabIndex = 3;
+            this.label41.Text = "Ingredient Name";
+            // 
+            // IngPONameSearchTxtBx
+            // 
+            this.IngPONameSearchTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IngPONameSearchTxtBx.Location = new System.Drawing.Point(140, 65);
+            this.IngPONameSearchTxtBx.Name = "IngPONameSearchTxtBx";
+            this.IngPONameSearchTxtBx.Size = new System.Drawing.Size(100, 26);
+            this.IngPONameSearchTxtBx.TabIndex = 4;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.Location = new System.Drawing.Point(20, 280);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(354, 19);
+            this.label42.TabIndex = 5;
+            this.label42.Text = "**Click on the row of Ingredient data to View and Order";
+            // 
+            // IngPORefreshBtn
+            // 
+            this.IngPORefreshBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IngPORefreshBtn.Location = new System.Drawing.Point(466, 280);
+            this.IngPORefreshBtn.Name = "IngPORefreshBtn";
+            this.IngPORefreshBtn.Size = new System.Drawing.Size(95, 30);
+            this.IngPORefreshBtn.TabIndex = 6;
+            this.IngPORefreshBtn.Text = "REFRESH";
+            this.IngPORefreshBtn.UseVisualStyleBackColor = true;
+            this.IngPORefreshBtn.Click += new System.EventHandler(this.IngPORefreshBtn_Click);
+            // 
+            // IngPOErrLbl
+            // 
+            this.IngPOErrLbl.AutoSize = true;
+            this.IngPOErrLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IngPOErrLbl.ForeColor = System.Drawing.Color.Red;
+            this.IngPOErrLbl.Location = new System.Drawing.Point(16, 330);
+            this.IngPOErrLbl.Name = "IngPOErrLbl";
+            this.IngPOErrLbl.Size = new System.Drawing.Size(17, 19);
+            this.IngPOErrLbl.TabIndex = 7;
+            this.IngPOErrLbl.Text = "*";
+            this.IngPOErrLbl.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2790,6 +2967,7 @@
             this.ControlBox = false;
             this.Controls.Add(this.PnlButton);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlPO);
             this.Controls.Add(this.pnlItem);
             this.Controls.Add(this.pnlSupplier);
             this.Controls.Add(this.pnlEmp);
@@ -2829,6 +3007,9 @@
             this.pnlItem.ResumeLayout(false);
             this.pnlItem.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IngDtGdVw)).EndInit();
+            this.pnlPO.ResumeLayout(false);
+            this.pnlPO.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IngPODtGrdVw)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -3034,7 +3215,6 @@
         private System.Windows.Forms.Button IngInsertBtn;
         private System.Windows.Forms.Button IngUpdateBtn;
         private System.Windows.Forms.Button IngResetBtn;
-        private System.Windows.Forms.Label POInsertUpdateLbl;
         private System.Windows.Forms.TextBox IngQuantityTxtBx;
         private System.Windows.Forms.ComboBox IngStatusCbBx;
         private System.Windows.Forms.Label IngStatusLbl;
@@ -3048,6 +3228,21 @@
         private System.Windows.Forms.Label ReOrderQtyLbl;
         private System.Windows.Forms.ComboBox ReOrderQtyCbBx;
         private System.Windows.Forms.DateTimePicker ExpiryDatePicker;
+        private System.Windows.Forms.Timer IngredientTimer;
+        private System.Windows.Forms.NotifyIcon IngredientNotifyIcn;
+        private System.Windows.Forms.ComboBox UnitCbBx;
+        private System.Windows.Forms.Label UnitLbl;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Panel pnlPO;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.DataGridView IngPODtGrdVw;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.TextBox IngPONameSearchTxtBx;
+        private System.Windows.Forms.Label IngPOErrLbl;
+        private System.Windows.Forms.Button IngPORefreshBtn;
+        private System.Windows.Forms.Label label42;
     }
 }
 

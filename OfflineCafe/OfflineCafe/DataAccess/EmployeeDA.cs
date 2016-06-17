@@ -58,5 +58,61 @@ namespace OfflineCafe.DataAccess
                 throw ex;
             }
         }
+
+        public void RetreiveEmployeeID(Employee e)
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
+
+            try
+            {
+                string sql = "SELECT EmployeeID FROM Employee WHERE ICNumber = '"+e.ICNumber+"'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    e.EmployeeIDRetrieve = dr["EmployeeID"].ToString();
+                } 
+            }
+            catch(SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void RetrieveAdminName(Employee ee)
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
+
+            try
+            {
+                string sql = "SELECT EmployeeName FROM Employee WHERE Position = 'Admin';";
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while(dr.Read())
+                {
+                    ee.AdminNameRetrieve = dr["EmployeeName"].ToString();
+                }
+            }
+            catch(SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace OfflineCafe.DataAccess
 
             try
             {
-                string sql = "INSERT INTO Ingredient VALUES ('"+ing.IngredientName+"', '"+ing.IngredientDesc+"', '"+ing.IngredientQty+"', '"+ing.StorageArea+"', '"+ing.ExpiryDate+"', '"+ing.ReOrderLevel+"', '"+ing.ReOrderQty+"', '"+ing.IngredientStatus+"')";
+                string sql = "INSERT INTO Ingredient VALUES ('"+ing.IngredientName+"', '"+ing.IngredientDesc+"', '"+ing.IngredientQty+"', '"+ing.Unit+"', '"+ing.StorageArea+"', '"+ing.ExpiryDate+"', '"+ing.ReOrderLevel+"', '"+ing.ReOrderQty+"', '"+ing.IngredientStatus+"')";
 
                 SqlCommand cmd = new SqlCommand(sql, con);
 
@@ -57,6 +57,37 @@ namespace OfflineCafe.DataAccess
                 throw ex;
             }
             con.Close();
+        }
+
+        public bool IngredientQtyCheck()
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
+            Ingredient i = new Ingredient();
+
+            try
+            {
+                string sql = "SELECT IngredientName FROM Ingredient WHERE Quantity <= ReOrderLevel AND IngredientStatus = 'Available';";
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while(dr.Read())
+                {
+                    i.IngredientNameRetrieved = dr["IngredientName"].ToString();
+                    return true;
+                }
+                return false;
+            }
+            catch(SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
         }
     }
 }

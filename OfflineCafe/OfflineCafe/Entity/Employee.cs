@@ -20,5 +20,7 @@ namespace OfflineCafe.Entity
         public string InsertStatus = "";
         public string UpdateStatus = "";
         public string CurrentStatus;
+        public string EmployeeIDRetrieve;
+        public string AdminNameRetrieve;
     }
 }
