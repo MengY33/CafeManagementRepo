@@ -255,9 +255,13 @@
             this.label40 = new System.Windows.Forms.Label();
             this.label41 = new System.Windows.Forms.Label();
             this.IngPONameSearchTxtBx = new System.Windows.Forms.TextBox();
-            this.label42 = new System.Windows.Forms.Label();
             this.IngPORefreshBtn = new System.Windows.Forms.Button();
-            this.IngPOErrLbl = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.POIDTxtBx = new System.Windows.Forms.TextBox();
+            this.label42 = new System.Windows.Forms.Label();
+            this.POEmpIDTxtBx = new System.Windows.Forms.TextBox();
+            this.label45 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.PnlButton.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -2860,9 +2864,13 @@
             // 
             // pnlPO
             // 
-            this.pnlPO.Controls.Add(this.IngPOErrLbl);
-            this.pnlPO.Controls.Add(this.IngPORefreshBtn);
+            this.pnlPO.Controls.Add(this.label45);
+            this.pnlPO.Controls.Add(this.POEmpIDTxtBx);
             this.pnlPO.Controls.Add(this.label42);
+            this.pnlPO.Controls.Add(this.POIDTxtBx);
+            this.pnlPO.Controls.Add(this.label44);
+            this.pnlPO.Controls.Add(this.label43);
+            this.pnlPO.Controls.Add(this.IngPORefreshBtn);
             this.pnlPO.Controls.Add(this.IngPONameSearchTxtBx);
             this.pnlPO.Controls.Add(this.label41);
             this.pnlPO.Controls.Add(this.label40);
@@ -2924,16 +2932,6 @@
             this.IngPONameSearchTxtBx.Size = new System.Drawing.Size(100, 26);
             this.IngPONameSearchTxtBx.TabIndex = 4;
             // 
-            // label42
-            // 
-            this.label42.AutoSize = true;
-            this.label42.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.Location = new System.Drawing.Point(20, 280);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(354, 19);
-            this.label42.TabIndex = 5;
-            this.label42.Text = "**Click on the row of Ingredient data to View and Order";
-            // 
             // IngPORefreshBtn
             // 
             this.IngPORefreshBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2945,17 +2943,64 @@
             this.IngPORefreshBtn.UseVisualStyleBackColor = true;
             this.IngPORefreshBtn.Click += new System.EventHandler(this.IngPORefreshBtn_Click);
             // 
-            // IngPOErrLbl
+            // label43
             // 
-            this.IngPOErrLbl.AutoSize = true;
-            this.IngPOErrLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IngPOErrLbl.ForeColor = System.Drawing.Color.Red;
-            this.IngPOErrLbl.Location = new System.Drawing.Point(16, 330);
-            this.IngPOErrLbl.Name = "IngPOErrLbl";
-            this.IngPOErrLbl.Size = new System.Drawing.Size(17, 19);
-            this.IngPOErrLbl.TabIndex = 7;
-            this.IngPOErrLbl.Text = "*";
-            this.IngPOErrLbl.Visible = false;
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("AR JULIAN", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label43.Location = new System.Drawing.Point(644, 39);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(125, 19);
+            this.label43.TabIndex = 8;
+            this.label43.Text = "Purchase Order";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label44.Location = new System.Drawing.Point(644, 65);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(125, 19);
+            this.label44.TabIndex = 9;
+            this.label44.Text = "Purchase Order ID";
+            // 
+            // POIDTxtBx
+            // 
+            this.POIDTxtBx.Enabled = false;
+            this.POIDTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.POIDTxtBx.Location = new System.Drawing.Point(776, 61);
+            this.POIDTxtBx.Name = "POIDTxtBx";
+            this.POIDTxtBx.Size = new System.Drawing.Size(150, 26);
+            this.POIDTxtBx.TabIndex = 10;
+            this.POIDTxtBx.Text = "Auto-Generated";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.Location = new System.Drawing.Point(644, 98);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(89, 19);
+            this.label42.TabIndex = 11;
+            this.label42.Text = "Employee ID";
+            // 
+            // POEmpIDTxtBx
+            // 
+            this.POEmpIDTxtBx.Enabled = false;
+            this.POEmpIDTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.POEmpIDTxtBx.Location = new System.Drawing.Point(776, 94);
+            this.POEmpIDTxtBx.Name = "POEmpIDTxtBx";
+            this.POEmpIDTxtBx.Size = new System.Drawing.Size(150, 26);
+            this.POEmpIDTxtBx.TabIndex = 12;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label45.Location = new System.Drawing.Point(644, 128);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(79, 19);
+            this.label45.TabIndex = 13;
+            this.label45.Text = "Supplier ID";
             // 
             // Form1
             // 
@@ -3240,9 +3285,13 @@
         private System.Windows.Forms.Label label40;
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.TextBox IngPONameSearchTxtBx;
-        private System.Windows.Forms.Label IngPOErrLbl;
         private System.Windows.Forms.Button IngPORefreshBtn;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.TextBox POIDTxtBx;
+        private System.Windows.Forms.TextBox POEmpIDTxtBx;
         private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label45;
     }
 }
 
