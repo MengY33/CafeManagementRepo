@@ -86,6 +86,8 @@
     <Compile Include="DataAccess\IngredientDA.cs" />
     <Compile Include="DataAccess\LoginDA.cs" />
     <Compile Include="DataAccess\MenuDA.cs" />
+    <Compile Include="DataAccess\PurchaseOrderDA.cs" />
+    <Compile Include="DataAccess\PurchaseOrderDetailsDA.cs" />
     <Compile Include="DataAccess\SupplierDA.cs" />
     <Compile Include="Entity\Employee.cs" />
     <Compile Include="Entity\Food.cs" />
@@ -93,6 +95,8 @@
     <Compile Include="Entity\Login.cs" />
     <Compile Include="Entity\Menu.cs" />
     <Compile Include="Entity\MenuFood.cs" />
+    <Compile Include="Entity\PurchaseOrder.cs" />
+    <Compile Include="Entity\PurchaseOrderDetails.cs" />
     <Compile Include="Entity\Supplier.cs" />
     <Compile Include="View\FirstTimeLogin.cs">
       <SubType>Form</SubType>

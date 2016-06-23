@@ -49,6 +49,9 @@ namespace OfflineCafe
             IngPODataFill();
             IngPODtGrdVw.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
+            POSupplierDetailsDataFill();
+            POSupplierDtGrdVw.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
             EmpPositionCbBx.SelectedIndex = 0;
             EmpStatusCbBx.SelectedIndex = 0;
             EmpUpdateBtn.Enabled = false;
@@ -61,6 +64,9 @@ namespace OfflineCafe
             ReOrderQtyCbBx.SelectedIndex = 0;
             IngStatusCbBx.SelectedIndex = 1;
             IngUpdateBtn.Enabled = false;
+
+            IngPODtGrdVw.Enabled = false;
+            IngPODtGrdVw2.Enabled = false;
 
             //for (int i = 0; i < staticeList.Count; i++)
             //{
@@ -93,9 +99,13 @@ namespace OfflineCafe
             SuppDtGdVw.AutoGenerateColumns = false;
             IngDtGdVw.AutoGenerateColumns = false;
             IngPODtGrdVw.AutoGenerateColumns = false;
+            POSupplierDtGrdVw.AutoGenerateColumns = false;
 
             IngredientTimer.Interval = 1000;
             IngredientTimer.Start();
+
+            OrderDateTxtBx.Text = System.DateTime.Now.ToShortDateString();
+            OrderTimeTxtBx.Text = System.DateTime.Now.ToShortTimeString();
         }
         //insert menu data
         private void btnInsertMenu_Click(object sender, EventArgs e)
@@ -2657,6 +2667,132 @@ namespace OfflineCafe
         private void IngPORefreshBtn_Click(object sender, EventArgs e)
         {
             IngPODataFill();
+        }
+
+        private void POSupplierDetailsDataFill()
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
+
+            try
+            {
+                string sql = "SELECT SupplierID, SupplierName, CompanyName FROM Supplier WHERE SuppStatus = 'Supply';";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, con);
+
+                DataSet ds = new DataSet();
+
+                con.Open();
+
+                da.Fill(ds, "Supplier");
+                con.Close();
+
+                POSupplierDtGrdVw.DataSource = ds;
+                POSupplierDtGrdVw.DataMember = "Supplier";
+
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Supplier Purchase Order's data grid view cannot read the database!");
+                throw ex;
+            }
+        }
+
+        private void POSupplierDtGrdVw_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int i;
+            i = POSupplierDtGrdVw.SelectedCells[0].RowIndex;
+
+            POSupplierIDTxtBx.Text = POSupplierDtGrdVw.Rows[i].Cells[0].Value.ToString();
+            POSupplierNameTxtBx.Text = POSupplierDtGrdVw.Rows[i].Cells[1].Value.ToString();
+            POCompanyNameTxtBx.Text = POSupplierDtGrdVw.Rows[i].Cells[2].Value.ToString();
+        }
+
+        private void POResetBtn_Click(object sender, EventArgs e)
+        {
+            POSupplierIDTxtBx.Clear();
+            POSupplierNameTxtBx.Clear();
+            POCompanyNameTxtBx.Clear();
+        }
+
+        private void POSuppRefreshBtn_Click(object sender, EventArgs e)
+        {
+            POSupplierDetailsDataFill();
+        }
+
+        private void IngPODtGrdVw_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            IngPORefreshBtn.Enabled = false;
+
+            if (e.ColumnIndex == IngPOCheckBx.Index)
+            {
+                var row = IngPODtGrdVw.Rows[e.RowIndex];
+                string ingID = row.Cells["IngredientID"].Value.ToString();
+                string ingName = row.Cells["IngredientName"].Value.ToString();
+                string ingQty = row.Cells["Quantity"].Value.ToString();
+                string reorderlvl = row.Cells["ReOrderLevel"].Value.ToString();
+                string reorderqty = row.Cells["ReOrderQuantity"].Value.ToString();
+
+                IngPODtGrdVw2.Rows.Add(true, ingID, ingName, ingQty, reorderlvl, reorderqty);
+                IngPODtGrdVw.Rows.Remove(row);
+            } 
+        }
+
+        private void IngPODtGrdVw2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            IngPORefreshBtn.Enabled = true;
+
+            if(e.ColumnIndex == IngPOCheckBx2.Index)
+            {
+                var row = IngPODtGrdVw2.Rows[e.RowIndex];
+
+                IngPODtGrdVw2.Rows.Remove(row);
+            }
+        }
+
+        private void POInsertBtn_Click_1(object sender, EventArgs e)
+        {
+            PurchaseOrder po = new PurchaseOrder();
+            PurchaseOrderDA poDA = new PurchaseOrderDA();
+
+            po.POEmployeeID = POEmpIDTxtBx.Text;
+            po.POOrderDate = OrderDateTxtBx.Text;
+            po.POOrderTime = OrderTimeTxtBx.Text;
+            po.POSupplierID = POSupplierIDTxtBx.Text;
+
+            poDA.InsertPurchaseOrderRecord(po);
+            poDA.POIDRetrieve(po);
+
+            IngPODtGrdVw.Enabled = true;
+            IngPODtGrdVw2.Enabled = true;
+
+            if (po.InsertStatus.Equals("Success"))
+            {
+                MessageBox.Show("New purchase order record has inserted successfully!\n\nNext, please select your ordered ingredients.");
+            }
+            else
+            {
+                MessageBox.Show("Failed to insert purchase order record!");
+            }
+        }
+
+        private void POConfirmBtn_Click(object sender, EventArgs e)
+        {
+            PurchaseOrder po = new PurchaseOrder();
+            
+
+            List<PurchaseOrderDetails> podList = new List<PurchaseOrderDetails>();
+
+            for(int i = 0; i < IngPODtGrdVw2.RowCount; i++)
+            {
+                PurchaseOrderDetails pod = new PurchaseOrderDetails();
+
+                pod.PurchaseOrderID = po.POID;
+                pod.IngredientID = IngPODtGrdVw2.Rows[i].Cells["IngredientID2"].Value.ToString();
+                pod.PurchaseQuantity = int.Parse(IngPODtGrdVw2.Rows[i].Cells["ReOrderQuantity2"].Value.ToString());
+
+                podList.Add(pod);
+            }
         }
     }    
 }
