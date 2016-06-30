@@ -32,7 +32,10 @@ namespace OfflineCafe.DataAccess
                 emp.InsertStatus = "Failed";
                 throw ex;
             }
-            con.Close();
+            finally
+            {
+                con.Close();
+            }
         }
 
         public void EmployeeUpdateRecord(Employee em)

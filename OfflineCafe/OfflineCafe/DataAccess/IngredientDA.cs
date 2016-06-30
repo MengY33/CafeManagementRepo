@@ -18,7 +18,7 @@ namespace OfflineCafe.DataAccess
 
             try
             {
-                string sql = "INSERT INTO Ingredient VALUES ('"+ing.IngredientName+"', '"+ing.IngredientDesc+"', '"+ing.IngredientQty+"', '"+ing.Unit+"', '"+ing.StorageArea+"', '"+ing.ExpiryDate+"', '"+ing.ReOrderLevel+"', '"+ing.ReOrderQty+"', '"+ing.IngredientStatus+"')";
+                string sql = "INSERT INTO Ingredient VALUES ('"+ing.IngredientName+"', '"+ing.IngredientDesc+"', '"+ing.IngredientQty+"', '"+ing.Unit+"', '"+ing.StorageArea+"', '"+ing.ReOrderLevel+"', '"+ing.ReOrderQty+"', '"+ing.IngredientStatus+"')";
 
                 SqlCommand cmd = new SqlCommand(sql, con);
 
@@ -42,7 +42,7 @@ namespace OfflineCafe.DataAccess
 
             try
             {
-                string sql = "UPDATE Ingredient SET IngredientName = '"+ing.IngredientName+"', IngredientDesc = '"+ing.IngredientDesc+"', StorageArea = '"+ing.StorageArea+"', ExpiryDate = '"+ing.ExpiryDate+"', ReOrderLevel = '"+ing.ReOrderLevel+"', ReOrderQuantity = '"+ing.ReOrderQty+"', IngredientStatus = '"+ing.IngredientStatus+"' WHERE IngredientID = '"+ing.IngredientID+"'";
+                string sql = "UPDATE Ingredient SET IngredientName = '"+ing.IngredientName+"', IngredientDesc = '"+ing.IngredientDesc+"', Unit = '"+ing.Unit+"' , StorageArea = '"+ing.StorageArea+"', ReOrderLevel = '"+ing.ReOrderLevel+"', ReOrderQuantity = '"+ing.ReOrderQty+"', IngredientStatus = '"+ing.IngredientStatus+"' WHERE IngredientID = '"+ing.IngredientID+"'";
 
                 SqlCommand cmd = new SqlCommand(sql, con);
 
@@ -67,7 +67,7 @@ namespace OfflineCafe.DataAccess
 
             try
             {
-                string sql = "SELECT IngredientName FROM Ingredient WHERE Quantity <= ReOrderLevel AND IngredientStatus = 'Available';";
+                string sql = "SELECT IngredientName FROM Ingredient WHERE Quantity < ReOrderLevel AND IngredientStatus = 'Available';";
                 SqlCommand cmd = new SqlCommand(sql, con);
 
                 con.Open();

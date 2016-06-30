@@ -14,7 +14,6 @@ namespace OfflineCafe.Entity
         public int IngredientQty;
         public string Unit;
         public string StorageArea;
-        public string ExpiryDate;
         public int ReOrderLevel;
         public int ReOrderQty;
         public string IngredientStatus;

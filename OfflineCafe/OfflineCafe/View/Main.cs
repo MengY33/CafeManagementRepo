@@ -59,10 +59,10 @@ namespace OfflineCafe
             SuppUpdateBtn.Enabled = false;
             UnitCbBx.SelectedIndex = 0;
             StorageAreaCbBx.SelectedIndex = 0;
-            ExpiryDatePicker.Value = System.DateTime.Now;
+            ExpiryDateTimePicker.Value = System.DateTime.Now;
+            UnitCbBx.SelectedIndex = 0;
             ReOrderLevelCbBx.SelectedIndex = 0;
-            ReOrderQtyCbBx.SelectedIndex = 0;
-            IngStatusCbBx.SelectedIndex = 1;
+            IngStatusCbBx.SelectedIndex = 0;
             IngUpdateBtn.Enabled = false;
 
             IngPODtGrdVw.Enabled = false;
@@ -99,6 +99,7 @@ namespace OfflineCafe
             SuppDtGdVw.AutoGenerateColumns = false;
             IngDtGdVw.AutoGenerateColumns = false;
             IngPODtGrdVw.AutoGenerateColumns = false;
+            //IngPODtGrdVw2.Auto
             POSupplierDtGrdVw.AutoGenerateColumns = false;
 
             IngredientTimer.Interval = 1000;
@@ -751,6 +752,9 @@ namespace OfflineCafe
 
         private void EmpInsertBtn_Click(object sender, EventArgs e)
         {
+            Employee emp = new Employee();
+            EmployeeDA empDA = new EmployeeDA();
+
             String p1 = @"^[a-z\s/]*$";
             String p2 = @"^\d*$";
             String p3 = @"[0-9]{2}[23456789]{1}\d{3}-\d{2}-\d{4}";      //check the month from the IC Number, make sure the first digit of the month is not starts from 2,3,4,5,6,7,8,9
@@ -985,9 +989,6 @@ namespace OfflineCafe
                                             }
                                             else
                                             {
-                                                Employee emp = new Employee();
-                                                EmployeeDA empDA = new EmployeeDA();
-
                                                 emp.EmployeeID = EmpIDDTxtBx.Text;
                                                 emp.EmployeeName = EmpNameTxtBx.Text;
                                                 emp.ICNumber = EmpICTxtBx.Text;
@@ -1016,7 +1017,7 @@ namespace OfflineCafe
                                                 emp.CurrentStatus = EmpStatusCbBx.SelectedItem.ToString();
 
                                                 empDA.EmployeeInsertRecord(emp);
-
+                                            }
                                                 if (emp.InsertStatus == "Success")
                                                 {
                                                     EmpIDDTxtBx.Text = "Auto-Generated";
@@ -1063,11 +1064,10 @@ namespace OfflineCafe
                                                         MessageBox.Show(ex.ToString());
                                                     }
                                                 }
-                                                else if (emp.InsertStatus == "Failed")
+                                                else
                                                 {
                                                     MessageBox.Show("Failed to insert employee record!");
                                                 }
-                                            }
                                         }
                                     }
                                 }
@@ -1824,7 +1824,7 @@ namespace OfflineCafe
 
                                                 SuppErrLbl.Visible = false;
                                             }
-                                            else if(supp.InsertStatus == "Failed")
+                                            else
                                             {
                                                 MessageBox.Show("Failed to insert supplier record!");
                                             }
@@ -2247,7 +2247,10 @@ namespace OfflineCafe
 
         private void ItmInsertBtn_Click(object sender, EventArgs e)
         {
-            if(IngNameTxtBx.Text == String.Empty || IngDescTxtBx.Text == String.Empty || StorageAreaCbBx.SelectedIndex == 0 || ReOrderLevelCbBx.SelectedIndex == 0 || ReOrderQtyCbBx.SelectedIndex == 0)
+            String p1 = @"^\d*$";
+            Regex rgx1 = new Regex(p1);
+
+            if(IngNameTxtBx.Text == String.Empty || IngDescTxtBx.Text == String.Empty || StorageAreaCbBx.SelectedIndex == 0 || UnitCbBx.SelectedIndex == 0 || ReOrderLevelCbBx.SelectedIndex == 0 || ReOrderQtyTxtBx.Text == String.Empty || IngStatusCbBx.SelectedIndex == 0)
             {
                 IngErrLbl.Visible = true;
                 IngErrLbl.Text = "*Please make sure all the fields are completed.";
@@ -2268,46 +2271,47 @@ namespace OfflineCafe
                     }
                     else
                     {
-                        if (!(ExpiryDatePicker.Value >= System.DateTime.Today))
-                        {
-                            IngErrLbl.Visible = true;
-                            IngErrLbl.Text = "*Invalid date! \r\n\r\n*Please make sure the Expiry Date is greater than or equals to today date.";
-                        }
-                        else
-                        {
-                            Ingredient ing = new Ingredient();
-                            IngredientDA ingDA = new IngredientDA();
-
-                            ing.IngredientName = IngNameTxtBx.Text;
-                            ing.IngredientDesc = IngDescTxtBx.Text;
-                            ing.IngredientQty = int.Parse(IngQuantityTxtBx.Text);
-                            ing.Unit = UnitCbBx.SelectedItem.ToString();
-                            ing.StorageArea = StorageAreaCbBx.SelectedItem.ToString();
-                            //ing.ExpiryDate = ExpiryDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture);
-                            ing.ExpiryDate = ExpiryDatePicker.Value.ToShortDateString();
-                            ing.ReOrderLevel = int.Parse(ReOrderLevelCbBx.SelectedItem.ToString());
-                            ing.ReOrderQty = int.Parse(ReOrderQtyCbBx.SelectedItem.ToString());
-                            ing.IngredientStatus = IngStatusCbBx.SelectedItem.ToString();
-
-                            ingDA.InsertIngredientRecord(ing);
-
-                            if (ing.InsertStatus == "Success")
+                            if (!rgx1.Match(ReOrderQtyTxtBx.Text).Success)
                             {
-                                MessageBox.Show("New ingredient record has inserted successfully!");
-
-                                IngNameTxtBx.Clear();
-                                IngDescTxtBx.Clear();
-                                StorageAreaCbBx.SelectedIndex = 0;
-                                ExpiryDatePicker.Value = DateTime.Now;
-                                ReOrderLevelCbBx.SelectedIndex = 0;
-                                ReOrderQtyCbBx.SelectedIndex = 0;
-
-                                IngErrLbl.Visible = false;
+                                IngErrLbl.Visible = true;
+                                IngErrLbl.Text = "*Please make sure the Re-Order Quantity is an integer value.";
                             }
-                            else if (ing.InsertStatus == "Failed")
-                            {
-                                MessageBox.Show("Failed to insert ingredient record!");
-                            }
+                            else {
+                                Ingredient ing = new Ingredient();
+                                IngredientDA ingDA = new IngredientDA();
+
+                                ing.IngredientName = IngNameTxtBx.Text;
+                                ing.IngredientDesc = IngDescTxtBx.Text;
+                                ing.IngredientQty = int.Parse(IngQuantityTxtBx.Text);
+                                ing.Unit = UnitCbBx.SelectedItem.ToString();
+                                ing.StorageArea = StorageAreaCbBx.SelectedItem.ToString();
+                                //ing.ExpiryDate = ExpiryDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture);
+                                //ing.ExpiryDate = ExpiryDatePicker.Value.ToShortDateString();
+                                ing.ReOrderLevel = int.Parse(ReOrderLevelCbBx.SelectedItem.ToString());
+                                ing.ReOrderQty = int.Parse(ReOrderQtyTxtBx.Text);
+                                ing.IngredientStatus = IngStatusCbBx.SelectedItem.ToString();
+
+                                ingDA.InsertIngredientRecord(ing);
+
+                                if (ing.InsertStatus == "Success")
+                                {
+                                    MessageBox.Show("New ingredient record has inserted successfully!");
+
+                                    IngNameTxtBx.Clear();
+                                    IngDescTxtBx.Clear();
+                                    UnitCbBx.SelectedIndex = 0;
+                                    StorageAreaCbBx.SelectedIndex = 0;
+                                    //ExpiryDatePicker.Value = DateTime.Now;
+                                    ReOrderLevelCbBx.SelectedIndex = 0;
+                                    ReOrderQtyTxtBx.Clear();
+                                    IngStatusCbBx.SelectedIndex = 0;
+
+                                    IngErrLbl.Visible = false;
+                                }
+                                else if (ing.InsertStatus == "Failed")
+                                {
+                                    MessageBox.Show("Failed to insert ingredient record!");
+                                }
                         }
                     }
                 }
@@ -2321,7 +2325,7 @@ namespace OfflineCafe
 
             try
             {
-                string sql = "SELECT IngredientID, IngredientName, IngredientDesc, Quantity, Unit, StorageArea, ExpiryDate, ReOrderLevel, ReOrderQuantity, IngredientStatus FROM Ingredient";
+                string sql = "SELECT IngredientID, IngredientName, IngredientDesc, Quantity, Unit, StorageArea, ReOrderLevel, ReOrderQuantity, IngredientStatus FROM Ingredient";
 
                 SqlDataAdapter da = new SqlDataAdapter(sql, con);
 
@@ -2350,11 +2354,9 @@ namespace OfflineCafe
             IngQuantityTxtBx.Text = "0";
             UnitCbBx.SelectedIndex = 0;
             StorageAreaCbBx.SelectedIndex = 0;
-            ExpiryDatePicker.Value = System.DateTime.Now;
             ReOrderLevelCbBx.SelectedIndex = 0;
-            ReOrderQtyCbBx.SelectedIndex = 0;
-            IngStatusCbBx.SelectedIndex = 1;
-            IngStatusCbBx.Enabled = false;
+            ReOrderQtyTxtBx.Clear();
+            IngStatusCbBx.SelectedIndex = 0;
 
             IngInsertBtn.Enabled = true;
             IngUpdateBtn.Enabled = false;
@@ -2408,10 +2410,7 @@ namespace OfflineCafe
                 StorageAreaCbBx.SelectedIndex = 3;
             }
 
-            string ed = IngDtGdVw.Rows[i].Cells[6].Value.ToString();
-            ExpiryDatePicker.Value = DateTime.Parse(ed);
-
-            string rol = IngDtGdVw.Rows[i].Cells[7].Value.ToString();
+            string rol = IngDtGdVw.Rows[i].Cells[6].Value.ToString();
 
             if (rol.Equals("5"))
             {
@@ -2434,38 +2433,17 @@ namespace OfflineCafe
                 ReOrderLevelCbBx.SelectedIndex = 5;
             }
 
-            string roq = IngDtGdVw.Rows[i].Cells[8].Value.ToString();
+            ReOrderQtyTxtBx.Text = IngDtGdVw.Rows[i].Cells[7].Value.ToString();
 
-            if (roq.Equals("10"))
-            {
-                ReOrderQtyCbBx.SelectedIndex = 1;
-            }
-            else if (roq.Equals("20"))
-            {
-                ReOrderQtyCbBx.SelectedIndex = 2;
-            }
-            else if (roq.Equals("30"))
-            {
-                ReOrderQtyCbBx.SelectedIndex = 3;
-            }
-            else if (roq.Equals("40"))
-            {
-                ReOrderQtyCbBx.SelectedIndex = 4;
-            }
-            else if (roq.Equals("50"))
-            {
-                ReOrderQtyCbBx.SelectedIndex = 5;
-            }
-
-            string s = IngDtGdVw.Rows[i].Cells[9].Value.ToString();
+            string s = IngDtGdVw.Rows[i].Cells[8].Value.ToString();
 
             if (s.Equals("Available"))
             {
-                IngStatusCbBx.SelectedIndex = 0;
+                IngStatusCbBx.SelectedIndex = 1;
             }
             else if (s.Equals("Not Available"))
             {
-                IngStatusCbBx.SelectedIndex = 1;
+                IngStatusCbBx.SelectedIndex = 2;
             }
         }
 
@@ -2476,7 +2454,7 @@ namespace OfflineCafe
 
         private void IngUpdateBtn_Click(object sender, EventArgs e)
         {
-            if (IngNameTxtBx.Text == String.Empty || IngDescTxtBx.Text == String.Empty ||StorageAreaCbBx.SelectedIndex == 0 || ReOrderLevelCbBx.SelectedIndex == 0 || ReOrderQtyCbBx.SelectedIndex == 0)
+            if (IngNameTxtBx.Text == String.Empty || IngDescTxtBx.Text == String.Empty || StorageAreaCbBx.SelectedIndex == 0 || UnitCbBx.SelectedIndex == 0 || ReOrderLevelCbBx.SelectedIndex == 0 || ReOrderQtyTxtBx.Text == String.Empty || IngStatusCbBx.SelectedIndex == 0)
             {
                 IngErrLbl.Visible = true;
                 IngErrLbl.Text = "*Please make sure all the fields are completed.";
@@ -2503,11 +2481,12 @@ namespace OfflineCafe
                             ing.IngredientID = IngIDTxtBx.Text;
                             ing.IngredientName = IngNameTxtBx.Text;
                             ing.IngredientDesc = IngDescTxtBx.Text;
+                            ing.Unit = UnitCbBx.SelectedItem.ToString();
                             ing.StorageArea = StorageAreaCbBx.SelectedItem.ToString();
                             //ing.ExpiryDate = ExpiryDatePicker.Value.ToString("yyyy-MM-dd HH:mm:ss.fff", System.Globalization.CultureInfo.InvariantCulture);
-                            ing.ExpiryDate = ExpiryDatePicker.Value.ToShortDateString();
+                            //ing.ExpiryDate = ExpiryDatePicker.Value.ToShortDateString();
                             ing.ReOrderLevel = int.Parse(ReOrderLevelCbBx.SelectedItem.ToString());
-                            ing.ReOrderQty = int.Parse(ReOrderQtyCbBx.SelectedItem.ToString());
+                            ing.ReOrderQty = int.Parse(ReOrderQtyTxtBx.Text);
                             ing.IngredientStatus = IngStatusCbBx.SelectedItem.ToString();
 
                             ingDA.UpdateIngredientRecord(ing);
@@ -2522,10 +2501,10 @@ namespace OfflineCafe
                                 IngQuantityTxtBx.Text = "0";
                                 UnitCbBx.SelectedIndex = 0;
                                 StorageAreaCbBx.SelectedIndex = 0;
-                                ExpiryDatePicker.Value = System.DateTime.Now;
+                                //ExpiryDatePicker.Value = System.DateTime.Now;
                                 ReOrderLevelCbBx.SelectedIndex = 0;
-                                ReOrderQtyCbBx.SelectedIndex = 0;
-                                IngStatusCbBx.SelectedIndex = 1;
+                                ReOrderQtyTxtBx.Clear();
+                                IngStatusCbBx.SelectedIndex = 0;
 
                                 IngErrLbl.Visible = false;
                                 IngInsertBtn.Enabled = true;
@@ -2609,7 +2588,7 @@ namespace OfflineCafe
                 IngredientNotifyIcn.BalloonTipTitle = "Not Enough Ingredient!";
                 IngredientNotifyIcn.BalloonTipText = "Please click below The Coffee Bean icon to get more details.";
                 IngredientNotifyIcn.ShowBalloonTip(100);
-                IngredientTimer.Interval = 70000;
+                IngredientTimer.Interval = 120000;
                 //IngredientTimer.Stop();
             }
         }
@@ -2643,7 +2622,7 @@ namespace OfflineCafe
 
             try
             {
-                string sql = "SELECT IngredientID, IngredientName, Quantity, ReOrderLevel, ReOrderQuantity FROM Ingredient WHERE Quantity <= ReOrderLevel AND IngredientStatus = 'Available';";
+                string sql = "SELECT IngredientID, IngredientName, Quantity, Unit, ReOrderLevel, ReOrderQuantity FROM Ingredient WHERE Quantity < ReOrderLevel AND IngredientStatus = 'Available';";
 
                 SqlDataAdapter da = new SqlDataAdapter(sql, con);
 
@@ -2730,10 +2709,11 @@ namespace OfflineCafe
                 string ingID = row.Cells["IngredientID"].Value.ToString();
                 string ingName = row.Cells["IngredientName"].Value.ToString();
                 string ingQty = row.Cells["Quantity"].Value.ToString();
+                string unt = row.Cells["Unit"].Value.ToString();
                 string reorderlvl = row.Cells["ReOrderLevel"].Value.ToString();
                 string reorderqty = row.Cells["ReOrderQuantity"].Value.ToString();
 
-                IngPODtGrdVw2.Rows.Add(true, ingID, ingName, ingQty, reorderlvl, reorderqty);
+                IngPODtGrdVw2.Rows.Add(true, ingID, ingName, ingQty, unt, reorderlvl, reorderqty);
                 IngPODtGrdVw.Rows.Remove(row);
             } 
         }
@@ -2755,19 +2735,31 @@ namespace OfflineCafe
             PurchaseOrder po = new PurchaseOrder();
             PurchaseOrderDA poDA = new PurchaseOrderDA();
 
-            po.POEmployeeID = POEmpIDTxtBx.Text;
-            po.POOrderDate = OrderDateTxtBx.Text;
-            po.POOrderTime = OrderTimeTxtBx.Text;
-            po.POSupplierID = POSupplierIDTxtBx.Text;
+            if (POSupplierIDTxtBx.Text == String.Empty || POSupplierNameTxtBx.Text == String.Empty || POCompanyNameTxtBx.Text == String.Empty)
+            {
+                IngPOErrLbl.Visible = true;
+                IngPOErrLbl.Text = "*Please make sure all the fields are completed.";
+            }
+            else
+            {
+                    po.POEmployeeID = POEmpIDTxtBx.Text;
+                    po.POOrderDate = OrderDateTxtBx.Text;
+                    po.POOrderTime = OrderTimeTxtBx.Text;
+                    po.POSupplierID = POSupplierIDTxtBx.Text;
 
-            poDA.InsertPurchaseOrderRecord(po);
-            poDA.POIDRetrieve(po);
+                    poDA.InsertPurchaseOrderRecord(po);
 
-            IngPODtGrdVw.Enabled = true;
-            IngPODtGrdVw2.Enabled = true;
+                    IngPODtGrdVw.Enabled = true;
+                    IngPODtGrdVw2.Enabled = true;
+
+                    PurchaseOrderDA p = new PurchaseOrderDA();
+                    string pp = p.POIDRetrieve(po);
+                    POIDTxtBx.Text = pp;
+                }
 
             if (po.InsertStatus.Equals("Success"))
             {
+                IngPOErrLbl.Visible = false;
                 MessageBox.Show("New purchase order record has inserted successfully!\n\nNext, please select your ordered ingredients.");
             }
             else
@@ -2778,20 +2770,93 @@ namespace OfflineCafe
 
         private void POConfirmBtn_Click(object sender, EventArgs e)
         {
-            PurchaseOrder po = new PurchaseOrder();
-            
+            PurchaseOrderDetails pod = new PurchaseOrderDetails();
+            PurchaseOrderDetailsDA podDA = new PurchaseOrderDetailsDA();
 
             List<PurchaseOrderDetails> podList = new List<PurchaseOrderDetails>();
 
-            for(int i = 0; i < IngPODtGrdVw2.RowCount; i++)
+            if (!(ExpiryDateTimePicker.Value > System.DateTime.Today))
             {
-                PurchaseOrderDetails pod = new PurchaseOrderDetails();
+                IngPOErrLbl.Visible = true;
+                IngPOErrLbl.Text = "*Invalid date! \r\n\r\n*Please make sure the Expiry Date is greater than or equals to today date.";
+            }
+            else
+            {
+                if (IngPODtGrdVw2.RowCount == 0)
+                {
+                    IngPOErrLbl.Visible = true;
+                    IngPOErrLbl.Text = "*Please select your ordered ingredients.";
+                }
+                else
+                {
+                    for (int i = 0; i <IngPODtGrdVw2.RowCount; i++)
+                    {
+                        pod.PurchaseOrderID = POIDTxtBx.Text;
+                        pod.IngredientID = IngPODtGrdVw2.Rows[i].Cells["IngredientID2"].Value.ToString();
+                     
+                        pod.PurchaseQuantity = int.Parse(IngPODtGrdVw2.Rows[i].Cells["ReOrderQuantity2"].Value.ToString());
 
-                pod.PurchaseOrderID = po.POID;
-                pod.IngredientID = IngPODtGrdVw2.Rows[i].Cells["IngredientID2"].Value.ToString();
-                pod.PurchaseQuantity = int.Parse(IngPODtGrdVw2.Rows[i].Cells["ReOrderQuantity2"].Value.ToString());
+                        pod.ExpiryDate = ExpiryDateTimePicker.Value.ToShortDateString();
 
-                podList.Add(pod);
+                        podList.Add(pod);
+                        podDA.InsertPurchaseOrderDetails(podList);
+                        podDA.IngQuantityIncrease(podList);
+                    }
+
+                    POIDTxtBx.Text = "Auto-Generated";
+                    POSupplierIDTxtBx.Clear();
+                    POSupplierNameTxtBx.Clear();
+                    POCompanyNameTxtBx.Clear();
+                    ExpiryDateTimePicker.Value = System.DateTime.Now;
+                    IngPOErrLbl.Visible = false;
+
+                    List<DataGridViewRow> toDeleteList = new List<DataGridViewRow>();
+
+                    foreach (DataGridViewRow row in IngPODtGrdVw2.Rows)
+                    {
+                        bool s = Convert.ToBoolean(row.Cells[0].Value);
+
+                        if (s == true)
+                        {
+                            toDeleteList.Add(row);
+                        }
+                    }
+
+                    foreach (DataGridViewRow row in toDeleteList)
+                    {
+                        IngPODtGrdVw2.Rows.Remove(row);
+                    }
+                    IngPORefreshBtn.Enabled = true;
+                }
+            }
+        }
+
+        private void IngPONameSearchTxtBx_TextChanged(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
+
+            try
+            {
+                string sql = "SELECT * FROM Ingredient WHERE IngredientName like '" + IngPONameSearchTxtBx.Text + "%' AND Quantity < ReOrderLevel AND IngredientStatus = 'Available';";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, con);
+
+                DataSet ds = new DataSet();
+
+                con.Open();
+
+                da.Fill(ds, "Ingredient");
+
+                con.Close();
+
+                IngPODtGrdVw.DataSource = ds;
+                IngPODtGrdVw.DataMember = "Ingredient";
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Can't find the Ingredient Name!");
+                throw ex;
             }
         }
     }    

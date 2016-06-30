@@ -37,11 +37,12 @@ namespace OfflineCafe.DataAccess
             }
         }
 
-        public void POIDRetrieve(PurchaseOrder pOrder)
+        public string POIDRetrieve(PurchaseOrder pOrder)
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
             PurchaseOrder po = new PurchaseOrder();
+            string p = "";
 
             try
             {
@@ -53,8 +54,9 @@ namespace OfflineCafe.DataAccess
 
                 while (dr.Read())
                 {
-                    po.POID = dr["PurchaseOrderID"].ToString();
+                    p = dr["PurchaseOrderID"].ToString();
                 }
+                return p;
             }
             catch(SqlException ex)
             {
