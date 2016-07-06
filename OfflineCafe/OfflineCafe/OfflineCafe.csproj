@@ -81,7 +81,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CafeManagementDataSet2.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\AnnouncementDA.cs" />
+    <Compile Include="DataAccess\EmployeeAnnouncementDA.cs" />
     <Compile Include="DataAccess\EmployeeDA.cs" />
+    <Compile Include="DataAccess\ExpiredIngredientDetailsDA.cs" />
     <Compile Include="DataAccess\FoodDA.cs" />
     <Compile Include="DataAccess\IngredientDA.cs" />
     <Compile Include="DataAccess\LoginDA.cs" />
@@ -89,10 +92,14 @@
     <Compile Include="DataAccess\PurchaseOrderDA.cs" />
     <Compile Include="DataAccess\PurchaseOrderDetailsDA.cs" />
     <Compile Include="DataAccess\SupplierDA.cs" />
+    <Compile Include="Entity\Announcement.cs" />
     <Compile Include="Entity\Employee.cs" />
+    <Compile Include="Entity\EmployeeAnnouncement.cs" />
+    <Compile Include="Entity\ExpiredIngredientDetails.cs" />
     <Compile Include="Entity\Food.cs" />
     <Compile Include="Entity\Ingredient.cs" />
     <Compile Include="Entity\Login.cs" />
+    <Compile Include="Entity\Member.cs" />
     <Compile Include="Entity\Menu.cs" />
     <Compile Include="Entity\MenuFood.cs" />
     <Compile Include="Entity\PurchaseOrder.cs" />

@@ -9,76 +9,21 @@ using System.Threading.Tasks;
 
 namespace OfflineCafe.DataAccess
 {
-    class IngredientDA
+    class AnnouncementDA
     {
-        public void InsertIngredientRecord(Ingredient ing)
+        public void InsertAnnouncementRecord(Announcement Ann)
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
 
             try
             {
-                string sql = "INSERT INTO Ingredient VALUES ('"+ing.IngredientName+"', '"+ing.IngredientDesc+"', '"+ing.IngredientQty+"', '"+ing.Unit+"', '"+ing.StorageArea+"', '"+ing.ReOrderLevel+"', '"+ing.ReOrderQty+"', '"+ing.IngredientStatus+"')";
+                string sql = "INSERT INTO Announcement VALUES ('"+Ann.Title+"', '"+Ann.Content+"', '"+Ann.PromoEndDate+"')";
 
                 SqlCommand cmd = new SqlCommand(sql, con);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
-
-                ing.InsertStatus = "Success";
-            }
-            catch(SqlException ex)
-            {
-                ing.InsertStatus = "Failed";
-                throw ex;
-            }
-            con.Close();
-        }
-
-        public void UpdateIngredientRecord(Ingredient ing)
-        {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
-
-            try
-            {
-                string sql = "UPDATE Ingredient SET IngredientName = '"+ing.IngredientName+"', IngredientDesc = '"+ing.IngredientDesc+"', Unit = '"+ing.Unit+"' , StorageArea = '"+ing.StorageArea+"', ReOrderLevel = '"+ing.ReOrderLevel+"', ReOrderQuantity = '"+ing.ReOrderQty+"', IngredientStatus = '"+ing.IngredientStatus+"' WHERE IngredientID = '"+ing.IngredientID+"'";
-
-                SqlCommand cmd = new SqlCommand(sql, con);
-
-                con.Open();
-                cmd.ExecuteNonQuery();
-
-                ing.UpdateStatus = "Success";
-            }
-            catch(SqlException ex)
-            {
-                ing.UpdateStatus = "Failed";
-                throw ex;
-            }
-            con.Close();
-        }
-
-        public bool IngredientQtyCheck()
-        {
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
-            Ingredient i = new Ingredient();
-
-            try
-            {
-                string sql = "SELECT IngredientName FROM Ingredient WHERE Quantity < ReOrderLevel AND IngredientStatus = 'Available';";
-                SqlCommand cmd = new SqlCommand(sql, con);
-
-                con.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-
-                while(dr.Read())
-                {
-                    i.IngredientNameRetrieved = dr["IngredientName"].ToString();
-                    return true;
-                }
-                return false;
             }
             catch(SqlException ex)
             {
@@ -90,15 +35,71 @@ namespace OfflineCafe.DataAccess
             }
         }
 
-        public bool ExpiredIngredientCheck()
+        public string AnnounceIDRetrieve(Announcement A)
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
+            string p = "";
+
+            try
+            {
+                string sql = "SELECT AnnouncementID FROM Announcement WHERE Title = '"+A.Title+"' AND AnnouncementContent = '"+A.Content+"' AND PromoEndDate = '"+A.PromoEndDate+"'";
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    p = dr["AnnouncementID"].ToString();
+                }
+                return p;
+            }
+            catch(SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void UpdateAnnouncementRecord(Announcement Ann)
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
 
             try
             {
-                string sql = "SELECT IngredientID, ExpiryDate FROM PurchaseOrderDetails WHERE CONVERT(date, ExpiryDate, 105) < CONVERT(date, GETDATE(), 105) AND ExpiredStatus = 'Uncheck';";
+                string sql = "UPDATE Announcement SET Title = '"+Ann.Title+"', AnnouncementContent = '"+Ann.Content+"', PromoEndDate = '"+Ann.PromoEndDate+"' WHERE AnnouncementID = '"+Ann.AnnouncementID+"'";
 
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+
+                Ann.UpdateStatus = "Success";
+            }
+            catch(SqlException ex)
+            {
+                Ann.UpdateStatus = "Failed";
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public bool ExpiredAnnouncementCheck()
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
+
+            try
+            {
+                string sql = "Select PromoEndDate FROM Announcement WHERE CONVERT(date, PromoEndDate, 105) < CONVERT(date, GETDATE(), 105)";
                 SqlCommand cmd = new SqlCommand(sql, con);
 
                 con.Open();
@@ -114,25 +115,55 @@ namespace OfflineCafe.DataAccess
             {
                 throw ex;
             }
-            finally
-            {
-                con.Close();
-            }
         }
 
-        public void IngredientQuantityUpdate(ExpiredIngredientDetails eid)
+        public void DeleteExpiredAnnouncement(Announcement Ann)
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
 
             try
             {
-                string sql = "UPDATE Ingredient SET Quantity = Quantity - '"+eid.ExpiredAmount+"' WHERE IngredientID = '"+eid.ExpiredIngredientID+"'";
-
+                string sql = "DELETE FROM Announcement WHERE AnnouncementID = '"+Ann.AnnouncementID+"'";
                 SqlCommand cmd = new SqlCommand(sql, con);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
+
+                Ann.DeleteStatus = "Success";
+            }
+            catch(SqlException ex)
+            {
+                Ann.DeleteStatus = "Failed";
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public List <string> RetrieveMemberEmails()
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
+
+            List<string> EmailList = new List<string>();
+
+            try
+            {
+                string sql = "SELECT Email FROM Member WHERE Status = 'Available';";
+                SqlCommand cmd = new SqlCommand(sql, con);
+
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                while(dr.Read())
+                {
+                    EmailList.Add(Convert.ToString(dr["Email"]));
+
+                }
+                return EmailList;
             }
             catch(SqlException ex)
             {

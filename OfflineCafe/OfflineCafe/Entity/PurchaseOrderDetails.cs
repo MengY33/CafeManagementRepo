@@ -12,5 +12,6 @@ namespace OfflineCafe.Entity
         public string IngredientID;
         public int PurchaseQuantity;
         public string ExpiryDate;
+        public string ExpiredStatus = "";
     }
 }

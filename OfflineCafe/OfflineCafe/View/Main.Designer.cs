@@ -139,8 +139,6 @@
             this.EmpEmailTxtBx = new System.Windows.Forms.TextBox();
             this.EmpHandphoneNoTxtBx = new System.Windows.Forms.TextBox();
             this.EmpHomeNoTxtBx = new System.Windows.Forms.TextBox();
-            this.EmpAddress2TxtBx = new System.Windows.Forms.TextBox();
-            this.EmpAddress1TxtBx = new System.Windows.Forms.TextBox();
             this.EmpFemaleRdBtn = new System.Windows.Forms.RadioButton();
             this.EmpMaleRdBtn = new System.Windows.Forms.RadioButton();
             this.EmpICTxtBx = new System.Windows.Forms.TextBox();
@@ -187,9 +185,7 @@
             this.CmpyFaxNumberTxtBx = new System.Windows.Forms.TextBox();
             this.CmpyNumberLbl = new System.Windows.Forms.Label();
             this.CmpyNumberTxtBx = new System.Windows.Forms.TextBox();
-            this.CmpyAddress2TxtBx = new System.Windows.Forms.TextBox();
             this.CmpyAddressLbl = new System.Windows.Forms.Label();
-            this.CmpyAddress1TxtBx = new System.Windows.Forms.TextBox();
             this.CmpyNameLbl = new System.Windows.Forms.Label();
             this.CmpyNameTxtBx = new System.Windows.Forms.TextBox();
             this.SuppEmailLbl = new System.Windows.Forms.Label();
@@ -213,6 +209,10 @@
             this.SuppSearchLbl = new System.Windows.Forms.Label();
             this.SuppMaintenanceLbl = new System.Windows.Forms.Label();
             this.pnlItem = new System.Windows.Forms.Panel();
+            this.button15 = new System.Windows.Forms.Button();
+            this.label66 = new System.Windows.Forms.Label();
+            this.ExpiredIngredientDtGrdVw = new System.Windows.Forms.DataGridView();
+            this.ReOrderQtyTxtBx = new System.Windows.Forms.TextBox();
             this.UnitCbBx = new System.Windows.Forms.ComboBox();
             this.UnitLbl = new System.Windows.Forms.Label();
             this.ReOrderQtyLbl = new System.Windows.Forms.Label();
@@ -247,8 +247,18 @@
             this.IngredientTimer = new System.Windows.Forms.Timer(this.components);
             this.IngredientNotifyIcn = new System.Windows.Forms.NotifyIcon(this.components);
             this.pnlPO = new System.Windows.Forms.Panel();
+            this.label52 = new System.Windows.Forms.Label();
+            this.ExpiryDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.IngPOErrLbl = new System.Windows.Forms.Label();
             this.POConfirmBtn = new System.Windows.Forms.Button();
             this.IngPODtGrdVw2 = new System.Windows.Forms.DataGridView();
+            this.IngPOCheckBx2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.IngredientID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IngredientName2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReOrderLevel2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReOrderQuantity2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label51 = new System.Windows.Forms.Label();
             this.POResetBtn = new System.Windows.Forms.Button();
             this.POInsertBtn = new System.Windows.Forms.Button();
@@ -277,17 +287,59 @@
             this.IngPODtGrdVw = new System.Windows.Forms.DataGridView();
             this.IngPOCheckBx = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label39 = new System.Windows.Forms.Label();
-            this.IngPOErrLbl = new System.Windows.Forms.Label();
-            this.ReOrderQtyTxtBx = new System.Windows.Forms.TextBox();
-            this.ExpiryDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.label52 = new System.Windows.Forms.Label();
-            this.IngPOCheckBx2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.IngredientID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IngredientName2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantity2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ReOrderLevel2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ReOrderQuantity2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pnlAnnouncement = new System.Windows.Forms.Panel();
+            this.SendEmailBtn = new System.Windows.Forms.Button();
+            this.AnnounceDeleteBtn = new System.Windows.Forms.Button();
+            this.label65 = new System.Windows.Forms.Label();
+            this.ExpiredAnnounceRefreshBtn = new System.Windows.Forms.Button();
+            this.ExpiredAnnounceDtGrdVw = new System.Windows.Forms.DataGridView();
+            this.label64 = new System.Windows.Forms.Label();
+            this.AnnounceIDSearchTxtBx = new System.Windows.Forms.TextBox();
+            this.AnnounceResetBtn = new System.Windows.Forms.Button();
+            this.AnnounceUpdateBtn = new System.Windows.Forms.Button();
+            this.AnnErrLbl = new System.Windows.Forms.Label();
+            this.AnnounceRefreshBtn = new System.Windows.Forms.Button();
+            this.label63 = new System.Windows.Forms.Label();
+            this.AnnounceInsertBtn = new System.Windows.Forms.Button();
+            this.label62 = new System.Windows.Forms.Label();
+            this.CreatedDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.label61 = new System.Windows.Forms.Label();
+            this.PromoDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.label60 = new System.Windows.Forms.Label();
+            this.ContentRchTxtBx = new System.Windows.Forms.RichTextBox();
+            this.label59 = new System.Windows.Forms.Label();
+            this.TitleTxtBx = new System.Windows.Forms.TextBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.AnnounceEmpTxtBx = new System.Windows.Forms.TextBox();
+            this.AnnounceIDTxtBx = new System.Windows.Forms.TextBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.AnnouncementDtGrdVw = new System.Windows.Forms.DataGridView();
+            this.label55 = new System.Windows.Forms.Label();
+            this.label54 = new System.Windows.Forms.Label();
+            this.label53 = new System.Windows.Forms.Label();
+            this.AnnouncementTimer = new System.Windows.Forms.Timer(this.components);
+            this.ExpiredAnnounceNotifyIcn = new System.Windows.Forms.NotifyIcon(this.components);
+            this.ExpiredIngredientTimer = new System.Windows.Forms.Timer(this.components);
+            this.ExpiredIngredientNotifyIcn = new System.Windows.Forms.NotifyIcon(this.components);
+            this.label67 = new System.Windows.Forms.Label();
+            this.label68 = new System.Windows.Forms.Label();
+            this.ExpiredIngPOIDTxtBx = new System.Windows.Forms.TextBox();
+            this.label69 = new System.Windows.Forms.Label();
+            this.ExpiredIngIDTxtBx = new System.Windows.Forms.TextBox();
+            this.ExpiredIngNameTxtBx = new System.Windows.Forms.TextBox();
+            this.label70 = new System.Windows.Forms.Label();
+            this.ExpiredIngPurchaseQtyTxtBx = new System.Windows.Forms.TextBox();
+            this.label71 = new System.Windows.Forms.Label();
+            this.ExpiredIngDateTxtBx = new System.Windows.Forms.TextBox();
+            this.label72 = new System.Windows.Forms.Label();
+            this.ExpiredIngAmtTxtBx = new System.Windows.Forms.TextBox();
+            this.label73 = new System.Windows.Forms.Label();
+            this.ExpiredIngConfirmBtn = new System.Windows.Forms.Button();
+            this.ExpiredIngErrLbl = new System.Windows.Forms.Label();
+            this.ExpiredIngAllClearBtn = new System.Windows.Forms.Button();
+            this.EmpAddressRchTxtBx = new System.Windows.Forms.RichTextBox();
+            this.CmpyAddressRchTxtBx = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.PnlButton.SuspendLayout();
             this.pnlMenu.SuspendLayout();
@@ -304,11 +356,15 @@
             this.pnlSupplier.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SuppDtGdVw)).BeginInit();
             this.pnlItem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpiredIngredientDtGrdVw)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IngDtGdVw)).BeginInit();
             this.pnlPO.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IngPODtGrdVw2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.POSupplierDtGrdVw)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IngPODtGrdVw)).BeginInit();
+            this.pnlAnnouncement.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpiredAnnounceDtGrdVw)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AnnouncementDtGrdVw)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -1501,6 +1557,7 @@
             // pnlEmp
             // 
             this.pnlEmp.AutoScroll = true;
+            this.pnlEmp.Controls.Add(this.EmpAddressRchTxtBx);
             this.pnlEmp.Controls.Add(this.EmpStatusLbl);
             this.pnlEmp.Controls.Add(this.EmpStatusCbBx);
             this.pnlEmp.Controls.Add(this.EmpResetBtn);
@@ -1512,8 +1569,6 @@
             this.pnlEmp.Controls.Add(this.EmpEmailTxtBx);
             this.pnlEmp.Controls.Add(this.EmpHandphoneNoTxtBx);
             this.pnlEmp.Controls.Add(this.EmpHomeNoTxtBx);
-            this.pnlEmp.Controls.Add(this.EmpAddress2TxtBx);
-            this.pnlEmp.Controls.Add(this.EmpAddress1TxtBx);
             this.pnlEmp.Controls.Add(this.EmpFemaleRdBtn);
             this.pnlEmp.Controls.Add(this.EmpMaleRdBtn);
             this.pnlEmp.Controls.Add(this.EmpICTxtBx);
@@ -1547,7 +1602,7 @@
             // 
             this.EmpStatusLbl.AutoSize = true;
             this.EmpStatusLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpStatusLbl.Location = new System.Drawing.Point(644, 471);
+            this.EmpStatusLbl.Location = new System.Drawing.Point(644, 516);
             this.EmpStatusLbl.Name = "EmpStatusLbl";
             this.EmpStatusLbl.Size = new System.Drawing.Size(46, 19);
             this.EmpStatusLbl.TabIndex = 72;
@@ -1563,29 +1618,30 @@
             "Hired",
             "Resigned",
             "Fired"});
-            this.EmpStatusCbBx.Location = new System.Drawing.Point(760, 466);
+            this.EmpStatusCbBx.Location = new System.Drawing.Point(760, 510);
             this.EmpStatusCbBx.Name = "EmpStatusCbBx";
             this.EmpStatusCbBx.Size = new System.Drawing.Size(134, 27);
-            this.EmpStatusCbBx.TabIndex = 11;
+            this.EmpStatusCbBx.TabIndex = 10;
             // 
             // EmpResetBtn
             // 
             this.EmpResetBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpResetBtn.Location = new System.Drawing.Point(900, 530);
+            this.EmpResetBtn.Location = new System.Drawing.Point(900, 570);
             this.EmpResetBtn.Name = "EmpResetBtn";
             this.EmpResetBtn.Size = new System.Drawing.Size(75, 30);
-            this.EmpResetBtn.TabIndex = 14;
+            this.EmpResetBtn.TabIndex = 13;
             this.EmpResetBtn.Text = "RESET";
             this.EmpResetBtn.UseVisualStyleBackColor = true;
             this.EmpResetBtn.Click += new System.EventHandler(this.EmpResetBtn_Click);
             // 
             // EmpUpdateBtn
             // 
+            this.EmpUpdateBtn.Enabled = false;
             this.EmpUpdateBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpUpdateBtn.Location = new System.Drawing.Point(780, 530);
+            this.EmpUpdateBtn.Location = new System.Drawing.Point(780, 570);
             this.EmpUpdateBtn.Name = "EmpUpdateBtn";
             this.EmpUpdateBtn.Size = new System.Drawing.Size(75, 30);
-            this.EmpUpdateBtn.TabIndex = 13;
+            this.EmpUpdateBtn.TabIndex = 12;
             this.EmpUpdateBtn.Text = "UPDATE";
             this.EmpUpdateBtn.UseVisualStyleBackColor = true;
             this.EmpUpdateBtn.Click += new System.EventHandler(this.EmpUpdateBtn_Click);
@@ -1596,7 +1652,7 @@
             this.EmpRefreshBtn.Location = new System.Drawing.Point(466, 280);
             this.EmpRefreshBtn.Name = "EmpRefreshBtn";
             this.EmpRefreshBtn.Size = new System.Drawing.Size(95, 30);
-            this.EmpRefreshBtn.TabIndex = 15;
+            this.EmpRefreshBtn.TabIndex = 14;
             this.EmpRefreshBtn.Text = "REFRESH";
             this.EmpRefreshBtn.UseVisualStyleBackColor = true;
             this.EmpRefreshBtn.Click += new System.EventHandler(this.EmpRefreshBtn_Click);
@@ -1616,10 +1672,10 @@
             // EmpInsertBtn
             // 
             this.EmpInsertBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpInsertBtn.Location = new System.Drawing.Point(644, 530);
+            this.EmpInsertBtn.Location = new System.Drawing.Point(644, 570);
             this.EmpInsertBtn.Name = "EmpInsertBtn";
             this.EmpInsertBtn.Size = new System.Drawing.Size(75, 30);
-            this.EmpInsertBtn.TabIndex = 12;
+            this.EmpInsertBtn.TabIndex = 11;
             this.EmpInsertBtn.Text = "INSERT";
             this.EmpInsertBtn.UseVisualStyleBackColor = true;
             this.EmpInsertBtn.Click += new System.EventHandler(this.EmpInsertBtn_Click);
@@ -1635,50 +1691,34 @@
             "Cashier",
             "Chef",
             "Manager"});
-            this.EmpPositionCbBx.Location = new System.Drawing.Point(760, 433);
+            this.EmpPositionCbBx.Location = new System.Drawing.Point(760, 480);
             this.EmpPositionCbBx.Name = "EmpPositionCbBx";
             this.EmpPositionCbBx.Size = new System.Drawing.Size(134, 27);
-            this.EmpPositionCbBx.TabIndex = 10;
+            this.EmpPositionCbBx.TabIndex = 9;
             // 
             // EmpEmailTxtBx
             // 
             this.EmpEmailTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpEmailTxtBx.Location = new System.Drawing.Point(760, 400);
+            this.EmpEmailTxtBx.Location = new System.Drawing.Point(760, 450);
             this.EmpEmailTxtBx.Name = "EmpEmailTxtBx";
             this.EmpEmailTxtBx.Size = new System.Drawing.Size(250, 26);
-            this.EmpEmailTxtBx.TabIndex = 9;
+            this.EmpEmailTxtBx.TabIndex = 8;
             // 
             // EmpHandphoneNoTxtBx
             // 
             this.EmpHandphoneNoTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpHandphoneNoTxtBx.Location = new System.Drawing.Point(760, 340);
+            this.EmpHandphoneNoTxtBx.Location = new System.Drawing.Point(760, 400);
             this.EmpHandphoneNoTxtBx.Name = "EmpHandphoneNoTxtBx";
             this.EmpHandphoneNoTxtBx.Size = new System.Drawing.Size(200, 26);
-            this.EmpHandphoneNoTxtBx.TabIndex = 8;
+            this.EmpHandphoneNoTxtBx.TabIndex = 7;
             // 
             // EmpHomeNoTxtBx
             // 
             this.EmpHomeNoTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpHomeNoTxtBx.Location = new System.Drawing.Point(760, 279);
+            this.EmpHomeNoTxtBx.Location = new System.Drawing.Point(760, 350);
             this.EmpHomeNoTxtBx.Name = "EmpHomeNoTxtBx";
             this.EmpHomeNoTxtBx.Size = new System.Drawing.Size(200, 26);
-            this.EmpHomeNoTxtBx.TabIndex = 7;
-            // 
-            // EmpAddress2TxtBx
-            // 
-            this.EmpAddress2TxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpAddress2TxtBx.Location = new System.Drawing.Point(760, 246);
-            this.EmpAddress2TxtBx.Name = "EmpAddress2TxtBx";
-            this.EmpAddress2TxtBx.Size = new System.Drawing.Size(250, 26);
-            this.EmpAddress2TxtBx.TabIndex = 6;
-            // 
-            // EmpAddress1TxtBx
-            // 
-            this.EmpAddress1TxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpAddress1TxtBx.Location = new System.Drawing.Point(760, 213);
-            this.EmpAddress1TxtBx.Name = "EmpAddress1TxtBx";
-            this.EmpAddress1TxtBx.Size = new System.Drawing.Size(250, 26);
-            this.EmpAddress1TxtBx.TabIndex = 5;
+            this.EmpHomeNoTxtBx.TabIndex = 6;
             // 
             // EmpFemaleRdBtn
             // 
@@ -1734,7 +1774,7 @@
             // 
             this.EmpPositionLbl.AutoSize = true;
             this.EmpPositionLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpPositionLbl.Location = new System.Drawing.Point(644, 439);
+            this.EmpPositionLbl.Location = new System.Drawing.Point(644, 485);
             this.EmpPositionLbl.Name = "EmpPositionLbl";
             this.EmpPositionLbl.Size = new System.Drawing.Size(57, 19);
             this.EmpPositionLbl.TabIndex = 54;
@@ -1744,7 +1784,7 @@
             // 
             this.EmpEmailLbl.AutoSize = true;
             this.EmpEmailLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpEmailLbl.Location = new System.Drawing.Point(644, 404);
+            this.EmpEmailLbl.Location = new System.Drawing.Point(644, 454);
             this.EmpEmailLbl.Name = "EmpEmailLbl";
             this.EmpEmailLbl.Size = new System.Drawing.Size(42, 19);
             this.EmpEmailLbl.TabIndex = 53;
@@ -1754,7 +1794,7 @@
             // 
             this.EmpHandphoneNoLbl.AutoSize = true;
             this.EmpHandphoneNoLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpHandphoneNoLbl.Location = new System.Drawing.Point(644, 344);
+            this.EmpHandphoneNoLbl.Location = new System.Drawing.Point(644, 403);
             this.EmpHandphoneNoLbl.Name = "EmpHandphoneNoLbl";
             this.EmpHandphoneNoLbl.Size = new System.Drawing.Size(107, 38);
             this.EmpHandphoneNoLbl.TabIndex = 52;
@@ -1764,7 +1804,7 @@
             // 
             this.EmpHomeNoLbl.AutoSize = true;
             this.EmpHomeNoLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpHomeNoLbl.Location = new System.Drawing.Point(644, 284);
+            this.EmpHomeNoLbl.Location = new System.Drawing.Point(644, 353);
             this.EmpHomeNoLbl.Name = "EmpHomeNoLbl";
             this.EmpHomeNoLbl.Size = new System.Drawing.Size(95, 38);
             this.EmpHomeNoLbl.TabIndex = 51;
@@ -1774,7 +1814,7 @@
             // 
             this.EmpAddressLbl.AutoSize = true;
             this.EmpAddressLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EmpAddressLbl.Location = new System.Drawing.Point(644, 217);
+            this.EmpAddressLbl.Location = new System.Drawing.Point(644, 222);
             this.EmpAddressLbl.Name = "EmpAddressLbl";
             this.EmpAddressLbl.Size = new System.Drawing.Size(60, 19);
             this.EmpAddressLbl.TabIndex = 50;
@@ -2074,6 +2114,7 @@
             // 
             // pnlSupplier
             // 
+            this.pnlSupplier.Controls.Add(this.CmpyAddressRchTxtBx);
             this.pnlSupplier.Controls.Add(this.SuppStatusLbl);
             this.pnlSupplier.Controls.Add(this.SuppStatusCbBx);
             this.pnlSupplier.Controls.Add(this.SuppResetBtn);
@@ -2083,9 +2124,7 @@
             this.pnlSupplier.Controls.Add(this.CmpyFaxNumberTxtBx);
             this.pnlSupplier.Controls.Add(this.CmpyNumberLbl);
             this.pnlSupplier.Controls.Add(this.CmpyNumberTxtBx);
-            this.pnlSupplier.Controls.Add(this.CmpyAddress2TxtBx);
             this.pnlSupplier.Controls.Add(this.CmpyAddressLbl);
-            this.pnlSupplier.Controls.Add(this.CmpyAddress1TxtBx);
             this.pnlSupplier.Controls.Add(this.CmpyNameLbl);
             this.pnlSupplier.Controls.Add(this.CmpyNameTxtBx);
             this.pnlSupplier.Controls.Add(this.SuppEmailLbl);
@@ -2117,7 +2156,7 @@
             // 
             this.SuppStatusLbl.AutoSize = true;
             this.SuppStatusLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SuppStatusLbl.Location = new System.Drawing.Point(644, 396);
+            this.SuppStatusLbl.Location = new System.Drawing.Point(644, 525);
             this.SuppStatusLbl.Name = "SuppStatusLbl";
             this.SuppStatusLbl.Size = new System.Drawing.Size(46, 19);
             this.SuppStatusLbl.TabIndex = 33;
@@ -2132,29 +2171,30 @@
             "- Select Status -",
             "Supply",
             "No Supply"});
-            this.SuppStatusCbBx.Location = new System.Drawing.Point(770, 391);
+            this.SuppStatusCbBx.Location = new System.Drawing.Point(770, 520);
             this.SuppStatusCbBx.Name = "SuppStatusCbBx";
             this.SuppStatusCbBx.Size = new System.Drawing.Size(134, 27);
-            this.SuppStatusCbBx.TabIndex = 11;
+            this.SuppStatusCbBx.TabIndex = 10;
             // 
             // SuppResetBtn
             // 
             this.SuppResetBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SuppResetBtn.Location = new System.Drawing.Point(900, 451);
+            this.SuppResetBtn.Location = new System.Drawing.Point(900, 590);
             this.SuppResetBtn.Name = "SuppResetBtn";
             this.SuppResetBtn.Size = new System.Drawing.Size(75, 30);
-            this.SuppResetBtn.TabIndex = 14;
+            this.SuppResetBtn.TabIndex = 13;
             this.SuppResetBtn.Text = "RESET";
             this.SuppResetBtn.UseVisualStyleBackColor = true;
             this.SuppResetBtn.Click += new System.EventHandler(this.SuppResetBtn_Click);
             // 
             // SuppUpdateBtn
             // 
+            this.SuppUpdateBtn.Enabled = false;
             this.SuppUpdateBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SuppUpdateBtn.Location = new System.Drawing.Point(780, 451);
+            this.SuppUpdateBtn.Location = new System.Drawing.Point(780, 590);
             this.SuppUpdateBtn.Name = "SuppUpdateBtn";
             this.SuppUpdateBtn.Size = new System.Drawing.Size(75, 30);
-            this.SuppUpdateBtn.TabIndex = 13;
+            this.SuppUpdateBtn.TabIndex = 12;
             this.SuppUpdateBtn.Text = "UPDATE";
             this.SuppUpdateBtn.UseVisualStyleBackColor = true;
             this.SuppUpdateBtn.Click += new System.EventHandler(this.SuppUpdateBtn_Click);
@@ -2162,10 +2202,10 @@
             // SuppInsertBtn
             // 
             this.SuppInsertBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SuppInsertBtn.Location = new System.Drawing.Point(644, 451);
+            this.SuppInsertBtn.Location = new System.Drawing.Point(644, 590);
             this.SuppInsertBtn.Name = "SuppInsertBtn";
             this.SuppInsertBtn.Size = new System.Drawing.Size(75, 30);
-            this.SuppInsertBtn.TabIndex = 12;
+            this.SuppInsertBtn.TabIndex = 11;
             this.SuppInsertBtn.Text = "INSERT";
             this.SuppInsertBtn.UseVisualStyleBackColor = true;
             this.SuppInsertBtn.Click += new System.EventHandler(this.SuppInsertBtn_Click);
@@ -2174,69 +2214,53 @@
             // 
             this.CmpyFaxNumberLbl.AutoSize = true;
             this.CmpyFaxNumberLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CmpyFaxNumberLbl.Location = new System.Drawing.Point(644, 362);
+            this.CmpyFaxNumberLbl.Location = new System.Drawing.Point(644, 474);
             this.CmpyFaxNumberLbl.Name = "CmpyFaxNumberLbl";
-            this.CmpyFaxNumberLbl.Size = new System.Drawing.Size(123, 19);
+            this.CmpyFaxNumberLbl.Size = new System.Drawing.Size(123, 38);
             this.CmpyFaxNumberLbl.TabIndex = 28;
-            this.CmpyFaxNumberLbl.Text = "Company Fax No.";
+            this.CmpyFaxNumberLbl.Text = "Company Fax No.\r\n(xx-xxxxxxxx)";
             // 
             // CmpyFaxNumberTxtBx
             // 
             this.CmpyFaxNumberTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CmpyFaxNumberTxtBx.Location = new System.Drawing.Point(770, 358);
+            this.CmpyFaxNumberTxtBx.Location = new System.Drawing.Point(770, 470);
             this.CmpyFaxNumberTxtBx.Name = "CmpyFaxNumberTxtBx";
             this.CmpyFaxNumberTxtBx.Size = new System.Drawing.Size(200, 26);
-            this.CmpyFaxNumberTxtBx.TabIndex = 10;
+            this.CmpyFaxNumberTxtBx.TabIndex = 9;
             // 
             // CmpyNumberLbl
             // 
             this.CmpyNumberLbl.AutoSize = true;
             this.CmpyNumberLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CmpyNumberLbl.Location = new System.Drawing.Point(644, 329);
+            this.CmpyNumberLbl.Location = new System.Drawing.Point(644, 424);
             this.CmpyNumberLbl.Name = "CmpyNumberLbl";
-            this.CmpyNumberLbl.Size = new System.Drawing.Size(96, 19);
+            this.CmpyNumberLbl.Size = new System.Drawing.Size(96, 38);
             this.CmpyNumberLbl.TabIndex = 26;
-            this.CmpyNumberLbl.Text = "Company No.";
+            this.CmpyNumberLbl.Text = "Company No.\r\n(xx-xxxxxxxx)";
             // 
             // CmpyNumberTxtBx
             // 
             this.CmpyNumberTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CmpyNumberTxtBx.Location = new System.Drawing.Point(770, 325);
+            this.CmpyNumberTxtBx.Location = new System.Drawing.Point(770, 420);
             this.CmpyNumberTxtBx.Name = "CmpyNumberTxtBx";
             this.CmpyNumberTxtBx.Size = new System.Drawing.Size(200, 26);
-            this.CmpyNumberTxtBx.TabIndex = 9;
-            // 
-            // CmpyAddress2TxtBx
-            // 
-            this.CmpyAddress2TxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CmpyAddress2TxtBx.Location = new System.Drawing.Point(770, 292);
-            this.CmpyAddress2TxtBx.Name = "CmpyAddress2TxtBx";
-            this.CmpyAddress2TxtBx.Size = new System.Drawing.Size(250, 26);
-            this.CmpyAddress2TxtBx.TabIndex = 8;
+            this.CmpyNumberTxtBx.TabIndex = 8;
             // 
             // CmpyAddressLbl
             // 
             this.CmpyAddressLbl.AutoSize = true;
             this.CmpyAddressLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CmpyAddressLbl.Location = new System.Drawing.Point(644, 265);
+            this.CmpyAddressLbl.Location = new System.Drawing.Point(644, 290);
             this.CmpyAddressLbl.Name = "CmpyAddressLbl";
             this.CmpyAddressLbl.Size = new System.Drawing.Size(122, 19);
             this.CmpyAddressLbl.TabIndex = 23;
             this.CmpyAddressLbl.Text = "Company Address";
             // 
-            // CmpyAddress1TxtBx
-            // 
-            this.CmpyAddress1TxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CmpyAddress1TxtBx.Location = new System.Drawing.Point(770, 259);
-            this.CmpyAddress1TxtBx.Name = "CmpyAddress1TxtBx";
-            this.CmpyAddress1TxtBx.Size = new System.Drawing.Size(250, 26);
-            this.CmpyAddress1TxtBx.TabIndex = 7;
-            // 
             // CmpyNameLbl
             // 
             this.CmpyNameLbl.AutoSize = true;
             this.CmpyNameLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CmpyNameLbl.Location = new System.Drawing.Point(644, 230);
+            this.CmpyNameLbl.Location = new System.Drawing.Point(644, 256);
             this.CmpyNameLbl.Name = "CmpyNameLbl";
             this.CmpyNameLbl.Size = new System.Drawing.Size(109, 19);
             this.CmpyNameLbl.TabIndex = 21;
@@ -2245,7 +2269,7 @@
             // CmpyNameTxtBx
             // 
             this.CmpyNameTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CmpyNameTxtBx.Location = new System.Drawing.Point(770, 226);
+            this.CmpyNameTxtBx.Location = new System.Drawing.Point(770, 253);
             this.CmpyNameTxtBx.Name = "CmpyNameTxtBx";
             this.CmpyNameTxtBx.Size = new System.Drawing.Size(250, 26);
             this.CmpyNameTxtBx.TabIndex = 6;
@@ -2254,7 +2278,7 @@
             // 
             this.SuppEmailLbl.AutoSize = true;
             this.SuppEmailLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SuppEmailLbl.Location = new System.Drawing.Point(644, 197);
+            this.SuppEmailLbl.Location = new System.Drawing.Point(644, 224);
             this.SuppEmailLbl.Name = "SuppEmailLbl";
             this.SuppEmailLbl.Size = new System.Drawing.Size(42, 19);
             this.SuppEmailLbl.TabIndex = 19;
@@ -2263,7 +2287,7 @@
             // SuppEmailTxtBx
             // 
             this.SuppEmailTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SuppEmailTxtBx.Location = new System.Drawing.Point(770, 193);
+            this.SuppEmailTxtBx.Location = new System.Drawing.Point(770, 220);
             this.SuppEmailTxtBx.Name = "SuppEmailTxtBx";
             this.SuppEmailTxtBx.Size = new System.Drawing.Size(250, 26);
             this.SuppEmailTxtBx.TabIndex = 5;
@@ -2274,9 +2298,9 @@
             this.label36.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label36.Location = new System.Drawing.Point(644, 164);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(107, 19);
+            this.label36.Size = new System.Drawing.Size(107, 38);
             this.label36.TabIndex = 17;
-            this.label36.Text = "Handphone No.";
+            this.label36.Text = "Handphone No.\r\n(xxx-xxxxxxx)";
             // 
             // SuppHandphoneTxtBx
             // 
@@ -2386,7 +2410,7 @@
             this.SuppRefreshBtn.Location = new System.Drawing.Point(466, 280);
             this.SuppRefreshBtn.Name = "SuppRefreshBtn";
             this.SuppRefreshBtn.Size = new System.Drawing.Size(95, 30);
-            this.SuppRefreshBtn.TabIndex = 15;
+            this.SuppRefreshBtn.TabIndex = 14;
             this.SuppRefreshBtn.Text = "REFRESH";
             this.SuppRefreshBtn.UseVisualStyleBackColor = true;
             this.SuppRefreshBtn.Click += new System.EventHandler(this.SuppRefreshBtn_Click);
@@ -2412,7 +2436,7 @@
             this.SuppDtGdVw.Name = "SuppDtGdVw";
             this.SuppDtGdVw.ReadOnly = true;
             this.SuppDtGdVw.Size = new System.Drawing.Size(541, 180);
-            this.SuppDtGdVw.TabIndex = 4;
+            this.SuppDtGdVw.TabIndex = 40;
             this.SuppDtGdVw.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.SuppDtGdVw_CellContentClick);
             // 
             // SuppNmTxtBx
@@ -2421,7 +2445,7 @@
             this.SuppNmTxtBx.Location = new System.Drawing.Point(140, 65);
             this.SuppNmTxtBx.Name = "SuppNmTxtBx";
             this.SuppNmTxtBx.Size = new System.Drawing.Size(120, 26);
-            this.SuppNmTxtBx.TabIndex = 3;
+            this.SuppNmTxtBx.TabIndex = 30;
             this.SuppNmTxtBx.TextChanged += new System.EventHandler(this.SuppNmTxtBx_TextChanged);
             // 
             // SuppNmLbl
@@ -2456,6 +2480,25 @@
             // 
             // pnlItem
             // 
+            this.pnlItem.Controls.Add(this.ExpiredIngAllClearBtn);
+            this.pnlItem.Controls.Add(this.ExpiredIngErrLbl);
+            this.pnlItem.Controls.Add(this.ExpiredIngConfirmBtn);
+            this.pnlItem.Controls.Add(this.label73);
+            this.pnlItem.Controls.Add(this.ExpiredIngAmtTxtBx);
+            this.pnlItem.Controls.Add(this.label72);
+            this.pnlItem.Controls.Add(this.ExpiredIngDateTxtBx);
+            this.pnlItem.Controls.Add(this.label71);
+            this.pnlItem.Controls.Add(this.ExpiredIngPurchaseQtyTxtBx);
+            this.pnlItem.Controls.Add(this.label70);
+            this.pnlItem.Controls.Add(this.ExpiredIngNameTxtBx);
+            this.pnlItem.Controls.Add(this.ExpiredIngIDTxtBx);
+            this.pnlItem.Controls.Add(this.label69);
+            this.pnlItem.Controls.Add(this.ExpiredIngPOIDTxtBx);
+            this.pnlItem.Controls.Add(this.label68);
+            this.pnlItem.Controls.Add(this.label67);
+            this.pnlItem.Controls.Add(this.button15);
+            this.pnlItem.Controls.Add(this.label66);
+            this.pnlItem.Controls.Add(this.ExpiredIngredientDtGrdVw);
             this.pnlItem.Controls.Add(this.ReOrderQtyTxtBx);
             this.pnlItem.Controls.Add(this.UnitCbBx);
             this.pnlItem.Controls.Add(this.UnitLbl);
@@ -2493,6 +2536,49 @@
             this.pnlItem.Size = new System.Drawing.Size(1091, 766);
             this.pnlItem.TabIndex = 75;
             // 
+            // button15
+            // 
+            this.button15.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button15.Location = new System.Drawing.Point(466, 623);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(95, 30);
+            this.button15.TabIndex = 59;
+            this.button15.Text = "REFRESH";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click_1);
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label66.Location = new System.Drawing.Point(21, 622);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(310, 19);
+            this.label66.TabIndex = 58;
+            this.label66.Text = "**Click on the row of expired ingredients to View";
+            // 
+            // ExpiredIngredientDtGrdVw
+            // 
+            this.ExpiredIngredientDtGrdVw.AllowUserToAddRows = false;
+            this.ExpiredIngredientDtGrdVw.AllowUserToDeleteRows = false;
+            this.ExpiredIngredientDtGrdVw.AllowUserToOrderColumns = true;
+            this.ExpiredIngredientDtGrdVw.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ExpiredIngredientDtGrdVw.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ExpiredIngredientDtGrdVw.Location = new System.Drawing.Point(20, 440);
+            this.ExpiredIngredientDtGrdVw.Name = "ExpiredIngredientDtGrdVw";
+            this.ExpiredIngredientDtGrdVw.ReadOnly = true;
+            this.ExpiredIngredientDtGrdVw.Size = new System.Drawing.Size(541, 180);
+            this.ExpiredIngredientDtGrdVw.TabIndex = 57;
+            this.ExpiredIngredientDtGrdVw.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ExpiredIngredientDtGrdVw_CellContentClick);
+            // 
+            // ReOrderQtyTxtBx
+            // 
+            this.ReOrderQtyTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReOrderQtyTxtBx.Location = new System.Drawing.Point(770, 260);
+            this.ReOrderQtyTxtBx.Name = "ReOrderQtyTxtBx";
+            this.ReOrderQtyTxtBx.Size = new System.Drawing.Size(170, 26);
+            this.ReOrderQtyTxtBx.TabIndex = 6;
+            // 
             // UnitCbBx
             // 
             this.UnitCbBx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -2507,7 +2593,7 @@
             this.UnitCbBx.Location = new System.Drawing.Point(940, 160);
             this.UnitCbBx.Name = "UnitCbBx";
             this.UnitCbBx.Size = new System.Drawing.Size(121, 27);
-            this.UnitCbBx.TabIndex = 43;
+            this.UnitCbBx.TabIndex = 3;
             // 
             // UnitLbl
             // 
@@ -2579,7 +2665,7 @@
             this.StorageAreaCbBx.Location = new System.Drawing.Point(770, 194);
             this.StorageAreaCbBx.Name = "StorageAreaCbBx";
             this.StorageAreaCbBx.Size = new System.Drawing.Size(170, 27);
-            this.StorageAreaCbBx.TabIndex = 3;
+            this.StorageAreaCbBx.TabIndex = 4;
             // 
             // IngredientStatusLbl
             // 
@@ -2617,7 +2703,7 @@
             this.IngStatusCbBx.Location = new System.Drawing.Point(770, 293);
             this.IngStatusCbBx.Name = "IngStatusCbBx";
             this.IngStatusCbBx.Size = new System.Drawing.Size(170, 27);
-            this.IngStatusCbBx.TabIndex = 55;
+            this.IngStatusCbBx.TabIndex = 7;
             // 
             // IngStatusLbl
             // 
@@ -2645,18 +2731,19 @@
             this.IngResetBtn.Location = new System.Drawing.Point(900, 350);
             this.IngResetBtn.Name = "IngResetBtn";
             this.IngResetBtn.Size = new System.Drawing.Size(75, 30);
-            this.IngResetBtn.TabIndex = 9;
+            this.IngResetBtn.TabIndex = 10;
             this.IngResetBtn.Text = "RESET";
             this.IngResetBtn.UseVisualStyleBackColor = true;
             this.IngResetBtn.Click += new System.EventHandler(this.ItmResetBtn_Click);
             // 
             // IngUpdateBtn
             // 
+            this.IngUpdateBtn.Enabled = false;
             this.IngUpdateBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IngUpdateBtn.Location = new System.Drawing.Point(780, 350);
             this.IngUpdateBtn.Name = "IngUpdateBtn";
             this.IngUpdateBtn.Size = new System.Drawing.Size(75, 30);
-            this.IngUpdateBtn.TabIndex = 8;
+            this.IngUpdateBtn.TabIndex = 9;
             this.IngUpdateBtn.Text = "UPDATE";
             this.IngUpdateBtn.UseVisualStyleBackColor = true;
             this.IngUpdateBtn.Click += new System.EventHandler(this.IngUpdateBtn_Click);
@@ -2667,7 +2754,7 @@
             this.IngInsertBtn.Location = new System.Drawing.Point(644, 350);
             this.IngInsertBtn.Name = "IngInsertBtn";
             this.IngInsertBtn.Size = new System.Drawing.Size(75, 30);
-            this.IngInsertBtn.TabIndex = 7;
+            this.IngInsertBtn.TabIndex = 8;
             this.IngInsertBtn.Text = "INSERT";
             this.IngInsertBtn.UseVisualStyleBackColor = true;
             this.IngInsertBtn.Click += new System.EventHandler(this.ItmInsertBtn_Click);
@@ -2766,7 +2853,7 @@
             this.IngRefreshBtn.Location = new System.Drawing.Point(466, 280);
             this.IngRefreshBtn.Name = "IngRefreshBtn";
             this.IngRefreshBtn.Size = new System.Drawing.Size(95, 30);
-            this.IngRefreshBtn.TabIndex = 10;
+            this.IngRefreshBtn.TabIndex = 11;
             this.IngRefreshBtn.Text = "REFRESH";
             this.IngRefreshBtn.UseVisualStyleBackColor = true;
             this.IngRefreshBtn.Click += new System.EventHandler(this.IngRefreshBtn_Click);
@@ -2842,8 +2929,7 @@
             // IngredientNotifyIcn
             // 
             this.IngredientNotifyIcn.Icon = ((System.Drawing.Icon)(resources.GetObject("IngredientNotifyIcn.Icon")));
-            this.IngredientNotifyIcn.Text = "The Coffee Bean";
-            this.IngredientNotifyIcn.Visible = true;
+            this.IngredientNotifyIcn.Text = "Lack of Ingredients";
             this.IngredientNotifyIcn.Click += new System.EventHandler(this.IngredientNotifyIcn_Click);
             // 
             // pnlPO
@@ -2885,6 +2971,39 @@
             this.pnlPO.Size = new System.Drawing.Size(1091, 766);
             this.pnlPO.TabIndex = 76;
             // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label52.Location = new System.Drawing.Point(20, 548);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(81, 19);
+            this.label52.TabIndex = 36;
+            this.label52.Text = "Expiry Date";
+            // 
+            // ExpiryDateTimePicker
+            // 
+            this.ExpiryDateTimePicker.CalendarFont = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExpiryDateTimePicker.CustomFormat = "dd-MM-yyyy";
+            this.ExpiryDateTimePicker.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExpiryDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.ExpiryDateTimePicker.Location = new System.Drawing.Point(120, 544);
+            this.ExpiryDateTimePicker.Name = "ExpiryDateTimePicker";
+            this.ExpiryDateTimePicker.Size = new System.Drawing.Size(150, 26);
+            this.ExpiryDateTimePicker.TabIndex = 35;
+            // 
+            // IngPOErrLbl
+            // 
+            this.IngPOErrLbl.AutoSize = true;
+            this.IngPOErrLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IngPOErrLbl.ForeColor = System.Drawing.Color.Red;
+            this.IngPOErrLbl.Location = new System.Drawing.Point(644, 590);
+            this.IngPOErrLbl.Name = "IngPOErrLbl";
+            this.IngPOErrLbl.Size = new System.Drawing.Size(17, 19);
+            this.IngPOErrLbl.TabIndex = 34;
+            this.IngPOErrLbl.Text = "*";
+            this.IngPOErrLbl.Visible = false;
+            // 
             // POConfirmBtn
             // 
             this.POConfirmBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2917,6 +3036,48 @@
             this.IngPODtGrdVw2.Size = new System.Drawing.Size(541, 180);
             this.IngPODtGrdVw2.TabIndex = 29;
             this.IngPODtGrdVw2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.IngPODtGrdVw2_CellContentClick);
+            // 
+            // IngPOCheckBx2
+            // 
+            this.IngPOCheckBx2.HeaderText = "";
+            this.IngPOCheckBx2.Name = "IngPOCheckBx2";
+            this.IngPOCheckBx2.ReadOnly = true;
+            // 
+            // IngredientID2
+            // 
+            this.IngredientID2.HeaderText = "Ingredient ID";
+            this.IngredientID2.Name = "IngredientID2";
+            this.IngredientID2.ReadOnly = true;
+            // 
+            // IngredientName2
+            // 
+            this.IngredientName2.HeaderText = "Ingredient Name";
+            this.IngredientName2.Name = "IngredientName2";
+            this.IngredientName2.ReadOnly = true;
+            // 
+            // Quantity2
+            // 
+            this.Quantity2.HeaderText = "Quantity";
+            this.Quantity2.Name = "Quantity2";
+            this.Quantity2.ReadOnly = true;
+            // 
+            // Unit
+            // 
+            this.Unit.HeaderText = "Unit";
+            this.Unit.Name = "Unit";
+            this.Unit.ReadOnly = true;
+            // 
+            // ReOrderLevel2
+            // 
+            this.ReOrderLevel2.HeaderText = "Re-Order Level";
+            this.ReOrderLevel2.Name = "ReOrderLevel2";
+            this.ReOrderLevel2.ReadOnly = true;
+            // 
+            // ReOrderQuantity2
+            // 
+            this.ReOrderQuantity2.HeaderText = "Re-Order Quantity";
+            this.ReOrderQuantity2.Name = "ReOrderQuantity2";
+            this.ReOrderQuantity2.ReadOnly = true;
             // 
             // label51
             // 
@@ -3202,88 +3363,556 @@
             this.label39.TabIndex = 0;
             this.label39.Text = "Ingredients Require to Order";
             // 
-            // IngPOErrLbl
+            // pnlAnnouncement
             // 
-            this.IngPOErrLbl.AutoSize = true;
-            this.IngPOErrLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IngPOErrLbl.ForeColor = System.Drawing.Color.Red;
-            this.IngPOErrLbl.Location = new System.Drawing.Point(644, 590);
-            this.IngPOErrLbl.Name = "IngPOErrLbl";
-            this.IngPOErrLbl.Size = new System.Drawing.Size(17, 19);
-            this.IngPOErrLbl.TabIndex = 34;
-            this.IngPOErrLbl.Text = "*";
-            this.IngPOErrLbl.Visible = false;
+            this.pnlAnnouncement.Controls.Add(this.SendEmailBtn);
+            this.pnlAnnouncement.Controls.Add(this.AnnounceDeleteBtn);
+            this.pnlAnnouncement.Controls.Add(this.label65);
+            this.pnlAnnouncement.Controls.Add(this.ExpiredAnnounceRefreshBtn);
+            this.pnlAnnouncement.Controls.Add(this.ExpiredAnnounceDtGrdVw);
+            this.pnlAnnouncement.Controls.Add(this.label64);
+            this.pnlAnnouncement.Controls.Add(this.AnnounceIDSearchTxtBx);
+            this.pnlAnnouncement.Controls.Add(this.AnnounceResetBtn);
+            this.pnlAnnouncement.Controls.Add(this.AnnounceUpdateBtn);
+            this.pnlAnnouncement.Controls.Add(this.AnnErrLbl);
+            this.pnlAnnouncement.Controls.Add(this.AnnounceRefreshBtn);
+            this.pnlAnnouncement.Controls.Add(this.label63);
+            this.pnlAnnouncement.Controls.Add(this.AnnounceInsertBtn);
+            this.pnlAnnouncement.Controls.Add(this.label62);
+            this.pnlAnnouncement.Controls.Add(this.CreatedDateTimePicker);
+            this.pnlAnnouncement.Controls.Add(this.label61);
+            this.pnlAnnouncement.Controls.Add(this.PromoDateTimePicker);
+            this.pnlAnnouncement.Controls.Add(this.label60);
+            this.pnlAnnouncement.Controls.Add(this.ContentRchTxtBx);
+            this.pnlAnnouncement.Controls.Add(this.label59);
+            this.pnlAnnouncement.Controls.Add(this.TitleTxtBx);
+            this.pnlAnnouncement.Controls.Add(this.label58);
+            this.pnlAnnouncement.Controls.Add(this.AnnounceEmpTxtBx);
+            this.pnlAnnouncement.Controls.Add(this.AnnounceIDTxtBx);
+            this.pnlAnnouncement.Controls.Add(this.label57);
+            this.pnlAnnouncement.Controls.Add(this.label56);
+            this.pnlAnnouncement.Controls.Add(this.AnnouncementDtGrdVw);
+            this.pnlAnnouncement.Controls.Add(this.label55);
+            this.pnlAnnouncement.Controls.Add(this.label54);
+            this.pnlAnnouncement.Controls.Add(this.label53);
+            this.pnlAnnouncement.Location = new System.Drawing.Point(2, 61);
+            this.pnlAnnouncement.Name = "pnlAnnouncement";
+            this.pnlAnnouncement.Size = new System.Drawing.Size(1091, 766);
+            this.pnlAnnouncement.TabIndex = 77;
             // 
-            // ReOrderQtyTxtBx
+            // SendEmailBtn
             // 
-            this.ReOrderQtyTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ReOrderQtyTxtBx.Location = new System.Drawing.Point(770, 260);
-            this.ReOrderQtyTxtBx.Name = "ReOrderQtyTxtBx";
-            this.ReOrderQtyTxtBx.Size = new System.Drawing.Size(170, 26);
-            this.ReOrderQtyTxtBx.TabIndex = 56;
+            this.SendEmailBtn.Enabled = false;
+            this.SendEmailBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SendEmailBtn.Location = new System.Drawing.Point(740, 526);
+            this.SendEmailBtn.Name = "SendEmailBtn";
+            this.SendEmailBtn.Size = new System.Drawing.Size(200, 30);
+            this.SendEmailBtn.TabIndex = 42;
+            this.SendEmailBtn.Text = "SEND NOTIFICATION";
+            this.SendEmailBtn.UseVisualStyleBackColor = true;
+            this.SendEmailBtn.Click += new System.EventHandler(this.button15_Click);
             // 
-            // ExpiryDateTimePicker
+            // AnnounceDeleteBtn
             // 
-            this.ExpiryDateTimePicker.CalendarFont = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExpiryDateTimePicker.CustomFormat = "dd-MM-yyyy";
-            this.ExpiryDateTimePicker.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExpiryDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.ExpiryDateTimePicker.Location = new System.Drawing.Point(120, 544);
-            this.ExpiryDateTimePicker.Name = "ExpiryDateTimePicker";
-            this.ExpiryDateTimePicker.Size = new System.Drawing.Size(150, 26);
-            this.ExpiryDateTimePicker.TabIndex = 35;
+            this.AnnounceDeleteBtn.Enabled = false;
+            this.AnnounceDeleteBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AnnounceDeleteBtn.Location = new System.Drawing.Point(1008, 463);
+            this.AnnounceDeleteBtn.Name = "AnnounceDeleteBtn";
+            this.AnnounceDeleteBtn.Size = new System.Drawing.Size(75, 30);
+            this.AnnounceDeleteBtn.TabIndex = 6;
+            this.AnnounceDeleteBtn.Text = "DELETE";
+            this.AnnounceDeleteBtn.UseVisualStyleBackColor = true;
+            this.AnnounceDeleteBtn.Click += new System.EventHandler(this.AnnounceDeleteBtn_Click);
             // 
-            // label52
+            // label65
             // 
-            this.label52.AutoSize = true;
-            this.label52.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label52.Location = new System.Drawing.Point(20, 548);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(81, 19);
-            this.label52.TabIndex = 36;
-            this.label52.Text = "Expiry Date";
+            this.label65.AutoSize = true;
+            this.label65.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label65.Location = new System.Drawing.Point(20, 612);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(375, 19);
+            this.label65.TabIndex = 27;
+            this.label65.Text = "**Click on the row of Expired Announcement data to Delete";
             // 
-            // IngPOCheckBx2
+            // ExpiredAnnounceRefreshBtn
             // 
-            this.IngPOCheckBx2.HeaderText = "";
-            this.IngPOCheckBx2.Name = "IngPOCheckBx2";
-            this.IngPOCheckBx2.ReadOnly = true;
+            this.ExpiredAnnounceRefreshBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExpiredAnnounceRefreshBtn.Location = new System.Drawing.Point(466, 610);
+            this.ExpiredAnnounceRefreshBtn.Name = "ExpiredAnnounceRefreshBtn";
+            this.ExpiredAnnounceRefreshBtn.Size = new System.Drawing.Size(95, 30);
+            this.ExpiredAnnounceRefreshBtn.TabIndex = 9;
+            this.ExpiredAnnounceRefreshBtn.Text = "REFRESH";
+            this.ExpiredAnnounceRefreshBtn.UseVisualStyleBackColor = true;
+            this.ExpiredAnnounceRefreshBtn.Click += new System.EventHandler(this.ExpiredAnnounceRefreshBtn_Click);
             // 
-            // IngredientID2
+            // ExpiredAnnounceDtGrdVw
             // 
-            this.IngredientID2.HeaderText = "Ingredient ID";
-            this.IngredientID2.Name = "IngredientID2";
-            this.IngredientID2.ReadOnly = true;
+            this.ExpiredAnnounceDtGrdVw.AllowUserToAddRows = false;
+            this.ExpiredAnnounceDtGrdVw.AllowUserToDeleteRows = false;
+            this.ExpiredAnnounceDtGrdVw.AllowUserToOrderColumns = true;
+            this.ExpiredAnnounceDtGrdVw.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.ExpiredAnnounceDtGrdVw.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ExpiredAnnounceDtGrdVw.Location = new System.Drawing.Point(20, 428);
+            this.ExpiredAnnounceDtGrdVw.Name = "ExpiredAnnounceDtGrdVw";
+            this.ExpiredAnnounceDtGrdVw.ReadOnly = true;
+            this.ExpiredAnnounceDtGrdVw.Size = new System.Drawing.Size(541, 180);
+            this.ExpiredAnnounceDtGrdVw.TabIndex = 25;
+            this.ExpiredAnnounceDtGrdVw.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ExpiredAnnounceDtGrdVw_CellContentClick);
             // 
-            // IngredientName2
+            // label64
             // 
-            this.IngredientName2.HeaderText = "Ingredient Name";
-            this.IngredientName2.Name = "IngredientName2";
-            this.IngredientName2.ReadOnly = true;
+            this.label64.AutoSize = true;
+            this.label64.Font = new System.Drawing.Font("AR JULIAN", 13.8F);
+            this.label64.Location = new System.Drawing.Point(20, 400);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(254, 23);
+            this.label64.TabIndex = 24;
+            this.label64.Text = "Expired Announcement Post";
             // 
-            // Quantity2
+            // AnnounceIDSearchTxtBx
             // 
-            this.Quantity2.HeaderText = "Quantity";
-            this.Quantity2.Name = "Quantity2";
-            this.Quantity2.ReadOnly = true;
+            this.AnnounceIDSearchTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AnnounceIDSearchTxtBx.Location = new System.Drawing.Point(142, 65);
+            this.AnnounceIDSearchTxtBx.Name = "AnnounceIDSearchTxtBx";
+            this.AnnounceIDSearchTxtBx.Size = new System.Drawing.Size(100, 26);
+            this.AnnounceIDSearchTxtBx.TabIndex = 23;
+            this.AnnounceIDSearchTxtBx.TextChanged += new System.EventHandler(this.AnnounceIDSearchTxtBx_TextChanged);
             // 
-            // Unit
+            // AnnounceResetBtn
             // 
-            this.Unit.HeaderText = "Unit";
-            this.Unit.Name = "Unit";
-            this.Unit.ReadOnly = true;
+            this.AnnounceResetBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AnnounceResetBtn.Location = new System.Drawing.Point(872, 463);
+            this.AnnounceResetBtn.Name = "AnnounceResetBtn";
+            this.AnnounceResetBtn.Size = new System.Drawing.Size(75, 30);
+            this.AnnounceResetBtn.TabIndex = 7;
+            this.AnnounceResetBtn.Text = "RESET";
+            this.AnnounceResetBtn.UseVisualStyleBackColor = true;
+            this.AnnounceResetBtn.Click += new System.EventHandler(this.AnnounceResetBtn_Click);
             // 
-            // ReOrderLevel2
+            // AnnounceUpdateBtn
             // 
-            this.ReOrderLevel2.HeaderText = "Re-Order Level";
-            this.ReOrderLevel2.Name = "ReOrderLevel2";
-            this.ReOrderLevel2.ReadOnly = true;
+            this.AnnounceUpdateBtn.Enabled = false;
+            this.AnnounceUpdateBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AnnounceUpdateBtn.Location = new System.Drawing.Point(736, 463);
+            this.AnnounceUpdateBtn.Name = "AnnounceUpdateBtn";
+            this.AnnounceUpdateBtn.Size = new System.Drawing.Size(75, 30);
+            this.AnnounceUpdateBtn.TabIndex = 5;
+            this.AnnounceUpdateBtn.Text = "UPDATE";
+            this.AnnounceUpdateBtn.UseVisualStyleBackColor = true;
+            this.AnnounceUpdateBtn.Click += new System.EventHandler(this.AnnounceUpdateBtn_Click);
             // 
-            // ReOrderQuantity2
+            // AnnErrLbl
             // 
-            this.ReOrderQuantity2.HeaderText = "Re-Order Quantity";
-            this.ReOrderQuantity2.Name = "ReOrderQuantity2";
-            this.ReOrderQuantity2.ReadOnly = true;
+            this.AnnErrLbl.AutoSize = true;
+            this.AnnErrLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AnnErrLbl.ForeColor = System.Drawing.Color.Red;
+            this.AnnErrLbl.Location = new System.Drawing.Point(20, 330);
+            this.AnnErrLbl.Name = "AnnErrLbl";
+            this.AnnErrLbl.Size = new System.Drawing.Size(17, 19);
+            this.AnnErrLbl.TabIndex = 20;
+            this.AnnErrLbl.Text = "*";
+            this.AnnErrLbl.Visible = false;
+            // 
+            // AnnounceRefreshBtn
+            // 
+            this.AnnounceRefreshBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AnnounceRefreshBtn.Location = new System.Drawing.Point(466, 280);
+            this.AnnounceRefreshBtn.Name = "AnnounceRefreshBtn";
+            this.AnnounceRefreshBtn.Size = new System.Drawing.Size(95, 30);
+            this.AnnounceRefreshBtn.TabIndex = 8;
+            this.AnnounceRefreshBtn.Text = "REFRESH";
+            this.AnnounceRefreshBtn.UseVisualStyleBackColor = true;
+            this.AnnounceRefreshBtn.Click += new System.EventHandler(this.AnnounceRefreshBtn_Click);
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label63.Location = new System.Drawing.Point(20, 280);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(391, 19);
+            this.label63.TabIndex = 18;
+            this.label63.Text = "**Click on the row of Announcemnet data to View and Update";
+            // 
+            // AnnounceInsertBtn
+            // 
+            this.AnnounceInsertBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AnnounceInsertBtn.Location = new System.Drawing.Point(600, 463);
+            this.AnnounceInsertBtn.Name = "AnnounceInsertBtn";
+            this.AnnounceInsertBtn.Size = new System.Drawing.Size(75, 30);
+            this.AnnounceInsertBtn.TabIndex = 4;
+            this.AnnounceInsertBtn.Text = "INSERT";
+            this.AnnounceInsertBtn.UseVisualStyleBackColor = true;
+            this.AnnounceInsertBtn.Click += new System.EventHandler(this.AnnounceInsertBtn_Click);
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label62.Location = new System.Drawing.Point(644, 417);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(83, 19);
+            this.label62.TabIndex = 16;
+            this.label62.Text = "Create Date";
+            // 
+            // CreatedDateTimePicker
+            // 
+            this.CreatedDateTimePicker.CalendarFont = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreatedDateTimePicker.CustomFormat = "dd-MM-yyyy";
+            this.CreatedDateTimePicker.Enabled = false;
+            this.CreatedDateTimePicker.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreatedDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.CreatedDateTimePicker.Location = new System.Drawing.Point(784, 413);
+            this.CreatedDateTimePicker.Name = "CreatedDateTimePicker";
+            this.CreatedDateTimePicker.Size = new System.Drawing.Size(150, 26);
+            this.CreatedDateTimePicker.TabIndex = 15;
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label61.Location = new System.Drawing.Point(644, 384);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(111, 19);
+            this.label61.TabIndex = 14;
+            this.label61.Text = "Promo End Date";
+            // 
+            // PromoDateTimePicker
+            // 
+            this.PromoDateTimePicker.CalendarFont = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PromoDateTimePicker.CustomFormat = "dd-MM-yyyy";
+            this.PromoDateTimePicker.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PromoDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.PromoDateTimePicker.Location = new System.Drawing.Point(784, 380);
+            this.PromoDateTimePicker.Name = "PromoDateTimePicker";
+            this.PromoDateTimePicker.Size = new System.Drawing.Size(150, 26);
+            this.PromoDateTimePicker.TabIndex = 3;
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label60.Location = new System.Drawing.Point(644, 171);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(57, 19);
+            this.label60.TabIndex = 12;
+            this.label60.Text = "Content";
+            // 
+            // ContentRchTxtBx
+            // 
+            this.ContentRchTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ContentRchTxtBx.Location = new System.Drawing.Point(784, 167);
+            this.ContentRchTxtBx.Name = "ContentRchTxtBx";
+            this.ContentRchTxtBx.Size = new System.Drawing.Size(300, 200);
+            this.ContentRchTxtBx.TabIndex = 2;
+            this.ContentRchTxtBx.Text = "";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label59.Location = new System.Drawing.Point(644, 132);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(34, 19);
+            this.label59.TabIndex = 10;
+            this.label59.Text = "Title";
+            // 
+            // TitleTxtBx
+            // 
+            this.TitleTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleTxtBx.Location = new System.Drawing.Point(784, 128);
+            this.TitleTxtBx.Name = "TitleTxtBx";
+            this.TitleTxtBx.Size = new System.Drawing.Size(300, 26);
+            this.TitleTxtBx.TabIndex = 1;
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label58.Location = new System.Drawing.Point(644, 99);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(89, 19);
+            this.label58.TabIndex = 8;
+            this.label58.Text = "Employee ID";
+            // 
+            // AnnounceEmpTxtBx
+            // 
+            this.AnnounceEmpTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AnnounceEmpTxtBx.Location = new System.Drawing.Point(784, 95);
+            this.AnnounceEmpTxtBx.Name = "AnnounceEmpTxtBx";
+            this.AnnounceEmpTxtBx.Size = new System.Drawing.Size(150, 26);
+            this.AnnounceEmpTxtBx.TabIndex = 41;
+            // 
+            // AnnounceIDTxtBx
+            // 
+            this.AnnounceIDTxtBx.Enabled = false;
+            this.AnnounceIDTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AnnounceIDTxtBx.Location = new System.Drawing.Point(784, 62);
+            this.AnnounceIDTxtBx.Name = "AnnounceIDTxtBx";
+            this.AnnounceIDTxtBx.Size = new System.Drawing.Size(150, 26);
+            this.AnnounceIDTxtBx.TabIndex = 40;
+            this.AnnounceIDTxtBx.Text = "Auto-Generated";
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label57.Location = new System.Drawing.Point(644, 65);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(119, 19);
+            this.label57.TabIndex = 5;
+            this.label57.Text = "Announcement ID";
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Font = new System.Drawing.Font("AR JULIAN", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label56.Location = new System.Drawing.Point(644, 39);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(240, 19);
+            this.label56.TabIndex = 4;
+            this.label56.Text = "Announcement Insert && Update";
+            // 
+            // AnnouncementDtGrdVw
+            // 
+            this.AnnouncementDtGrdVw.AllowUserToAddRows = false;
+            this.AnnouncementDtGrdVw.AllowUserToDeleteRows = false;
+            this.AnnouncementDtGrdVw.AllowUserToOrderColumns = true;
+            this.AnnouncementDtGrdVw.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.AnnouncementDtGrdVw.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.AnnouncementDtGrdVw.Location = new System.Drawing.Point(20, 97);
+            this.AnnouncementDtGrdVw.Name = "AnnouncementDtGrdVw";
+            this.AnnouncementDtGrdVw.ReadOnly = true;
+            this.AnnouncementDtGrdVw.Size = new System.Drawing.Size(541, 180);
+            this.AnnouncementDtGrdVw.TabIndex = 3;
+            this.AnnouncementDtGrdVw.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.AnnouncementDtGrdVw_CellContentClick);
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label55.Location = new System.Drawing.Point(16, 68);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(119, 19);
+            this.label55.TabIndex = 2;
+            this.label55.Text = "Announcement ID";
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Font = new System.Drawing.Font("AR JULIAN", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label54.Location = new System.Drawing.Point(16, 39);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(165, 19);
+            this.label54.TabIndex = 1;
+            this.label54.Text = "Announcement Search";
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Font = new System.Drawing.Font("AR JULIAN", 13.8F);
+            this.label53.Location = new System.Drawing.Point(7, 7);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(245, 23);
+            this.label53.TabIndex = 0;
+            this.label53.Text = "Announcement Maintenance";
+            // 
+            // AnnouncementTimer
+            // 
+            this.AnnouncementTimer.Tick += new System.EventHandler(this.AnnouncementTimer_Tick);
+            // 
+            // ExpiredAnnounceNotifyIcn
+            // 
+            this.ExpiredAnnounceNotifyIcn.Icon = ((System.Drawing.Icon)(resources.GetObject("ExpiredAnnounceNotifyIcn.Icon")));
+            this.ExpiredAnnounceNotifyIcn.Text = "Expired Announcement Post";
+            this.ExpiredAnnounceNotifyIcn.Click += new System.EventHandler(this.ExpiredAnnounceNotifyIcn_Click);
+            // 
+            // ExpiredIngredientTimer
+            // 
+            this.ExpiredIngredientTimer.Tick += new System.EventHandler(this.ExpiredIngredientTimer_Tick);
+            // 
+            // ExpiredIngredientNotifyIcn
+            // 
+            this.ExpiredIngredientNotifyIcn.Icon = ((System.Drawing.Icon)(resources.GetObject("ExpiredIngredientNotifyIcn.Icon")));
+            this.ExpiredIngredientNotifyIcn.Text = "Expired Ingredient";
+            this.ExpiredIngredientNotifyIcn.Click += new System.EventHandler(this.ExpiredIngredientNotifyIcn_Click);
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Font = new System.Drawing.Font("AR JULIAN", 13.8F);
+            this.label67.Location = new System.Drawing.Point(20, 412);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(182, 23);
+            this.label67.TabIndex = 60;
+            this.label67.Text = "Expired Ingredients";
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label68.Location = new System.Drawing.Point(644, 440);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(125, 19);
+            this.label68.TabIndex = 61;
+            this.label68.Text = "Purchase Order ID";
+            // 
+            // ExpiredIngPOIDTxtBx
+            // 
+            this.ExpiredIngPOIDTxtBx.Enabled = false;
+            this.ExpiredIngPOIDTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExpiredIngPOIDTxtBx.Location = new System.Drawing.Point(770, 436);
+            this.ExpiredIngPOIDTxtBx.Name = "ExpiredIngPOIDTxtBx";
+            this.ExpiredIngPOIDTxtBx.Size = new System.Drawing.Size(150, 26);
+            this.ExpiredIngPOIDTxtBx.TabIndex = 62;
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label69.Location = new System.Drawing.Point(644, 473);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(89, 19);
+            this.label69.TabIndex = 63;
+            this.label69.Text = "Ingredient ID";
+            // 
+            // ExpiredIngIDTxtBx
+            // 
+            this.ExpiredIngIDTxtBx.Enabled = false;
+            this.ExpiredIngIDTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExpiredIngIDTxtBx.Location = new System.Drawing.Point(770, 469);
+            this.ExpiredIngIDTxtBx.Name = "ExpiredIngIDTxtBx";
+            this.ExpiredIngIDTxtBx.Size = new System.Drawing.Size(150, 26);
+            this.ExpiredIngIDTxtBx.TabIndex = 64;
+            // 
+            // ExpiredIngNameTxtBx
+            // 
+            this.ExpiredIngNameTxtBx.Enabled = false;
+            this.ExpiredIngNameTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExpiredIngNameTxtBx.Location = new System.Drawing.Point(770, 502);
+            this.ExpiredIngNameTxtBx.Name = "ExpiredIngNameTxtBx";
+            this.ExpiredIngNameTxtBx.Size = new System.Drawing.Size(150, 26);
+            this.ExpiredIngNameTxtBx.TabIndex = 65;
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label70.Location = new System.Drawing.Point(644, 506);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(110, 19);
+            this.label70.TabIndex = 66;
+            this.label70.Text = "Ingredient Name";
+            // 
+            // ExpiredIngPurchaseQtyTxtBx
+            // 
+            this.ExpiredIngPurchaseQtyTxtBx.Enabled = false;
+            this.ExpiredIngPurchaseQtyTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExpiredIngPurchaseQtyTxtBx.Location = new System.Drawing.Point(770, 535);
+            this.ExpiredIngPurchaseQtyTxtBx.Name = "ExpiredIngPurchaseQtyTxtBx";
+            this.ExpiredIngPurchaseQtyTxtBx.Size = new System.Drawing.Size(150, 26);
+            this.ExpiredIngPurchaseQtyTxtBx.TabIndex = 67;
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label71.Location = new System.Drawing.Point(644, 539);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(99, 19);
+            this.label71.TabIndex = 68;
+            this.label71.Text = "Purchased Qty";
+            // 
+            // ExpiredIngDateTxtBx
+            // 
+            this.ExpiredIngDateTxtBx.Enabled = false;
+            this.ExpiredIngDateTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExpiredIngDateTxtBx.Location = new System.Drawing.Point(770, 568);
+            this.ExpiredIngDateTxtBx.Name = "ExpiredIngDateTxtBx";
+            this.ExpiredIngDateTxtBx.Size = new System.Drawing.Size(150, 26);
+            this.ExpiredIngDateTxtBx.TabIndex = 69;
+            // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label72.Location = new System.Drawing.Point(644, 572);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(89, 19);
+            this.label72.TabIndex = 70;
+            this.label72.Text = "Expired Date";
+            // 
+            // ExpiredIngAmtTxtBx
+            // 
+            this.ExpiredIngAmtTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExpiredIngAmtTxtBx.Location = new System.Drawing.Point(770, 601);
+            this.ExpiredIngAmtTxtBx.Name = "ExpiredIngAmtTxtBx";
+            this.ExpiredIngAmtTxtBx.Size = new System.Drawing.Size(150, 26);
+            this.ExpiredIngAmtTxtBx.TabIndex = 71;
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label73.Location = new System.Drawing.Point(644, 605);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(107, 19);
+            this.label73.TabIndex = 72;
+            this.label73.Text = "Expired Amount";
+            // 
+            // ExpiredIngConfirmBtn
+            // 
+            this.ExpiredIngConfirmBtn.Enabled = false;
+            this.ExpiredIngConfirmBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExpiredIngConfirmBtn.Location = new System.Drawing.Point(644, 660);
+            this.ExpiredIngConfirmBtn.Name = "ExpiredIngConfirmBtn";
+            this.ExpiredIngConfirmBtn.Size = new System.Drawing.Size(95, 30);
+            this.ExpiredIngConfirmBtn.TabIndex = 73;
+            this.ExpiredIngConfirmBtn.Text = "CONFIRM";
+            this.ExpiredIngConfirmBtn.UseVisualStyleBackColor = true;
+            this.ExpiredIngConfirmBtn.Click += new System.EventHandler(this.ExpiredIngConfirmBtn_Click);
+            // 
+            // ExpiredIngErrLbl
+            // 
+            this.ExpiredIngErrLbl.AutoSize = true;
+            this.ExpiredIngErrLbl.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExpiredIngErrLbl.ForeColor = System.Drawing.Color.Red;
+            this.ExpiredIngErrLbl.Location = new System.Drawing.Point(20, 685);
+            this.ExpiredIngErrLbl.Name = "ExpiredIngErrLbl";
+            this.ExpiredIngErrLbl.Size = new System.Drawing.Size(17, 19);
+            this.ExpiredIngErrLbl.TabIndex = 74;
+            this.ExpiredIngErrLbl.Text = "*";
+            this.ExpiredIngErrLbl.Visible = false;
+            // 
+            // ExpiredIngAllClearBtn
+            // 
+            this.ExpiredIngAllClearBtn.Enabled = false;
+            this.ExpiredIngAllClearBtn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExpiredIngAllClearBtn.Location = new System.Drawing.Point(770, 660);
+            this.ExpiredIngAllClearBtn.Name = "ExpiredIngAllClearBtn";
+            this.ExpiredIngAllClearBtn.Size = new System.Drawing.Size(100, 30);
+            this.ExpiredIngAllClearBtn.TabIndex = 75;
+            this.ExpiredIngAllClearBtn.Text = "ALL CLEAR";
+            this.ExpiredIngAllClearBtn.UseVisualStyleBackColor = true;
+            this.ExpiredIngAllClearBtn.Click += new System.EventHandler(this.ExpiredIngAllClearBtn_Click);
+            // 
+            // EmpAddressRchTxtBx
+            // 
+            this.EmpAddressRchTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EmpAddressRchTxtBx.Location = new System.Drawing.Point(760, 218);
+            this.EmpAddressRchTxtBx.Name = "EmpAddressRchTxtBx";
+            this.EmpAddressRchTxtBx.Size = new System.Drawing.Size(320, 120);
+            this.EmpAddressRchTxtBx.TabIndex = 5;
+            this.EmpAddressRchTxtBx.Text = "";
+            // 
+            // CmpyAddressRchTxtBx
+            // 
+            this.CmpyAddressRchTxtBx.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CmpyAddressRchTxtBx.Location = new System.Drawing.Point(770, 286);
+            this.CmpyAddressRchTxtBx.Name = "CmpyAddressRchTxtBx";
+            this.CmpyAddressRchTxtBx.Size = new System.Drawing.Size(310, 120);
+            this.CmpyAddressRchTxtBx.TabIndex = 7;
+            this.CmpyAddressRchTxtBx.Text = "";
             // 
             // Form1
             // 
@@ -3295,19 +3924,20 @@
             this.ControlBox = false;
             this.Controls.Add(this.PnlButton);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pnlAnnouncement);
+            this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlPO);
             this.Controls.Add(this.pnlItem);
             this.Controls.Add(this.pnlSupplier);
             this.Controls.Add(this.pnlEmp);
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.pnlPwChg);
-            this.Controls.Add(this.pnlMain);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.ShowIcon = false;
-            this.Text = "The Coffee Bean Cafe Management System";
+            this.Text = "RESET";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
@@ -3334,12 +3964,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.SuppDtGdVw)).EndInit();
             this.pnlItem.ResumeLayout(false);
             this.pnlItem.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpiredIngredientDtGrdVw)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IngDtGdVw)).EndInit();
             this.pnlPO.ResumeLayout(false);
             this.pnlPO.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IngPODtGrdVw2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.POSupplierDtGrdVw)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IngPODtGrdVw)).EndInit();
+            this.pnlAnnouncement.ResumeLayout(false);
+            this.pnlAnnouncement.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ExpiredAnnounceDtGrdVw)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AnnouncementDtGrdVw)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -3465,8 +4100,6 @@
         private System.Windows.Forms.TextBox EmpEmailTxtBx;
         private System.Windows.Forms.TextBox EmpHandphoneNoTxtBx;
         private System.Windows.Forms.TextBox EmpHomeNoTxtBx;
-        private System.Windows.Forms.TextBox EmpAddress2TxtBx;
-        private System.Windows.Forms.TextBox EmpAddress1TxtBx;
         private System.Windows.Forms.RadioButton EmpFemaleRdBtn;
         private System.Windows.Forms.RadioButton EmpMaleRdBtn;
         private System.Windows.Forms.TextBox EmpICTxtBx;
@@ -3514,8 +4147,6 @@
         private System.Windows.Forms.TextBox CmpyNameTxtBx;
         private System.Windows.Forms.Label CmpyNameLbl;
         private System.Windows.Forms.Label CmpyAddressLbl;
-        private System.Windows.Forms.TextBox CmpyAddress1TxtBx;
-        private System.Windows.Forms.TextBox CmpyAddress2TxtBx;
         private System.Windows.Forms.Label CmpyNumberLbl;
         private System.Windows.Forms.TextBox CmpyNumberTxtBx;
         private System.Windows.Forms.Label CmpyFaxNumberLbl;
@@ -3603,6 +4234,62 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Unit;
         private System.Windows.Forms.DataGridViewTextBoxColumn ReOrderLevel2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ReOrderQuantity2;
+        private System.Windows.Forms.Panel pnlAnnouncement;
+        private System.Windows.Forms.DataGridView AnnouncementDtGrdVw;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.TextBox AnnounceIDTxtBx;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.TextBox AnnounceEmpTxtBx;
+        private System.Windows.Forms.TextBox TitleTxtBx;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.RichTextBox ContentRchTxtBx;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.DateTimePicker PromoDateTimePicker;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.DateTimePicker CreatedDateTimePicker;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Button AnnounceInsertBtn;
+        private System.Windows.Forms.Button AnnounceRefreshBtn;
+        private System.Windows.Forms.Label AnnErrLbl;
+        private System.Windows.Forms.Button AnnounceUpdateBtn;
+        private System.Windows.Forms.Button AnnounceResetBtn;
+        private System.Windows.Forms.TextBox AnnounceIDSearchTxtBx;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.DataGridView ExpiredAnnounceDtGrdVw;
+        private System.Windows.Forms.Timer AnnouncementTimer;
+        private System.Windows.Forms.Button ExpiredAnnounceRefreshBtn;
+        private System.Windows.Forms.NotifyIcon ExpiredAnnounceNotifyIcn;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.Button AnnounceDeleteBtn;
+        private System.Windows.Forms.Button SendEmailBtn;
+        private System.Windows.Forms.DataGridView ExpiredIngredientDtGrdVw;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Timer ExpiredIngredientTimer;
+        private System.Windows.Forms.NotifyIcon ExpiredIngredientNotifyIcn;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.TextBox ExpiredIngPOIDTxtBx;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.TextBox ExpiredIngIDTxtBx;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.TextBox ExpiredIngNameTxtBx;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.TextBox ExpiredIngPurchaseQtyTxtBx;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.TextBox ExpiredIngDateTxtBx;
+        private System.Windows.Forms.Label label73;
+        private System.Windows.Forms.TextBox ExpiredIngAmtTxtBx;
+        private System.Windows.Forms.Button ExpiredIngConfirmBtn;
+        private System.Windows.Forms.Label ExpiredIngErrLbl;
+        private System.Windows.Forms.Button ExpiredIngAllClearBtn;
+        private System.Windows.Forms.RichTextBox EmpAddressRchTxtBx;
+        private System.Windows.Forms.RichTextBox CmpyAddressRchTxtBx;
     }
 }
 
