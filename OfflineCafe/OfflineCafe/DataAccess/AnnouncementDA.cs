@@ -115,6 +115,10 @@ namespace OfflineCafe.DataAccess
             {
                 throw ex;
             }
+            finally
+            {
+                con.Close();
+            }
         }
 
         public void DeleteExpiredAnnouncement(Announcement Ann)

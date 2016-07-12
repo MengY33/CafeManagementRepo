@@ -53,22 +53,25 @@ namespace OfflineCafe
             POSupplierDtGrdVw.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             AnnouncementDataFill();
+            AnnouncementDtGrdVw.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
             ExpiredAnnouncementDataFill();
+            ExpiredAnnounceDtGrdVw.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             ExpiredIngredientDataFill();
+            ExpiredIngredientDtGrdVw.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            ReservationDataFill();
 
             EmpPositionCbBx.SelectedIndex = 0;
             EmpStatusCbBx.SelectedIndex = 0;
-            EmpUpdateBtn.Enabled = false;
             SuppStatusCbBx.SelectedIndex = 0;
-            SuppUpdateBtn.Enabled = false;
             UnitCbBx.SelectedIndex = 0;
             StorageAreaCbBx.SelectedIndex = 0;
             ExpiryDateTimePicker.Value = System.DateTime.Now;
             UnitCbBx.SelectedIndex = 0;
             ReOrderLevelCbBx.SelectedIndex = 0;
             IngStatusCbBx.SelectedIndex = 0;
-            IngUpdateBtn.Enabled = false;
 
             IngPODtGrdVw.Enabled = false;
             IngPODtGrdVw2.Enabled = false;
@@ -110,16 +113,15 @@ namespace OfflineCafe
             EmpDtGrdVw.AutoGenerateColumns = false;
             SuppDtGdVw.AutoGenerateColumns = false;
             IngDtGdVw.AutoGenerateColumns = false;
+            ExpiredIngredientDtGrdVw.AutoGenerateColumns = false;
             IngPODtGrdVw.AutoGenerateColumns = false;
-            //IngPODtGrdVw2.Auto
+            ExpiredAnnounceDtGrdVw.AutoGenerateColumns = false;
             POSupplierDtGrdVw.AutoGenerateColumns = false;
+            AnnouncementDtGrdVw.AutoGenerateColumns = false;
+            ExpiredAnnounceDtGrdVw.AutoGenerateColumns = false;
 
             OrderDateTxtBx.Text = System.DateTime.Now.ToShortDateString();
             OrderTimeTxtBx.Text = System.DateTime.Now.ToShortTimeString();
-
-            //AnnouncementTimer.Interval = 3600000;       //Every one hour
-            //AnnouncementTimer.Interval = 60000;
-            //AnnouncementTimer.Start();
         }
         //insert menu data
         private void btnInsertMenu_Click(object sender, EventArgs e)
@@ -610,34 +612,44 @@ namespace OfflineCafe
             pnlMenu.Visible = false;
             pnlAnnouncement.Visible = false;
             pnlPO.Visible = false;
+            pnlMain.Visible = false;
+            pnlReservation.Visible = false;
         }
         //supplier btn
         private void button2_Click(object sender, EventArgs e)
         {
+            pnlMain.Visible = false;
             pnlMenu.Visible = false;
             pnlEmp.Visible = false;
             pnlMain.Visible = false;
             pnlItem.Visible = false;
             pnlPO.Visible = false;
             pnlAnnouncement.Visible = false;
+            pnlReservation.Visible = false;
             pnlSupplier.Visible = true;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            pnlMain.Visible = false;
             pnlMenu.Visible = false;
             pnlEmp.Visible = false;
             pnlSupplier.Visible = false;
             pnlPO.Visible = false;
+            pnlAnnouncement.Visible = false;
+            pnlReservation.Visible = false;
             pnlItem.Visible = true;
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            pnlMain.Visible = false;
             pnlMenu.Visible = false;
             pnlEmp.Visible = false;
             pnlSupplier.Visible = false;
             pnlPO.Visible = false;
+            pnlItem.Visible = false;
+            pnlReservation.Visible = false;
             pnlAnnouncement.Visible = true;
         }
 
@@ -648,7 +660,14 @@ namespace OfflineCafe
 
         private void button7_Click(object sender, EventArgs e)
         {
+            pnlMain.Visible = false;
             pnlMenu.Visible = false;
+            pnlEmp.Visible = false;
+            pnlSupplier.Visible = false;
+            pnlPO.Visible = false;
+            pnlItem.Visible = false;
+            pnlAnnouncement.Visible = false;
+            pnlReservation.Visible = true;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -3244,6 +3263,43 @@ namespace OfflineCafe
 
             ExpiredIngConfirmBtn.Enabled = false;
             ExpiredIngAllClearBtn.Enabled = false;
+        }
+
+        public void ReservationDataFill()
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["Cafe"].ConnectionString;
+
+            try
+            {
+                string sql = "SELECT a.ReservationID, a.MemberID, a.ReservationDate, a.ReservationTime, b.TableNo, b.SndTableNo FROM Reservation AS a, TableNoReserved AS b WHERE a.ReservationID = b.ReservationID";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, con);
+
+                DataSet ds = new DataSet();
+
+                con.Open();
+
+                da.Fill(ds, "Reservation, TableNoReserved");
+
+                con.Close();
+
+                ReservationDtGrdVw.DataSource = ds;
+                ReservationDtGrdVw.DataMember = "Reservation, TableNoReserved";
+            }
+            catch(SqlException ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        private void ReservationRefreshBtn_Click(object sender, EventArgs e)
+        {
+            ReservationDataFill();
         }
     }
 }
